@@ -46,10 +46,10 @@ const dexes: { [mod: string]: ModdedDex } = Object.create(null);
 
 type DataType =
 	'Abilities' | 'Rulesets' | 'FormatsData' | 'Items' | 'Learnsets' | 'Moves' |
-	'Natures' | 'Pokedex' | 'Scripts' | 'Conditions' | 'TypeChart' | 'PokemonGoData';
+	'Natures' | 'Characters' | 'Scripts' | 'Conditions' | 'TypeChart' | 'PokemonGoData';
 const DATA_TYPES: DataType[] = [
 	'Abilities', 'Rulesets', 'FormatsData', 'Items', 'Learnsets', 'Moves',
-	'Natures', 'Pokedex', 'Scripts', 'Conditions', 'TypeChart', 'PokemonGoData',
+	'Natures', 'Characters', 'Scripts', 'Conditions', 'TypeChart', 'PokemonGoData',
 ];
 
 const DATA_FILES = {
@@ -60,7 +60,7 @@ const DATA_FILES = {
 	Learnsets: 'learnsets',
 	Moves: 'moves',
 	Natures: 'natures',
-	Pokedex: 'pokedex',
+	Characters: 'Characters',
 	PokemonGoData: 'pokemongo',
 	Scripts: 'scripts',
 	Conditions: 'conditions',
@@ -78,7 +78,7 @@ interface DexTableData {
 	Learnsets: DexTable<import('./dex-species').LearnsetData>;
 	Moves: DexTable<import('./dex-moves').MoveData>;
 	Natures: DexTable<import('./dex-data').NatureData>;
-	Pokedex: DexTable<import('./dex-species').SpeciesData>;
+	Characters: DexTable<import('./dex-species').SpeciesData>;
 	FormatsData: DexTable<import('./dex-species').SpeciesFormatsData>;
 	PokemonGoData: DexTable<import('./dex-species').PokemonGoData>;
 	Scripts: DexTable<AnyObject>;
@@ -89,7 +89,7 @@ interface TextTableData {
 	Abilities: DexTable<AbilityText>;
 	Items: DexTable<ItemText>;
 	Moves: DexTable<MoveText>;
-	Pokedex: DexTable<PokedexText>;
+	Characters: DexTable<CharactersText>;
 	Default: DexTable<DefaultText>;
 }
 
@@ -365,18 +365,18 @@ export class ModdedDex {
 
 	dataSearch(
 		target: string,
-		searchIn?: ('Pokedex' | 'Moves' | 'Abilities' | 'Items' | 'Natures' | 'TypeChart')[] | null,
+		searchIn?: ('Characters' | 'Moves' | 'Abilities' | 'Items' | 'Natures' | 'TypeChart')[] | null,
 		isInexact?: boolean
 	): AnyObject[] | null {
 		if (!target) return null;
 
-		searchIn = searchIn || ['Pokedex', 'Moves', 'Abilities', 'Items', 'Natures'];
+		searchIn = searchIn || ['Characters', 'Moves', 'Abilities', 'Items', 'Natures'];
 
 		const searchObjects = {
-			Pokedex: 'species', Moves: 'moves', Abilities: 'abilities', Items: 'items', Natures: 'natures', TypeChart: 'types',
+			Characters: 'species', Moves: 'moves', Abilities: 'abilities', Items: 'items', Natures: 'natures', TypeChart: 'types',
 		} as const;
 		const searchTypes = {
-			Pokedex: 'pokemon', Moves: 'move', Abilities: 'ability', Items: 'item', Natures: 'nature', TypeChart: 'type',
+			Characters: 'pokemon', Moves: 'move', Abilities: 'ability', Items: 'item', Natures: 'nature', TypeChart: 'type',
 		} as const;
 		let searchResults: AnyObject[] | null = [];
 		for (const table of searchIn) {
@@ -460,7 +460,7 @@ export class ModdedDex {
 
 	loadTextFile(
 		name: string, exportName: string
-	): DexTable<MoveText | ItemText | AbilityText | PokedexText | DefaultText> {
+	): DexTable<MoveText | ItemText | AbilityText | CharactersText | DefaultText> {
 		return require(`${DATA_DIR}/text/${name}`)[exportName];
 	}
 
@@ -491,7 +491,7 @@ export class ModdedDex {
 	loadTextData() {
 		if (dexes['base'].textCache) return dexes['base'].textCache;
 		dexes['base'].textCache = {
-			Pokedex: this.loadTextFile('pokedex', 'PokedexText') as DexTable<PokedexText>,
+			Characters: this.loadTextFile('Characters', 'CharactersText') as DexTable<CharactersText>,
 			Moves: this.loadTextFile('moves', 'MovesText') as DexTable<MoveText>,
 			Abilities: this.loadTextFile('abilities', 'AbilitiesText') as DexTable<AbilityText>,
 			Items: this.loadTextFile('items', 'ItemsText') as DexTable<ItemText>,
@@ -545,7 +545,7 @@ export class ModdedDex {
 				addFuzzy(`${alias}m` as ID, target);
 			}
 		};
-		for (const table of ['Items', 'Abilities', 'Moves', 'Pokedex'] as const) {
+		for (const table of ['Items', 'Abilities', 'Moves', 'Characters'] as const) {
 			const data = this.data[table];
 			for (const [id, entry] of Object.entries(data) as [ID, DexTableData[typeof table][string]][]) {
 				let name = compoundNames.get(id) || entry.name;
@@ -554,9 +554,9 @@ export class ModdedDex {
 				if (name.includes('(')) {
 					addFuzzy(toID(name.split('(')[0]), id);
 				}
-				if (table === 'Pokedex') {
+				if (table === 'Characters') {
 					// can't Dex.species.get; aliases isn't loaded
-					const species = entry as DexTableData['Pokedex'][string];
+					const species = entry as DexTableData['Characters'][string];
 					const baseid = toID(species.baseSpecies);
 					if (baseid && baseid !== id) {
 						name = compoundNames.get(baseid) || baseid;

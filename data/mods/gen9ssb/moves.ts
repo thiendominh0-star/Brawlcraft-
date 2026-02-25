@@ -6245,7 +6245,7 @@ export const Moves: import('../../../sim/dex-moves').ModdedMoveDataTable = {
 		basePower: 90,
 		category: "Special",
 		shortDesc: "If the user is taller than the target, +1 SpA.",
-		desc: "If the user's height as listed on its Pokedex data is greater than the target's height, the user's Special Attack is boosted by 1 stage.",
+		desc: "If the user's height as listed on its Characters data is greater than the target's height, the user's Special Attack is boosted by 1 stage.",
 		name: "High Ground",
 		pp: 10,
 		priority: 0,

@@ -1052,7 +1052,7 @@ export class DexFormats {
 			if (matchType === 'item' && ruleid === 'noitem') return 'item:noitem';
 			let table;
 			switch (matchType) {
-			case 'pokemon': table = this.dex.data.Pokedex; break;
+			case 'pokemon': table = this.dex.data.Characters; break;
 			case 'move': table = this.dex.data.Moves; break;
 			case 'item': table = this.dex.data.Items; break;
 			case 'ability': table = this.dex.data.Abilities; break;

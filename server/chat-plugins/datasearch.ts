@@ -58,9 +58,9 @@ const supportedDexsearchRules: { [k: string]: string[] } = Object.assign(Object.
 	movevalidation: ['stabmonsmovelegality', 'alphabetcupmovelegality'],
 	statmodification: ['350cupmod', 'flippedmod', 'scalemonsmod', 'badnboostedmod', 'reevolutionmod'],
 	banlist: [
-		'hoennpokedex', 'sinnohpokedex', 'oldunovapokedex', 'newunovapokedex', 'kalospokedex', 'oldalolapokedex',
-		'newalolapokedex', 'galarpokedex', 'isleofarmorpokedex', 'crowntundrapokedex', 'galarexpansionpokedex',
-		'paldeapokedex', 'kitakamipokedex', 'blueberrypokedex',
+		'hoennCharacters', 'sinnohCharacters', 'oldunovaCharacters', 'newunovaCharacters', 'kalosCharacters', 'oldalolaCharacters',
+		'newalolaCharacters', 'galarCharacters', 'isleofarmorCharacters', 'crowntundraCharacters', 'galarexpansionCharacters',
+		'paldeaCharacters', 'kitakamiCharacters', 'blueberryCharacters',
 	],
 });
 const dexsearchHelpRules = Object.values((supportedDexsearchRules)).flat().filter(x => x).join('</code>, <code>');
@@ -1288,7 +1288,7 @@ function runDexsearch(target: string, cmd: string, message: string, isTest: bool
 
 		/**
 		 * Not every ruleset with an onValidateSet function is specifically to exclude mons.
-		 * In the current list of supported rules only the Pokedex rules do such which is
+		 * In the current list of supported rules only the Characters rules do such which is
 		 * why this step is ignored for other rules. Rules can be added for this functionality
 		 * in the supportedDexSearchTypes mapping at the top of the function.
 		 */

@@ -1,4 +1,4 @@
-export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
+export const Characters: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	growlithehisui: {
 		inherit: true,
 		abilities: { 0: "Intimidate", 1: "Flash Fire", H: "Justified" },

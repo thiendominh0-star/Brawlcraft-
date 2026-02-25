@@ -1,4 +1,4 @@
-export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
+export const Characters: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	weedle: {
 		inherit: true,
 		unreleasedHidden: true,

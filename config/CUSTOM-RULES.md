@@ -166,21 +166,21 @@ Custom rules can have more complicated behavior. They can also include other rul
 
 `Obtainable Misc` - allow only legal EVs, IVs, levels, genders, and Hidden Power types
 
-### Pokedex rules
+### Characters rules
 
-`Hoenn Pokedex` - allow only Pokémon in the Hoenn Pokédex (OR/AS)
+`Hoenn Characters` - allow only Pokémon in the Hoenn Pokédex (OR/AS)
 
-`Sinnoh Pokedex` - allow only Pokémon in the Sinnoh Pokédex (Platinum)
+`Sinnoh Characters` - allow only Pokémon in the Sinnoh Pokédex (Platinum)
 
-`Old Unova Pokedex` - allow only Pokémon in the Old Unova Pokédex (B/W)
+`Old Unova Characters` - allow only Pokémon in the Old Unova Pokédex (B/W)
 
-`New Unova Pokedex` - allow only Pokémon in the New Unova Pokédex (B2/W2)
+`New Unova Characters` - allow only Pokémon in the New Unova Pokédex (B2/W2)
 
-`Kalos Pokedex` - allow only Pokémon in the Kalos Pokédex (X/Y)
+`Kalos Characters` - allow only Pokémon in the Kalos Pokédex (X/Y)
 
-`Alola Pokedex` - allow only Pokémon in the Alola Pokédex (US/UM)
+`Alola Characters` - allow only Pokémon in the Alola Pokédex (US/UM)
 
-`Galar Pokedex` - allow only Pokémon in the Galar Pokédex (SW/SH) [Ban Pokémon you can catch in the adventures but are not listed in the Pokédex like Ultra Beasts and Landorus]
+`Galar Characters` - allow only Pokémon in the Galar Pokédex (SW/SH) [Ban Pokémon you can catch in the adventures but are not listed in the Pokédex like Ultra Beasts and Landorus]
 
 ### Clauses
 

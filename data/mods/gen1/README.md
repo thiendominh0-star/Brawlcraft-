@@ -20,7 +20,7 @@ Special Stat
 Back then, there weren't Special Defense and Special Attack stats. It was just "Special", and moves raised and lowered it.
 That's why Special walls were so OP in Gen 1.
 
-In order to achieve a similar effect without heavily changing other scripts rather than just the mod, the mod's Pokedex
+In order to achieve a similar effect without heavily changing other scripts rather than just the mod, the mod's Characters
 and the mod's moves have been edited in order to emulate it, making all Pokémon have the old special stat in both SpA and
 SpD and making moves raise and lower both SpA and SpD at the same time.
 

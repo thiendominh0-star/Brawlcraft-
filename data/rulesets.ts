@@ -255,9 +255,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	hoennpokedex: {
+	hoennCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Hoenn Pokedex',
+		name: 'Hoenn Characters',
 		desc: "Only allows Pok&eacute;mon native to the Hoenn region (OR/AS)",
 		onValidateSet(set, format) {
 			const hoennDex = [
@@ -269,9 +269,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	sinnohpokedex: {
+	sinnohCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Sinnoh Pokedex',
+		name: 'Sinnoh Characters',
 		desc: "Only allows Pok&eacute;mon native to the Sinnoh region (Platinum)",
 		onValidateSet(set, format) {
 			const sinnohDex = [
@@ -283,9 +283,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	oldunovapokedex: {
+	oldunovaCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Old Unova Pokedex',
+		name: 'Old Unova Characters',
 		desc: "Only allows Pok&eacute;mon native to the Unova region as of the original Black/White games",
 		onValidateSet(set, format) {
 			const species = this.dex.species.get(set.species || set.name);
@@ -296,9 +296,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	newunovapokedex: {
+	newunovaCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'New Unova Pokedex',
+		name: 'New Unova Characters',
 		desc: "Only allows Pok&eacute;mon native to the Unova region as of the Black 2/White 2 games",
 		onValidateSet(set, format) {
 			const unovaDex = [
@@ -311,9 +311,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	kalospokedex: {
+	kalosCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Kalos Pokedex',
+		name: 'Kalos Characters',
 		desc: "Only allows Pok&eacute;mon native to the Kalos region (XY)",
 		onValidateSet(set, format) {
 			const kalosDex = [
@@ -327,9 +327,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	oldalolapokedex: {
+	oldalolaCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Old Alola Pokedex',
+		name: 'Old Alola Characters',
 		desc: "Only allows Pok&eacute;mon native to the Alola region (SUMO)",
 		banlist: ['Pikachu-Partner', 'Marowak-Alola-Totem', 'Ribombee-Totem', 'Araquanid-Totem', 'Lycanroc-Dusk', 'Necrozma-Dusk-Mane', 'Necrozma-Dawn-Wings'],
 		onValidateSet(set, format) {
@@ -343,9 +343,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	newalolapokedex: {
+	newalolaCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'New Alola Pokedex',
+		name: 'New Alola Characters',
 		desc: "Only allows Pok&eacute;mon native to the Alola region (US/UM)",
 		onValidateSet(set, format) {
 			const alolaDex = [
@@ -358,9 +358,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	galarpokedex: {
+	galarCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Galar Pokedex',
+		name: 'Galar Characters',
 		desc: "Only allows Pok&eacute;mon native to the Galar region (Sw/Sh)",
 		banlist: ['Raichu-Alola', 'Weezing-Base'],
 		onValidateSet(set, format) {
@@ -374,9 +374,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	isleofarmorpokedex: {
+	isleofarmorCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Isle of Armor Pokedex',
+		name: 'Isle of Armor Characters',
 		desc: "Only allows Pok&eacute;mon native to the Isle of Armor in the Galar Region (Sw/Sh DLC1)",
 		onValidateSet(set, format) {
 			const ioaDex = [
@@ -389,9 +389,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	crowntundrapokedex: {
+	crowntundraCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Crown Tundra Pokedex',
+		name: 'Crown Tundra Characters',
 		desc: "Only allows Pok&eacute;mon native to the Crown Tundra in the Galar Region (Sw/Sh DLC2)",
 		onValidateSet(set, format) {
 			const tundraDex = [
@@ -403,9 +403,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	galarexpansionpokedex: {
+	galarexpansionCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Galar Expansion Pokedex',
+		name: 'Galar Expansion Characters',
 		desc: "Only allows Pok&eacute;mon native to the Galar region, Isle of Armor, or Crown Tundra (Sw/Sh + Expansion Pass)",
 		onValidateSet(set, format) {
 			const galarDex = [
@@ -419,9 +419,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	paldeapokedex: {
+	paldeaCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Paldea Pokedex',
+		name: 'Paldea Characters',
 		desc: "Only allows Pok&eacute;mon native to the Paldea region (SV)",
 		banlist: [
 			'Arcanine-Hisui', 'Avalugg-Hisui', 'Basculin-White-Striped', 'Braviary-Hisui', 'Diglett-Alola', 'Dugtrio-Alola', 'Electrode-Hisui', 'Gimmighoul-Roaming',
@@ -440,9 +440,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	kitakamipokedex: {
+	kitakamiCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Kitakami Pokedex',
+		name: 'Kitakami Characters',
 		desc: "Only allows Pok&eacute;mon native to the Kitakami region (SV DLC1)",
 		banlist: [
 			'Wooper-Paldea', 'Raichu-Alola', 'Vulpix-Alola', 'Ninetales-Alola', 'Growlithe-Hisui', 'Arcanine-Hisui',
@@ -460,9 +460,9 @@ export const Rulesets: import('../sim/dex-formats').FormatDataTable = {
 			}
 		},
 	},
-	blueberrypokedex: {
+	blueberryCharacters: {
 		effectType: 'ValidatorRule',
-		name: 'Blueberry Pokedex',
+		name: 'Blueberry Characters',
 		desc: "Only allows Pok&eacute;mon native to the Blueberry Academy (SV DLC2)",
 		banlist: [
 			'Diglett-Base', 'Dugtrio-Base', 'Grimer-Base', 'Muk-Base', 'Slowpoke-Base', 'Slowbro-Base', 'Slowking-Base',

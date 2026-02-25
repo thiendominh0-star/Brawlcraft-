@@ -1,4 +1,4 @@
-export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
+export const Characters: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	kingdra: {
 		inherit: true,
 		otherFormes: ["Kingdra-Classic", "Kingdra-Brinepool", "Kingdra-Druid", "Kingdra-Bard", "Kingdra-Gourmet", "Kingdra-Ancient"],

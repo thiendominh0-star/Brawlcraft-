@@ -454,7 +454,7 @@ type AbilityText = TextFile<ConditionTextData & {
 }>;
 type MoveText = TextFile<MoveTextData>;
 type ItemText = TextFile<ConditionTextData>;
-type PokedexText = TextFile<BasicTextData>;
+type CharactersText = TextFile<BasicTextData>;
 type DefaultText = AnyObject;
 
 declare namespace RandomTeamsTypes {

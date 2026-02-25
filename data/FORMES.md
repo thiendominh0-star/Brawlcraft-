@@ -190,9 +190,9 @@ Alcremie garnishes and Spinda spot patterns aren't considered formes by the game
 Dynamax and Gigantamax are not considered formes by the games themselves. PS implements them correctly in the simulator as volatile statuses, but does have dex entries for Gigantamax Pokémon (treating them as in-battle formes) to make their sprites easier to access, and to make Gigantamax-capable Pokémon easier to select in the teambuilder.
 
 
-`pokedex.js`
+`Characters.js`
 ------------
 
-All the data shown here is information available from `Dex.species.get`. Data in `pokedex.js` will not necessarily contain the same information.
+All the data shown here is information available from `Dex.species.get`. Data in `Characters.js` will not necessarily contain the same information.
 
-Most importantly, note that cosmetic formes are not listed in `pokedex.js`, but generated automatically from their base forme entry.
+Most importantly, note that cosmetic formes are not listed in `Characters.js`, but generated automatically from their base forme entry.

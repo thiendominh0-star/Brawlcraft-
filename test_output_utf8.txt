@@ -1,0 +1,93 @@
+﻿node : node:internal/mo
+dules/cjs/loader:1451
+At line:1 char:1
++ node 
+test_custom_battle.js 
+> test_output.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (node:internal   
+ /modules/cjs/loade    
+r:1451:String) [],     
+RemoteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+  throw err;
+  ^
+
+Error: Cannot find 
+module 'E:\GitHub\pokem
+on-showdown\dist\data/t
+ext/Characters'
+Require stack:
+- E:\GitHub\pokemon-sho
+wdown\dist\sim\dex.js
+- E:\GitHub\pokemon-sho
+wdown\dist\sim\battle.j
+s
+- E:\GitHub\pokemon-sho
+wdown\dist\sim\index.js
+- E:\GitHub\pokemon-sho
+wdown\test_custom_battl
+e.js
+    at Module._resolveF
+ilename (node:internal/
+modules/cjs/loader:1448
+:15)
+    at 
+defaultResolveImpl (nod
+e:internal/modules/cjs/
+loader:1059:19)
+    at 
+resolveForCJSWithHooks 
+(node:internal/modules/
+cjs/loader:1064:22)
+    at Module._load (no
+de:internal/modules/cjs
+/loader:1234:25)
+    at TracingChannel.t
+raceSync (node:diagnost
+ics_channel:328:14)
+    at wrapModuleLoad (
+node:internal/modules/c
+js/loader:245:24)
+    at Module.require (
+node:internal/modules/c
+js/loader:1548:12)
+    at require (node:in
+ternal/modules/helpers:
+152:16)
+    at 
+ModdedDex.loadTextFile 
+(E:\GitHub\pokemon-show
+down\dist\sim\dex.js:43
+7:12)
+    at 
+ModdedDex.loadTextData 
+(E:\GitHub\pokemon-show
+down\dist\sim\dex.js:46
+1:24) {
+  code: 
+'MODULE_NOT_FOUND',
+  requireStack: [
+    'E:\\GitHub\\pokemo
+n-showdown\\dist\\sim\\
+dex.js',
+    'E:\\GitHub\\pokemo
+n-showdown\\dist\\sim\\
+battle.js',
+    'E:\\GitHub\\pokemo
+n-showdown\\dist\\sim\\
+index.js',
+    'E:\\GitHub\\pokemo
+n-showdown\\test_custom
+_battle.js'
+  ]
+}
+
+Node.js v24.13.1

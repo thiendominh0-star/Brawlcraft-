@@ -13,9 +13,9 @@ export const Scripts: ModdedBattleScriptsData = {
 	inherit: 'gen7',
 	init() {
 		this.modData('Abilities', 'noability').isNonstandard = null;
-		for (const i in this.data.Pokedex) {
-			this.modData('Pokedex', i).abilities = { 0: 'No Ability' };
-			delete this.modData('Pokedex', i).requiredItem;
+		for (const i in this.data.Characters) {
+			this.modData('Characters', i).abilities = { 0: 'No Ability' };
+			delete this.modData('Characters', i).requiredItem;
 		}
 	},
 	actions: {

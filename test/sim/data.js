@@ -4,10 +4,10 @@ const assert = require('./../assert');
 const fs = require('fs');
 
 describe('Dex data', () => {
-	it('should have valid Pokedex entries', () => {
-		const Pokedex = Dex.data.Pokedex;
-		for (const pokemonid in Pokedex) {
-			const entry = Pokedex[pokemonid];
+	it('should have valid Characters entries', () => {
+		const Characters = Dex.data.Characters;
+		for (const pokemonid in Characters) {
+			const entry = Characters[pokemonid];
 			assert.equal(toID(entry.name), pokemonid, `Mismatched Pokemon key "${pokemonid}" of ${entry.name}`);
 			assert(!entry.name.startsWith("-") && !entry.name.endsWith("-"), `Pokemon name "${entry.name}" should not start or end with a hyphen`);
 			assert.equal(entry.name, entry.name.trim(), `Pokemon name "${entry.name}" should not start or end with whitespace`);
@@ -17,9 +17,9 @@ describe('Dex data', () => {
 
 			if (entry.forme) {
 				// entry is a forme of a base species
-				const baseEntry = Pokedex[toID(entry.baseSpecies)];
+				const baseEntry = Characters[toID(entry.baseSpecies)];
 				assert(baseEntry && !baseEntry.forme, `Forme ${entry.name} should have a valid baseSpecies`);
-				// Gmax formes are not actually formes, they are only included in pokedex.ts for convenience
+				// Gmax formes are not actually formes, they are only included in characters.ts for convenience
 				if (!entry.name.includes('Gmax') && !entry.isCosmeticForme) {
 					assert((baseEntry.otherFormes || []).includes(entry.name), `Base species ${entry.baseSpecies} should have ${entry.name} listed as an otherForme`);
 				}
@@ -37,12 +37,12 @@ describe('Dex data', () => {
 			}
 
 			if (entry.prevo) {
-				const prevoEntry = Pokedex[toID(entry.prevo)] || {};
+				const prevoEntry = Characters[toID(entry.prevo)] || {};
 				assert(prevoEntry.evos.includes(entry.name), `Prevo ${entry.prevo} should have ${entry.name} listed as an evo`);
 			}
 			if (entry.evos) {
 				for (const evo of entry.evos) {
-					const evoEntry = Pokedex[toID(evo)] || {};
+					const evoEntry = Characters[toID(evo)] || {};
 					assert.equal(evo, evoEntry.name, `Misspelled/nonexistent evo "${evo}" of ${entry.name}`);
 					assert.notEqual(entry.num, evoEntry.num, `Evo ${evo} of ${entry.name} should have a different dex number`);
 					if (entry.name === "Gimmighoul-Roaming") continue;
@@ -51,7 +51,7 @@ describe('Dex data', () => {
 			}
 			if (entry.otherFormes) {
 				for (const forme of entry.otherFormes) {
-					const formeEntry = Pokedex[toID(forme)] || {};
+					const formeEntry = Characters[toID(forme)] || {};
 					assert.equal(forme, formeEntry.name, `Misspelled/nonexistent forme "${forme}" of ${entry.name}`);
 					assert.equal(entry.num, formeEntry.num, `Forme ${formeEntry.name} of ${entry.name} should have the same dex number`);
 					assert.equal(formeEntry.baseSpecies, entry.name, `Forme ${forme} of ${entry.name} should have it as a baseSpecies`);
@@ -74,14 +74,14 @@ describe('Dex data', () => {
 			if (entry.battleOnly) {
 				const battleOnly = Array.isArray(entry.battleOnly) ? entry.battleOnly : [entry.battleOnly];
 				for (const battleForme of battleOnly) {
-					const battleEntry = Pokedex[toID(battleForme)] || {};
+					const battleEntry = Characters[toID(battleForme)] || {};
 					assert.equal(battleForme, battleEntry.name, `Misspelled/nonexistent battle-only forme "${battleForme}" of ${entry.name}`);
 					assert.equal(battleEntry.baseSpecies || battleEntry.name, entry.baseSpecies, `Battle-only forme ${entry.name} of ${battleEntry.name} should have the same baseSpecies`);
 					assert(!battleEntry.battleOnly, `Out-of-battle forme ${battleEntry.name} of ${entry.name} should not be battle-only`);
 				}
 			}
 			if (entry.changesFrom) {
-				const formeEntry = Pokedex[toID(entry.changesFrom)] || {};
+				const formeEntry = Characters[toID(entry.changesFrom)] || {};
 				assert.equal(entry.changesFrom, formeEntry.name, `Misspelled/nonexistent changesFrom value "${entry.changesFrom}" of ${entry.name}`);
 				assert.equal(formeEntry.baseSpecies || formeEntry.name, entry.baseSpecies, `Original forme ${formeEntry.name} of ${entry.name} should have the same baseSpecies`);
 				assert(!formeEntry.changesFrom, `Original forme ${formeEntry.name} of ${entry.name} should not also have chagesFrom`);
@@ -101,7 +101,7 @@ describe('Dex data', () => {
 			if (entry.formeOrder) {
 				for (const forme of entry.formeOrder) {
 					if (toID(forme).includes('gmax')) continue;
-					// formeOrder contains other formes and 'cosmetic' formes which do not have entries in Pokedex but should have aliases
+					// formeOrder contains other formes and 'cosmetic' formes which do not have entries in Characters but should have aliases
 					const formeEntry = Dex.species.get(toID(forme));
 					assert.equal(forme, formeEntry.name, `Misspelled/nonexistent forme "${forme}" of ${entry.name}`);
 					assert(entry.formeOrder.includes(formeEntry.baseSpecies), `${entry.name}'s formeOrder does not contain its base species ${formeEntry.baseSpecies}`);
@@ -159,8 +159,8 @@ describe('Dex data', () => {
 		const Aliases = require('../../dist/data/aliases').Aliases;
 		for (const aliasid in Aliases) {
 			const targetid = toID(Aliases[aliasid]);
-			if (targetid in Dex.data.Pokedex) {
-				assert.equal(Aliases[aliasid], Dex.data.Pokedex[targetid].name, `Alias ${aliasid} has incorrect Species name "${Aliases[aliasid]}"`);
+			if (targetid in Dex.data.Characters) {
+				assert.equal(Aliases[aliasid], Dex.data.Characters[targetid].name, `Alias ${aliasid} has incorrect Species name "${Aliases[aliasid]}"`);
 			} else if (targetid in Dex.data.Moves) {
 				assert.equal(Aliases[aliasid], Dex.data.Moves[targetid].name, `Alias ${aliasid} has incorrect Move name "${Aliases[aliasid]}"`);
 			} else if (targetid in Dex.data.Abilities) {
@@ -191,9 +191,9 @@ describe('Dex data', () => {
 			assert(!used.has(targetid), `CompoundWordNames entry "${name}" already exists as "${used.get(targetid)}"`);
 			used.set(targetid, name);
 
-			let actualName = Dex.data.Pokedex[targetid]?.name || Dex.data.Moves[targetid]?.name ||
+			let actualName = Dex.data.Characters[targetid]?.name || Dex.data.Moves[targetid]?.name ||
 				Dex.data.Abilities[targetid]?.name || Dex.data.Items[targetid]?.name;
-			if (Dex.data.Pokedex[targetid]?.name) {
+			if (Dex.data.Characters[targetid]?.name) {
 				const species = Dex.species.get(targetid);
 				if (species.forme) actualName = species.baseSpecies + ' ' + species.forme;
 			}
@@ -400,7 +400,7 @@ describe('Dex data', () => {
 	// Vulpix (1) + Ninetales (1) + Wormadam (2) + Cherrim (1) + Rotom (5) + Origin (3) + Arceus (17) +
 	// Shaymin (1) + Therian (4) + Hisui (16) + Basculin (1) + Basculegion (1)
 	formes['gen8legends'] = 1 + 1 + 2 + 1 + 5 + 3 + 17 + 1 + 4 + 16 + 1 + 1;
-	species['gen9legends'] = 232 + 132; // Lumiose Pokedex + Hyperspace Pokedex
+	species['gen9legends'] = 232 + 132; // Lumiose Characters + Hyperspace Characters
 	// Mega (96) + Primal (2) + Rotom (5) + Keldeo (1) + Meloetta (1) + Genesect (4) + Vivillon (2) + Floette (1) +
 	// Meowstic (1) + Aegislash (1) + Pumpkaboo (3) + Gourgeist (3) + Zygarde (2) + Mimikyu (1) +
 	// Alola (4) + Toxtricity (1) + Indeedee (1) + Morpeko (1) + Galar (8) + Hisui (4) + Squawkabilly (3) +
@@ -423,7 +423,7 @@ describe('Dex data', () => {
 			.filter(mod => mod !== 'gen9ssb');
 		// console.log(modNames);
 		const mods = ['data/', ...modNames.map(mod => `data/mods/${mod}/`)];
-		const files = ['abilities.js', 'aliases.js', 'conditions.js', 'formats-data.js', 'items.js', 'learnsets.js', 'moves.js', 'natures.js', 'pokedex.js', 'pokemongo.js', 'rulesets.js', 'tags.js', 'typechart.js'];
+		const files = ['abilities.js', 'aliases.js', 'conditions.js', 'formats-data.js', 'items.js', 'learnsets.js', 'moves.js', 'natures.js', 'Characters.js', 'pokemongo.js', 'rulesets.js', 'tags.js', 'typechart.js'];
 		for (const mod of mods) {
 			for (const file of files) {
 				let contents;

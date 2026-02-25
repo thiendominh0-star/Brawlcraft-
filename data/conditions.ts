@@ -847,7 +847,7 @@ export const Conditions: import('../sim/dex-conditions').ConditionDataTable = {
 	// Their true typing for all their formes is Normal, and it's only
 	// Multitype and RKS System, respectively, that changes their type,
 	// but their formes are specified to be their corresponding type
-	// in the Pokedex, so that needs to be overridden.
+	// in the Characters, so that needs to be overridden.
 	// This is mainly relevant for Hackmons Cup and Balanced Hackmons.
 	arceus: {
 		name: 'Arceus',

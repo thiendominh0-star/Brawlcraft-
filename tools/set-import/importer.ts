@@ -80,7 +80,7 @@ async function importGen(gen: GenerationNum, index: string) {
 	const numByFormat: { [formatid: string]: number } = {};
 	const imports = [];
 	const dex = Dex.forFormat(`gen${gen}ou`);
-	for (const id in dex.data.Pokedex) {
+	for (const id in dex.data.Characters) {
 		if (!eligible(dex, id as ID)) continue;
 		const species = dex.species.get(id);
 		if (species.battleOnly) continue;// Smogon collapses these into their out of battle species

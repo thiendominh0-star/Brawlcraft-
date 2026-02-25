@@ -155,7 +155,7 @@ export const Conditions: import('../../../sim/dex-conditions').ModdedConditionDa
 	},
 	// Arceus's true typing for all its formes is Normal, and it's only Multitype
 	// that changes its type, but its formes are specified to be their corresponding
-	// type in the Pokedex, so that needs to be overridden. Without Multitype it
+	// type in the Characters, so that needs to be overridden. Without Multitype it
 	// starts as Normal type, but its type can be changed by other effects.
 	// This is mainly relevant for Hackmons Cup and Balanced Hackmons.
 	arceus: {

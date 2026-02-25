@@ -578,7 +578,7 @@ export const commands: Chat.ChatCommands = {
 	pstats: 'data',
 	stats: 'data',
 	dex: 'data',
-	pokedex: 'data',
+	Characters: 'data',
 	data(target, room, user, connection, cmd) {
 		if (!this.runBroadcast()) return;
 		target = target.trim();
@@ -926,7 +926,7 @@ export const commands: Chat.ChatCommands = {
 		let type3 = dex.types.get(targets[2]);
 		if (species.name !== "" && !species.exists && type1.name !== "" && !type1.exists) {
 			const typeSearchResults = dex.dataSearch(targets[0], ['TypeChart']);
-			const speciesSearchResults = dex.dataSearch(targets[0], ['Pokedex']);
+			const speciesSearchResults = dex.dataSearch(targets[0], ['Characters']);
 			if (typeSearchResults && typeSearchResults[0].name !== "") {
 				type1 = dex.types.get(typeSearchResults[0].name);
 				imperfectMatch = true;

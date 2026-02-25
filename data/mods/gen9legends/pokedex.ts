@@ -1,4 +1,4 @@
-export const Pokedex: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
+export const Characters: import('../../../sim/dex-species').ModdedSpeciesDataTable = {
 	starmiemega: {
 		inherit: true,
 		baseStats: { hp: 60, atk: 140, def: 105, spa: 130, spd: 105, spe: 120 },

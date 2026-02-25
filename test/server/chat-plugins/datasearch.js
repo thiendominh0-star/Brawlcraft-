@@ -132,7 +132,7 @@ describe("Datasearch Plugin", () => {
 
 	it('should include only Pokemon allowed by the provided rulesets', () => {
 		const cmd = 'ds';
-		const target = 'mod=gen8, rule=kalospokedex, rule=hoennpokedex, water, ground';
+		const target = 'mod=gen8, rule=kalosCharacters, rule=hoennCharacters, water, ground';
 		const search = datasearch.testables.runDexsearch(target, cmd, `/${cmd} ${target}`);
 		assert(search.reply.includes('Whiscash'));
 		assert.false(search.reply.includes('Swampert'));

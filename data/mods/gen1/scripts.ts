@@ -16,8 +16,8 @@ export const Scripts: ModdedBattleScriptsData = {
 	inherit: 'gen2',
 	gen: 1,
 	init() {
-		for (const i in this.data.Pokedex) {
-			const poke = this.modData('Pokedex', i);
+		for (const i in this.data.Characters) {
+			const poke = this.modData('Characters', i);
 			poke.gender = 'N';
 			poke.eggGroups = null;
 		}

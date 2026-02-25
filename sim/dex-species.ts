@@ -136,12 +136,12 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	/**
 	 * Other forms. List of names of cosmetic forms. These should have
 	 * `aliases.js` aliases to this entry, but not have their own
-	 * entry in `pokedex.js`.
+	 * entry in `Characters.js`.
 	 */
 	readonly cosmeticFormes?: string[];
 	/**
 	 * Other formes. List of names of formes, appears only on the base
-	 * forme. Unlike forms, these have their own entry in `pokedex.js`.
+	 * forme. Unlike forms, these have their own entry in `Characters.js`.
 	 */
 	readonly otherFormes?: string[];
 	/**
@@ -445,15 +445,15 @@ export class DexSpecies {
 			if (this.dex.data.FormatsData.hasOwnProperty(id)) {
 				// special event ID
 				species = new Species({
-					...this.dex.data.Pokedex[alias],
+					...this.dex.data.Characters[alias],
 					...this.dex.data.FormatsData[id],
 					name: id,
 				});
 				species.abilities = { 0: species.abilities['S']! };
 			} else {
 				species = this.get(alias);
-				if (this.dex.data.Pokedex?.[id]?.isCosmeticForme) {
-					const cosmeticForme = this.dex.data.Pokedex[id];
+				if (this.dex.data.Characters?.[id]?.isCosmeticForme) {
+					const cosmeticForme = this.dex.data.Characters[id];
 					species = new Species({
 						...species,
 						...cosmeticForme,
@@ -465,7 +465,7 @@ export class DexSpecies {
 				}
 				if (species.cosmeticFormes) {
 					for (const forme of species.cosmeticFormes) {
-						if (this.dex.data.Pokedex.hasOwnProperty(toID(forme))) continue;
+						if (this.dex.data.Characters.hasOwnProperty(toID(forme))) continue;
 						if (toID(forme) === id) {
 							species = new Species({
 								...species,
@@ -486,7 +486,7 @@ export class DexSpecies {
 			return species;
 		}
 
-		if (!this.dex.data.Pokedex.hasOwnProperty(id)) {
+		if (!this.dex.data.Characters.hasOwnProperty(id)) {
 			let aliasTo = '';
 			const formeNames: { [k: IDEntry]: IDEntry[] } = {
 				alola: ['a', 'alola', 'alolan'],
@@ -506,7 +506,7 @@ export class DexSpecies {
 					}
 				}
 				pokeName = this.dex.getAlias(pokeName as ID) || pokeName;
-				if (this.dex.data.Pokedex[pokeName + forme]) {
+				if (this.dex.data.Characters[pokeName + forme]) {
 					aliasTo = pokeName + forme;
 					break;
 				}
@@ -519,12 +519,12 @@ export class DexSpecies {
 				}
 			}
 		}
-		if (id && this.dex.data.Pokedex.hasOwnProperty(id)) {
-			const pokedexData = this.dex.data.Pokedex[id];
-			const baseSpeciesTags = pokedexData.baseSpecies && this.dex.data.Pokedex[toID(pokedexData.baseSpecies)].tags;
+		if (id && this.dex.data.Characters.hasOwnProperty(id)) {
+			const CharactersData = this.dex.data.Characters[id];
+			const baseSpeciesTags = CharactersData.baseSpecies && this.dex.data.Characters[toID(CharactersData.baseSpecies)].tags;
 			species = new Species({
 				tags: baseSpeciesTags,
-				...pokedexData,
+				...CharactersData,
 				...this.dex.data.FormatsData[id],
 			});
 			// Inherit any statuses from the base species (Arceus, Silvally).
@@ -603,7 +603,7 @@ export class DexSpecies {
 			if (this.dex.parentMod) {
 				// if this species is exactly identical to parentMod's species, reuse parentMod's copy
 				const parentMod = this.dex.mod(this.dex.parentMod);
-				if (this.dex.data.Pokedex[id] === parentMod.data.Pokedex[id]) {
+				if (this.dex.data.Characters[id] === parentMod.data.Characters[id]) {
 					const parentSpecies = parentMod.species.getByID(id);
 					// checking tier cheaply filters out some non-matches.
 					// The construction logic is very complex so we ultimately need to do a deep equality check
@@ -790,7 +790,7 @@ export class DexSpecies {
 	all(): readonly Species[] {
 		if (this.allCache) return this.allCache;
 		const species = [];
-		for (const id in this.dex.data.Pokedex) {
+		for (const id in this.dex.data.Characters) {
 			species.push(this.getByID(id as ID));
 		}
 		this.allCache = Object.freeze(species);
