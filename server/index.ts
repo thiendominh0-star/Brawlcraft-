@@ -55,16 +55,16 @@ try {
 // I've gotten enough reports by people who don't use the launch
 // script that this is worth repeating here
 try {
-// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	fetch;
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 } catch (e) {
 	throw new Error("We require Node.js version 22 or later; you're using " + process.version);
 }
 
 try {
 	require.resolve('ts-chacha20');
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 } catch (e) {
 	throw new Error("Dependencies are unmet; run `npm ci` before launching Pokemon Showdown again.");
 }
@@ -143,6 +143,13 @@ export const readyPromise = cleanupStale().then(() => {
 	Verifier.start(Config.subprocessescache);
 	TeamValidatorAsync.start(Config.subprocessescache);
 	Chat.start(Config.subprocessescache);
+
+	// Khởi chạy Sync Plugin sớm để port 8001 sẵn sàng ngay
+	try {
+		require('./chat-plugins/admin-sync');
+	} catch (e) {
+		console.error("Lỗi nạp AdminSync Plugin:", e);
+	}
 
 	/*********************************************************
 	 * Monitor config file and display diagnostics

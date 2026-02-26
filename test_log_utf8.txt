@@ -1,0 +1,46 @@
+﻿=== Battle Start ===
+=== Battle Log ===
+|t:|1772011480
+|gametype|singles
+|player|p1|Player 1||
+|player|p2|Player 2||
+|gen|9
+|tier|[Gen 9] The Prototype
+|clearpoke
+|split|p1
+|poke|p1|Shadow Blade, M|
+
+|split|p2
+|poke|p2|Arcane Sniper, M|
+
+|teampreview|6
+|
+|t:|1772011481
+|teamsize|p1|1
+|teamsize|p2|1
+|start
+|split|p1
+|switch|p1a: Shadow Blade|Shadow Blade, M|941/941
+|switch|p1a: Shadow Blade|Shadow Blade, M|100/100
+|split|p2
+|switch|p2a: Arcane Sniper|Arcane Sniper, M|841/841
+|switch|p2a: Arcane Sniper|Arcane Sniper, M|100/100
+|turn|1
+|
+|t:|1772011481
+|move|p1a: Shadow Blade|Assassinate|p2a: Arcane Sniper
+|-supereffective|p2a: Arcane Sniper
+|split|p2
+|-damage|p2a: Arcane Sniper|299/841
+|-damage|p2a: Arcane Sniper|36/100
+|move|p2a: Arcane Sniper|Arcane Shot|p1a: Shadow Blade
+|split|p1
+|-damage|p1a: Shadow Blade|752/941
+|-damage|p1a: Shadow Blade|80/100
+|
+|upkeep
+|turn|2
+
+=== Final HP ===
+P1 (Shadow Blade): 752 / 941
+P2 (Arcane Sniper): 299 / 841

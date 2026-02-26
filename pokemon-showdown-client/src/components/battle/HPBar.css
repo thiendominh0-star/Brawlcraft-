@@ -1,0 +1,78 @@
+.hpbar {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1);
+	width: 100%;
+}
+
+.hpbar__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: var(--space-2);
+}
+
+.hpbar__name {
+	font-family: var(--font-display);
+	font-size: 1rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+	color: var(--text-primary);
+	text-transform: uppercase;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.hpbar__hp-text {
+	font-family: var(--font-display);
+	font-size: 0.85rem;
+	font-weight: 600;
+	letter-spacing: 0.03em;
+	white-space: nowrap;
+}
+
+.hpbar__track {
+	position: relative;
+	height: 8px;
+	background: var(--bg-04);
+	border-radius: 99px;
+	overflow: hidden;
+	border: 1px solid var(--border-subtle);
+}
+
+.hpbar__type-accent {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 3px;
+	border-radius: 99px 0 0 99px;
+	z-index: 1;
+}
+
+.hpbar__fill {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	border-radius: 99px;
+	transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1), background 0.4s ease;
+	min-width: 2px;
+}
+
+.hpbar__pct-label {
+	font-size: 0.72rem;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-align: right;
+}
+
+/* Player vs Enemy flip */
+.hpbar--enemy .hpbar__header {
+	flex-direction: row-reverse;
+}
+
+.hpbar--enemy .hpbar__pct-label {
+	text-align: left;
+}

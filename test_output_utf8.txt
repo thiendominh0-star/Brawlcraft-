@@ -1,5 +1,8 @@
-﻿node : node:internal/mo
-dules/cjs/loader:1451
+﻿=== Battle Start ===
+=== Turn 1 End ===
+node : Simulation 
+Error: Error: Not all 
+choices done
 At line:1 char:1
 + node 
 test_custom_battle.js 
@@ -9,85 +12,95 @@ test_custom_battle.js
 ~~~~~
     + CategoryInfo     
          : NotSpecifi  
-  ed: (node:internal   
- /modules/cjs/loade    
-r:1451:String) [],     
-RemoteException
+  ed: (Simulation Er   
+ ro...ll choices do    
+ne:String) [], Rem    
+oteException
     + FullyQualifiedEr 
    rorId : NativeComm  
   andError
  
-  throw err;
-  ^
-
-Error: Cannot find 
-module 'E:\GitHub\pokem
-on-showdown\dist\data/t
-ext/Characters'
-Require stack:
-- E:\GitHub\pokemon-sho
-wdown\dist\sim\dex.js
-- E:\GitHub\pokemon-sho
-wdown\dist\sim\battle.j
-s
-- E:\GitHub\pokemon-sho
-wdown\dist\sim\index.js
-- E:\GitHub\pokemon-sho
-wdown\test_custom_battl
-e.js
-    at Module._resolveF
-ilename (node:internal/
-modules/cjs/loader:1448
-:15)
     at 
-defaultResolveImpl (nod
-e:internal/modules/cjs/
-loader:1059:19)
+Battle.commitChoices (E
+:\GitHub\pokemon-showdo
+wn\dist\sim\battle.js:2
+478:39)
     at 
-resolveForCJSWithHooks 
+Object.<anonymous> (E:\
+GitHub\pokemon-showdown
+\test_custom_battle.js:
+30:9)
+    at Module._compile 
 (node:internal/modules/
-cjs/loader:1064:22)
+cjs/loader:1804:14)
+    at Object..js (node
+:internal/modules/cjs/l
+oader:1936:10)
+    at Module.load (nod
+e:internal/modules/cjs/
+loader:1525:32)
     at Module._load (no
 de:internal/modules/cjs
-/loader:1234:25)
+/loader:1327:12)
     at TracingChannel.t
 raceSync (node:diagnost
 ics_channel:328:14)
     at wrapModuleLoad (
 node:internal/modules/c
 js/loader:245:24)
-    at Module.require (
+    at Module.executeUs
+erEntryPoint [as 
+runMain] (node:internal
+/modules/run_main:154:5
+)
+    at node:internal/ma
+in/run_main_module:33:4
+7
+E:\GitHub\pokemon-showd
+own\test_custom_battle.
+js:36
+console.log("P1 
+(Shadow Blade) HP: " + 
+battle.p1.active[0].hp 
++ " / " + battle.p1.act
+ive[0].maxhp);
+                       
+                       
+             ^
+
+TypeError: Cannot read 
+properties of null 
+(reading 'hp')
+    at 
+Object.<anonymous> (E:\
+GitHub\pokemon-showdown
+\test_custom_battle.js:
+36:60)
+    at Module._compile 
+(node:internal/modules/
+cjs/loader:1804:14)
+    at Object..js (node
+:internal/modules/cjs/l
+oader:1936:10)
+    at Module.load (nod
+e:internal/modules/cjs/
+loader:1525:32)
+    at Module._load (no
+de:internal/modules/cjs
+/loader:1327:12)
+    at TracingChannel.t
+raceSync (node:diagnost
+ics_channel:328:14)
+    at wrapModuleLoad (
 node:internal/modules/c
-js/loader:1548:12)
-    at require (node:in
-ternal/modules/helpers:
-152:16)
-    at 
-ModdedDex.loadTextFile 
-(E:\GitHub\pokemon-show
-down\dist\sim\dex.js:43
-7:12)
-    at 
-ModdedDex.loadTextData 
-(E:\GitHub\pokemon-show
-down\dist\sim\dex.js:46
-1:24) {
-  code: 
-'MODULE_NOT_FOUND',
-  requireStack: [
-    'E:\\GitHub\\pokemo
-n-showdown\\dist\\sim\\
-dex.js',
-    'E:\\GitHub\\pokemo
-n-showdown\\dist\\sim\\
-battle.js',
-    'E:\\GitHub\\pokemo
-n-showdown\\dist\\sim\\
-index.js',
-    'E:\\GitHub\\pokemo
-n-showdown\\test_custom
-_battle.js'
-  ]
-}
+js/loader:245:24)
+    at Module.executeUs
+erEntryPoint [as 
+runMain] (node:internal
+/modules/run_main:154:5
+)
+    at node:internal/ma
+in/run_main_module:33:4
+7
 
 Node.js v24.13.1

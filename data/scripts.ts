@@ -96,11 +96,9 @@ export const Scripts: ModdedBattleScriptsData = {
 			const ignoreDefensive = !!(activeMove.ignoreDefensive || (ignorePositiveDefensive && defBoosts > 0));
 
 			if (ignoreOffensive) {
-				this.battle.debug('Negating (sp)atk boost/penalty.');
 				atkBoosts = 0;
 			}
 			if (ignoreDefensive) {
-				this.battle.debug('Negating (sp)def boost/penalty.');
 				defBoosts = 0;
 			}
 
@@ -128,7 +126,6 @@ export const Scripts: ModdedBattleScriptsData = {
 			if (move.spreadHit) {
 				// multi-target modifier (doubles only)
 				const spreadModifier = this.battle.gameType === 'freeforall' ? 0.5 : 0.75;
-				this.battle.debug(`Spread modifier: ${spreadModifier}`);
 				finalDamage = this.battle.modify(finalDamage, spreadModifier);
 			}
 

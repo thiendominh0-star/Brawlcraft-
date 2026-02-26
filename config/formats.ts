@@ -10,7 +10,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 			'Cancel Mod',
 			'Max Team Size = 6',
 			'Picked Team Size = 6',
-			'Default Level = 100'
+			'Default Level = 100',
 		],
 	},
 ];
