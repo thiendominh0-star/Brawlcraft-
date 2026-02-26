@@ -4,7 +4,7 @@
  * Giao tiếp với backend PS tại ws://localhost:8000
  */
 
-const SERVER_URL = 'ws://localhost:8000/showdown/websocket';
+const SERVER_URL = import.meta.env.VITE_WS_URL || 'ws://localhost:8000/showdown/websocket';
 
 class ShowdownClient {
 	constructor() {
