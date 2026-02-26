@@ -1,0 +1,1 @@
+export const Pokedex: import('../sim/dex-species').SpeciesDataTable = { null_species: { num: 0, name: 'null_species', types: ['Normal'], baseStats: { hp: 10, atk: 10, def: 10, spa: 10, spd: 10, spe: 10 }, abilities: { 0: 'No Ability' } } };
