@@ -2,22 +2,22 @@ import {useState, useEffect} from 'react';
 import client from '../../services/showdownClient';
 import './Leaderboard.css';
 
-export default function Leaderboard({connected}) {
+export default function Leaderboard({connected, format = 'gen9brawlcraftstandard'}) {
 	const [html, setHtml] = useState('');
 
 	useEffect(() => {
 		if (!connected) return;
 
 		// Fetch leaderboard info
-		client.fetchLeaderboard('gen9theprototype');
+		client.fetchLeaderboard(format);
 
 		// Optional: Refresh periodically every 30s
 		const interval = setInterval(() => {
-			client.fetchLeaderboard('gen9theprototype');
+			client.fetchLeaderboard(format);
 		}, 30000);
 
 		const unsub = client.on('laddertop', (data) => {
-			if (data.formatId === 'gen9theprototype') {
+			if (data.formatId === format) {
 				setHtml(data.html);
 			}
 		});
@@ -26,7 +26,7 @@ export default function Leaderboard({connected}) {
 			clearInterval(interval);
 			unsub();
 		};
-	}, [connected]);
+	}, [connected, format]);
 
 	if (!html) return null;
 

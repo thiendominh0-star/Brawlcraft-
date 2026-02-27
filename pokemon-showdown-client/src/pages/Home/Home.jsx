@@ -19,6 +19,7 @@ export default function Home() {
 	const [status, setStatus] = useState('idle')
 	const [playerName, setPlayerName] = useState(user ? user.displayName : '')
 	const [connected, setConnected] = useState(false)
+	const [selectedFormat, setSelectedFormat] = useState('gen9brawlcraftstandard')
 	const cleanups = useRef([])
 
 	useEffect(() => {
@@ -71,7 +72,7 @@ export default function Home() {
 		} else {
 			setStatus('searching')
 			const packedTeam = packTeamForShowdown(teamData)
-			client.findBattle('gen9theprototype', packedTeam)
+			client.findBattle(selectedFormat, packedTeam)
 		}
 	}
 
@@ -90,14 +91,14 @@ export default function Home() {
 			<div className="home__gradient-orb home__gradient-orb--1" aria-hidden />
 			<div className="home__gradient-orb home__gradient-orb--2" aria-hidden />
 
-			<Leaderboard connected={connected} />
+			<Leaderboard connected={connected} format={selectedFormat} />
 
 			<div className="home__content animate-fadeInUp">
 				<header className="home__header">
 					<div className="home__logo">
 						<span className="home__logo-icon">⚔</span>
 					</div>
-					<h1 className="home__title font-display">THE PROTOTYPE</h1>
+					<h1 className="home__title font-display">BRAWLCRAFT</h1>
 					<p className="home__subtitle">Competitive Battle Arena</p>
 				</header>
 
@@ -109,6 +110,18 @@ export default function Home() {
 				)}
 
 				<div className="home__actions">
+					<div className="home__format-select-wrapper">
+						<select
+							className="home__format-select"
+							value={selectedFormat}
+							onChange={(e) => setSelectedFormat(e.target.value)}
+							disabled={status !== 'idle'}
+						>
+							<option value="gen9brawlcraftstandard">Brawlcraft Standard</option>
+							<option value="gen9brawlcraftcustom">Brawlcraft Custom (Crafted)</option>
+						</select>
+					</div>
+
 					<button
 						id="btn-find-match"
 						className={`btn btn-primary btn-lg home__find-btn ${status === 'searching' ? 'home__find-btn--searching' : ''}`}

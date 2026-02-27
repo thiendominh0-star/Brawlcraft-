@@ -15,9 +15,15 @@ export default function Teambuilder() {
 	}) // max 6 slots
 	const [selectedCharId, setSelectedCharId] = useState(null)
 
-	// Đọc roster từ localStorage (hoặc default)
+	// Đọc roster từ localStorage (hoặc default) và trộn với Custom Brawler
 	useEffect(() => {
-		setRoster(loadRoster())
+		const adminRoster = loadRoster();
+		let customRoster = [];
+		try {
+			const j = localStorage.getItem('brawlcraft_customs');
+			if (j) customRoster = JSON.parse(j);
+		} catch (e) { }
+		setRoster([...customRoster, ...adminRoster]);
 	}, [])
 
 	const addToTeam = (char) => {
@@ -45,6 +51,13 @@ export default function Teambuilder() {
 					← Back
 				</button>
 				<h1 className="teambuilder__title font-display">TEAMBUILDER</h1>
+				<button
+					className="btn btn-primary"
+					onClick={() => navigate('/craft')}
+					style={{marginLeft: 'auto', marginRight: '20px', backgroundColor: 'var(--accent-purple)', borderColor: 'var(--accent-purple)'}}
+				>
+					⚒ CRAFT NEW BRAWLER
+				</button>
 				<div className="teambuilder__team-count">
 					<span>{team.length}</span><span className="teambuilder__team-count-max">/6</span>
 				</div>

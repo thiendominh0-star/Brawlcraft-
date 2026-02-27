@@ -1,0 +1,218 @@
+.craft-room {
+	min-height: 100vh;
+	background-color: var(--bg-dark);
+	color: var(--text-primary);
+	padding: 40px;
+	display: flex;
+	flex-direction: column;
+	gap: 30px;
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.craft-room__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+	padding-bottom: 20px;
+}
+
+.craft-room__title {
+	font-size: 2rem;
+	color: var(--accent-gold);
+	text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+	margin: 0;
+	letter-spacing: 2px;
+}
+
+.craft-room__points {
+	font-family: var(--font-display);
+	font-size: 1.5rem;
+	background: rgba(0, 0, 0, 0.4);
+	padding: 10px 20px;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-success {
+	color: #4ade80;
+}
+
+.text-warning {
+	color: #facc15;
+}
+
+.craft-room__body {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	gap: 30px;
+}
+
+.craft-panel {
+	background: rgba(15, 20, 30, 0.6);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 25px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.craft-panel h3 {
+	margin-top: 0;
+	color: var(--text-secondary);
+	font-size: 1.1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	padding-bottom: 10px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 8px;
+	color: var(--text-secondary);
+	font-size: 0.9rem;
+	text-transform: uppercase;
+}
+
+.form-group input[type="text"] {
+	width: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
+	padding: 12px;
+	border-radius: 6px;
+	font-size: 1.1rem;
+	font-family: inherit;
+}
+
+.type-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.type-btn {
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	color: white;
+	padding: 10px;
+	border-radius: 6px;
+	cursor: pointer;
+	font-weight: 600;
+	transition: all 0.2s;
+}
+
+.type-btn:hover {
+	background: rgba(255, 255, 255, 0.15);
+}
+
+.type-btn.active {
+	border-color: var(--accent-blue);
+	box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+/* Hardcoded some colors for Types */
+.type-btn--shadow.active {
+	background: #6b21a8;
+	border-color: #a855f7;
+}
+
+.type-btn--arcane.active {
+	background: #1d4ed8;
+	border-color: #3b82f6;
+}
+
+.type-btn--holy.active {
+	background: #b45309;
+	border-color: #f59e0b;
+}
+
+.type-btn--undead.active {
+	background: #374151;
+	border-color: #9ca3af;
+}
+
+.type-btn--dragon.active {
+	background: #991b1b;
+	border-color: #ef4444;
+}
+
+.type-btn--nature.active {
+	background: #166534;
+	border-color: #22c55e;
+}
+
+.type-btn--steel.active {
+	background: #475569;
+	border-color: #cbd5e1;
+}
+
+.type-btn--fire.active {
+	background: #c2410c;
+	border-color: #f97316;
+}
+
+.type-btn--water.active {
+	background: #0369a1;
+	border-color: #0ea5e9;
+}
+
+.stats-list {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.stat-row {
+	display: grid;
+	grid-template-columns: 60px 1fr 70px;
+	align-items: center;
+	gap: 15px;
+}
+
+.stat-label {
+	font-weight: bold;
+	color: var(--text-secondary);
+	font-size: 1.1rem;
+}
+
+.stat-slider input[type="range"] {
+	width: 100%;
+	cursor: pointer;
+	accent-color: var(--accent-blue);
+}
+
+.stat-value input[type="number"] {
+	width: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: white;
+	padding: 8px;
+	border-radius: 4px;
+	text-align: center;
+	font-weight: bold;
+	font-family: var(--font-display);
+}
+
+.craft-room__footer {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.craft-room__footer .btn {
+	width: 300px;
+	font-size: 1.2rem;
+	padding: 15px;
+	border-color: var(--accent-gold);
+	color: var(--accent-gold);
+}
+
+.craft-room__footer .btn:hover {
+	background: var(--accent-gold);
+	color: black;
+	box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}

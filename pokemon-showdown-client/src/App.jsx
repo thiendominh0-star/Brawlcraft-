@@ -4,6 +4,7 @@ import Teambuilder from './pages/Teambuilder/Teambuilder.jsx'
 import Match from './pages/Match/Match.jsx'
 import Admin from './pages/Admin/Admin.jsx'
 import Login from './pages/Login/Login.jsx'
+import CraftRoom from './pages/CraftRoom/CraftRoom.jsx'
 import {ToastProvider} from './components/shared/ToastProvider.jsx'
 import {getCurrentUser} from './services/authStore.js'
 
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/teambuilder" element={<ProtectedRoute><Teambuilder /></ProtectedRoute>} />
+          <Route path="/craft" element={<ProtectedRoute><CraftRoom /></ProtectedRoute>} />
           <Route path="/admin" element={<ProtectedRoute reqAdmin={true}><Admin /></ProtectedRoute>} />
           <Route path="/battle/:roomId" element={<ProtectedRoute><Match /></ProtectedRoute>} />
           <Route path="*" element={<Navigate to="/" replace />} />
