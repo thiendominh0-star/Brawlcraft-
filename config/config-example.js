@@ -86,7 +86,8 @@ exports.proxyip = false;
 
 // subprocesses - the number of child processes to use for various tasks.
 //   Can be set to `0` instead of `{...}` to stop using subprocesses, if you're running out of RAM.
-exports.subprocesses = {
+exports.subprocesses = 0;
+const default_subprocesses_disabled = {
 	/**
 	 * network - the number of networking child processes to spawn
 	 *   This should be no greater than the number of threads available on your
@@ -512,7 +513,7 @@ exports.forcedpublicprefixes = [];
  * startuphook - function to call when the server is fully initialized and ready
  * to serve requests.
  */
-exports.startuphook = function () {};
+exports.startuphook = function () { };
 
 /**
  * lastfmkey - the API key to let users use the last.fm commands from The Studio's
