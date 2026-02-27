@@ -68,6 +68,10 @@ class ShowdownClient {
 		this.send(`|/search ${formatId}`);
 	}
 
+	/** Yêu cầu lấy Bảng xếp hạng Top 100 */
+	fetchLeaderboard(formatId = 'gen9theprototype') {
+		this.send(`|/cmd laddertop ${formatId}`);
+	}
 
 	/** Hủy tìm trận */
 	cancelSearch() {
@@ -161,6 +165,17 @@ class ShowdownClient {
 
 				case 'turn':
 					this._emit('battle:turn', {roomId, turn: parseInt(args[0])});
+					break;
+
+				case 'queryresponse':
+					// args[0] là queryType (vd 'laddertop'), args[1] là JSON payload
+					if (args[0] === 'laddertop') {
+						try {
+							const payload = JSON.parse(args[1]);
+							// payload là mảng: [formatId, htmlString]
+							this._emit('laddertop', {formatId: payload[0], html: payload[1]});
+						} catch (e) { /* ignore */}
+					}
 					break;
 
 				case '-damage':

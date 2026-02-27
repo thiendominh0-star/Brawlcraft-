@@ -1,0 +1,103 @@
+.home-leaderboard {
+	position: absolute;
+	right: 40px;
+	top: 40px;
+	width: 350px;
+	z-index: 10;
+	pointer-events: none;
+	/* Let clicks pass through empty spaces */
+}
+
+.leaderboard-glass {
+	background: rgba(15, 20, 30, 0.6);
+	backdrop-filter: blur(12px);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 20px;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+	pointer-events: auto;
+	/* Re-enable clicks for the panel itself */
+}
+
+.leaderboard-title {
+	font-family: var(--font-display);
+	font-size: 1.2rem;
+	color: var(--accent-gold, #ffd700);
+	margin-bottom: 15px;
+	text-align: center;
+	letter-spacing: 2px;
+	text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.leaderboard-content h3 {
+	display: none;
+	/* Hide the default h3 from Showdown HTML */
+}
+
+.leaderboard-content table {
+	width: 100%;
+	border-collapse: collapse;
+	color: var(--text-primary);
+	font-size: 0.9rem;
+}
+
+.leaderboard-content th {
+	text-transform: uppercase;
+	font-size: 0.75rem;
+	color: var(--text-secondary);
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	text-align: left;
+}
+
+.leaderboard-content td {
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.leaderboard-content tr:last-child td {
+	border-bottom: none;
+}
+
+.leaderboard-content td:nth-child(2) {
+	/* Username column */
+	font-weight: 500;
+	color: var(--accent-blue);
+}
+
+.leaderboard-content td:nth-child(3) {
+	/* ELO column */
+	color: var(--accent-gold, #ffd700);
+	text-align: center;
+}
+
+.leaderboard-content td:last-child,
+.leaderboard-content td:nth-last-child(2),
+.leaderboard-content td:nth-last-child(3) {
+	/* W L T columns */
+	text-align: center;
+	opacity: 0.8;
+}
+
+.leaderboard-content th:nth-child(3),
+.leaderboard-content th:last-child,
+.leaderboard-content th:nth-last-child(2),
+.leaderboard-content th:nth-last-child(3) {
+	text-align: center;
+}
+
+/* Optional: Emphasize Top 3 */
+.leaderboard-content tr:nth-of-type(2) td:first-child {
+	color: gold;
+	font-weight: bold;
+}
+
+.leaderboard-content tr:nth-of-type(3) td:first-child {
+	color: silver;
+	font-weight: bold;
+}
+
+.leaderboard-content tr:nth-of-type(4) td:first-child {
+	color: #cd7f32;
+	font-weight: bold;
+}

@@ -3,6 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import client from '../../services/showdownClient.js'
 import {packTeamForShowdown} from '../../services/teamUtils.js'
 import {getCurrentUser, logout} from '../../services/authStore.js'
+import Leaderboard from './Leaderboard.jsx'
 import './Home.css'
 
 const STATUS_LABELS = {
@@ -88,6 +89,8 @@ export default function Home() {
 			<div className="home__grid-bg" aria-hidden />
 			<div className="home__gradient-orb home__gradient-orb--1" aria-hidden />
 			<div className="home__gradient-orb home__gradient-orb--2" aria-hidden />
+
+			<Leaderboard connected={connected} />
 
 			<div className="home__content animate-fadeInUp">
 				<header className="home__header">
