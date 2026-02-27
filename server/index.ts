@@ -165,7 +165,7 @@ export const readyPromise = cleanupStale().then(() => {
 	 * On error continue - enabled by default
 	 *********************************************************/
 
-	if (Config.crashguard) {
+	if (false) {
 		// graceful crash - allow current battles to finish before restarting
 		process.on('uncaughtException', (err: Error) => {
 			Monitor.crashlog(err, 'The main process');
@@ -183,7 +183,7 @@ export const readyPromise = cleanupStale().then(() => {
 	 * Start up the REPL server
 	 *********************************************************/
 
-	Repl.startGlobal('app');
+	// Repl.startGlobal('app');
 
 	/*********************************************************
 	 * Fully initialized, run startup hook
