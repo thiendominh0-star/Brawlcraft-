@@ -45,7 +45,7 @@ export default function Login() {
 			<div className="login-card animate-fadeInUp">
 				<div className="login-card__header">
 					<span className="login-card__icon">⬣</span>
-					<h1 className="login-card__title font-display">THE PROTOTYPE</h1>
+					<h1 className="login-card__title font-display">BRAWLCRAFT</h1>
 					<p className="login-card__subtitle">
 						{isRegister ? 'Tạo tài khoản mới' : 'Authenticate to continue'}
 					</p>
@@ -87,12 +87,6 @@ export default function Login() {
 						{isRegister ? 'Đăng nhập ngay' : 'Đăng ký ngay'}
 					</strong>
 				</p>
-
-				{!isRegister && (
-					<p className="login-hint" style={{marginTop: 'var(--space-2)'}}>
-						* Admin Test: <strong style={{color: 'var(--accent-red)'}}>admin / 1</strong>
-					</p>
-				)}
 			</div>
 		</div>
 	)
