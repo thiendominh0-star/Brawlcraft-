@@ -178,6 +178,12 @@ class ShowdownClient {
 					}
 					break;
 
+				case 'switch':
+				case 'drag':
+				case 'replace':
+					this._emit('battle:switch', {roomId, pokemon: args[0], details: args[1], hpText: args[2]});
+					break;
+
 				case '-damage':
 					this._emit('battle:damage', {roomId, pokemon: args[0], hpText: args[1], condition: args[2]});
 					break;

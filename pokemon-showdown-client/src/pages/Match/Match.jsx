@@ -98,6 +98,35 @@ export default function Match() {
 				}
 			}),
 
+			// Switch
+			client.on('battle:switch', ({roomId: r, pokemon, details, hpText}) => {
+				if (r !== decodedRoomId) return
+				const isEnemy = pokemon.startsWith('p2')
+				const {hp, maxHp} = parseHPText(hpText)
+
+				const [rawName] = details.split(',')
+				let displayName = rawName
+				let displayType = 'normal'
+
+				if (rawName.startsWith('C-')) {
+					const parts = rawName.split('-')
+					if (parts.length >= 9) {
+						displayName = parts[1]
+						displayType = parts[8].toLowerCase()
+					}
+				} else {
+					displayType = rawName.toLowerCase().replace(/\s+/g, '')
+				}
+
+				if (isEnemy) {
+					setEnemyPokemon(prev => ({...prev, name: displayName, hp, maxHp: maxHp || prev.maxHp, type: displayType}))
+					appendLog(`Opponent sent out ${displayName}!`)
+				} else {
+					setMyPokemon(prev => ({...prev, name: displayName, hp, maxHp: maxHp || prev.maxHp, type: displayType}))
+					appendLog(`Go! ${displayName}!`)
+				}
+			}),
+
 			// Heal
 			client.on('battle:heal', ({roomId: r, pokemon, hpText}) => {
 				if (r !== decodedRoomId) return

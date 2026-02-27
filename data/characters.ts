@@ -4,7 +4,7 @@ export const Characters: import('../sim/dex-species').SpeciesDataTable = {
 		name: "Pikachu",
 		types: ["Electric"],
 		baseStats: { hp: 35, atk: 55, def: 40, spa: 50, spd: 50, spe: 90 },
-		abilities: { 0: "Static", H: "Lightning Rod" },
+		abilities: { 0: "No Ability", H: "Berserker" },
 		weightkg: 6,
 	},
 	arcanesniper: {
@@ -12,7 +12,7 @@ export const Characters: import('../sim/dex-species').SpeciesDataTable = {
 		name: "Arcane Sniper",
 		types: ["Arcane"],
 		baseStats: { hp: 70, atk: 110, def: 70, spa: 110, spd: 70, spe: 120 },
-		abilities: { 0: "Sniper" },
+		abilities: { 0: "No Ability" },
 		weightkg: 40,
 	},
 	shadowblade: {
@@ -20,7 +20,7 @@ export const Characters: import('../sim/dex-species').SpeciesDataTable = {
 		name: "Shadow Blade",
 		types: ["Shadow"],
 		baseStats: { hp: 80, atk: 120, def: 80, spa: 60, spd: 70, spe: 110 },
-		abilities: { 0: "Infiltrator" },
+		abilities: { 0: "No Ability" },
 		weightkg: 50,
 	}
 };

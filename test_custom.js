@@ -16,13 +16,13 @@ async function run() {
 		send(ws1, `|/trn ${p1Name},0`);
 		// C-Tên-HP-ATK-DEF-SPA-SPD-SPE-Type
 		// 80+80+80+80+80+100 = 500
-		send(ws1, '|/utm C-Lucifer-80-80-80-80-80-100-Shadow|pikachu||static|tackle,quickattack||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|');
+		send(ws1, '|/utm C-Lucifer-80-80-80-80-80-100-Shadow|pikachu|||tackle,quickattack||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|');
 		send(ws1, '|/search gen9brawlcraftcustom');
 	};
 
 	ws2.onopen = () => {
 		send(ws2, `|/trn ${p2Name},0`);
-		send(ws2, '|/utm pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|]pikachu|||static|tackle||||||100|');
+		send(ws2, '|/utm pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|]pikachu||||tackle||||||100|');
 		send(ws2, '|/search gen9brawlcraftcustom');
 	};
 
@@ -58,8 +58,8 @@ async function run() {
 		}
 	};
 
-    // Giữ process sống 15 giây
-    setTimeout(() => { console.log("Timeout 15s reached"); process.exit(0); }, 15000);
+	// Giữ process sống 15 giây
+	setTimeout(() => {console.log("Timeout 15s reached"); process.exit(0);}, 15000);
 }
 
 run();
