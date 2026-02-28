@@ -63,13 +63,13 @@ class ShowdownClient {
 	}
 
 	/** Tìm trận */
-	findBattle(formatId = 'gen9theprototype', teamFormat = null) {
+	findBattle(formatId = 'gen9brawlcraftstandard', teamFormat = null) {
 		if (teamFormat) this.setTeam(teamFormat);
 		this.send(`|/search ${formatId}`);
 	}
 
 	/** Yêu cầu lấy Bảng xếp hạng Top 100 */
-	fetchLeaderboard(formatId = 'gen9theprototype') {
+	fetchLeaderboard(formatId = 'gen9brawlcraftstandard') {
 		this.send(`|/cmd laddertop ${formatId}`);
 	}
 
@@ -139,6 +139,10 @@ class ShowdownClient {
 				case 'challstr':
 					this.challstr = args.join('|');
 					this._emit('challstr', this.challstr);
+					break;
+
+				case 'popup':
+					window.alert(args.join('|').replace(/\|/g, '\n'));
 					break;
 
 				case 'updateuser':

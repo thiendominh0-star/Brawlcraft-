@@ -57,7 +57,7 @@ export default function Home() {
 
 		let teamData = []
 		try {
-			const saved = localStorage.getItem('prototype_team')
+			const saved = localStorage.getItem('brawlcraft_team')
 			if (saved) teamData = JSON.parse(saved)
 		} catch (e) { /* ignore */}
 

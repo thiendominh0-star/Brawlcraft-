@@ -657,7 +657,7 @@ export class TeamValidator {
 			setSources.sources = ['8S0 melmetal'];
 		}
 		if (!species.exists) {
-			return [`The Pokemon "${set.species}" does not exist.`];
+			return [`The Brawler "${set.species}" does not exist.`];
 		}
 
 		if (item.id && !item.exists) {

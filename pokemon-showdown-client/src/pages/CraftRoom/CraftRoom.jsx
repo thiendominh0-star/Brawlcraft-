@@ -45,9 +45,28 @@ export default function CraftRoom() {
 		setStats(prev => ({...prev, [statName]: clamped}));
 	};
 
+	const validateBrawlerInput = () => {
+		if (currentBST !== MAX_BST) {
+			alert(`❌ KHÔNG HỢP LỆ! Tổng chỉ số hiện tại là ${currentBST}/${MAX_BST} (Đang thừa ${pointsRemaining} điểm).`);
+			return false;
+		}
+		const hasOutOfBounds = Object.values(stats).some(val => val < MIN_STAT || val > MAX_STAT);
+		if (hasOutOfBounds) {
+			alert(`❌ KHÔNG HỢP LỆ! Mỗi chỉ số phải nằm trong khoảng từ ${MIN_STAT} đến ${MAX_STAT}.`);
+			return false;
+		}
+		alert(`✅ HỢP LỆ! Brawler "${brawlerName}" (Hệ ${selectedType}, Tổng ${currentBST} BST) đã đạt chuẩn Server!`);
+		return true;
+	};
+
 	const saveBrawler = () => {
 		if (currentBST !== MAX_BST) {
-			alert(`Bạn phải sử dụng toàn bộ ${MAX_BST} điểm chỉ số! (Đang thừa ${pointsRemaining} điểm)`);
+			alert(`❌ Bạn phải sử dụng toàn bộ ${MAX_BST} điểm chỉ số! (Đang thừa ${pointsRemaining} điểm)`);
+			return;
+		}
+		const hasOutOfBounds = Object.values(stats).some(val => val < MIN_STAT || val > MAX_STAT);
+		if (hasOutOfBounds) {
+			alert(`❌ KHÔNG HỢP LỆ! Mỗi chỉ số phải nằm trong khoảng từ ${MIN_STAT} đến ${MAX_STAT}.`);
 			return;
 		}
 
@@ -150,6 +169,9 @@ export default function CraftRoom() {
 			</div>
 
 			<div className="craft-room__footer">
+				<button className="btn btn-secondary btn-lg" onClick={validateBrawlerInput} style={{marginRight: '15px'}}>
+					✓ VALIDATE BRAWLER
+				</button>
 				<button className="btn btn-primary btn-lg" onClick={saveBrawler}>
 					⚒ CHẾ TẠO BRAWLER NÀY
 				</button>

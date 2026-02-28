@@ -22,5 +22,37 @@ export const Characters: import('../sim/dex-species').SpeciesDataTable = {
 		baseStats: { hp: 80, atk: 120, def: 80, spa: 60, spd: 70, spe: 110 },
 		abilities: { 0: "No Ability" },
 		weightkg: 50,
+	},
+	holyknight: {
+		num: 1003,
+		name: "Holy Knight",
+		types: ["Holy"],
+		baseStats: { hp: 100, atk: 80, def: 120, spa: 50, spd: 100, spe: 50 },
+		abilities: { 0: "No Ability" },
+		weightkg: 100,
+	},
+	undeadbrute: {
+		num: 1004,
+		name: "Undead Brute",
+		types: ["Undead"],
+		baseStats: { hp: 120, atk: 110, def: 80, spa: 40, spd: 80, spe: 70 },
+		abilities: { 0: "No Ability" },
+		weightkg: 120,
+	},
+	dragonmage: {
+		num: 1005,
+		name: "Dragon Mage",
+		types: ["Dragon"],
+		baseStats: { hp: 70, atk: 50, def: 70, spa: 130, spd: 90, spe: 90 },
+		abilities: { 0: "No Ability" },
+		weightkg: 60,
+	},
+	naturegolem: {
+		num: 1006,
+		name: "Nature Golem",
+		types: ["Nature"],
+		baseStats: { hp: 150, atk: 90, def: 130, spa: 40, spd: 80, spe: 30 },
+		abilities: { 0: "No Ability" },
+		weightkg: 300,
 	}
 };

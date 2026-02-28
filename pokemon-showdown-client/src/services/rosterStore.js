@@ -4,7 +4,7 @@
  * Trang Admin ghi -> Teambuilder đọc từ đây.
  */
 
-const STORAGE_KEY = 'prototype_roster'
+const STORAGE_KEY = 'brawlcraft_roster'
 
 // Default roster - dùng khi localStorage chưa có dữ liệu
 const DEFAULT_ROSTER = [

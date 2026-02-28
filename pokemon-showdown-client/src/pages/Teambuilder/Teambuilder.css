@@ -180,3 +180,56 @@
 	width: 100%;
 	margin-top: auto;
 }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+	.teambuilder__header {
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.teambuilder__title {
+		font-size: 1.1rem;
+	}
+
+	.teambuilder__body {
+		grid-template-columns: 1fr;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.teambuilder__sidebar {
+		order: -1;
+		border-left: none;
+		border-bottom: 1px solid var(--border-subtle);
+		padding: var(--space-4);
+	}
+
+	.teambuilder__team-slots {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 10px;
+	}
+
+	.teambuilder__slot {
+		min-height: 80px;
+	}
+
+	.teambuilder__roster {
+		padding: var(--space-4);
+	}
+
+	.teambuilder__grid {
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+	}
+
+	.teambuilder__save-btn {
+		margin-top: 10px;
+	}
+}
+
+@media (max-width: 480px) {
+	.teambuilder__team-slots {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}

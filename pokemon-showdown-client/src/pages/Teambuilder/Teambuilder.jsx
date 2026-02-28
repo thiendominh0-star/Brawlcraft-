@@ -9,11 +9,12 @@ export default function Teambuilder() {
 	const [roster, setRoster] = useState([])
 	const [team, setTeam] = useState(() => {
 		try {
-			const saved = localStorage.getItem('prototype_team')
+			const saved = localStorage.getItem('brawlcraft_team')
 			return saved ? JSON.parse(saved) : []
 		} catch {return []}
 	}) // max 6 slots
 	const [selectedCharId, setSelectedCharId] = useState(null)
+	const [searchText, setSearchText] = useState('')
 
 	// Đọc roster từ localStorage (hoặc default) và trộn với Custom Brawler
 	useEffect(() => {
@@ -25,6 +26,10 @@ export default function Teambuilder() {
 		} catch (e) { }
 		setRoster([...customRoster, ...adminRoster]);
 	}, [])
+
+	const filteredRoster = roster.filter(char =>
+		char.name.toLowerCase().includes(searchText.toLowerCase())
+	)
 
 	const addToTeam = (char) => {
 		if (team.length >= 6) return
@@ -39,7 +44,7 @@ export default function Teambuilder() {
 	const isInTeam = (id) => team.some(c => c.id === id)
 
 	const handleSaveTeam = () => {
-		localStorage.setItem('prototype_team', JSON.stringify(team))
+		localStorage.setItem('brawlcraft_team', JSON.stringify(team))
 		navigate('/')
 	}
 
@@ -66,9 +71,18 @@ export default function Teambuilder() {
 			<div className="teambuilder__body">
 				{/* Roster Grid */}
 				<section className="teambuilder__roster">
-					<h2 className="teambuilder__section-title">Roster ({roster.length})</h2>
+					<div className="teambuilder__roster-header" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', flexWrap: 'wrap', gap: '10px'}}>
+						<h2 className="teambuilder__section-title" style={{margin: 0}}>Roster ({filteredRoster.length})</h2>
+						<input
+							type="text"
+							placeholder="Search by name..."
+							value={searchText}
+							onChange={(e) => setSearchText(e.target.value)}
+							style={{padding: '0.4rem 0.8rem', borderRadius: '4px', border: '1px solid var(--border-subtle)', background: 'var(--bg-02)', color: 'var(--text-primary)', outline: 'none', maxWidth: '200px'}}
+						/>
+					</div>
 					<div className="teambuilder__grid">
-						{roster.map(char => (
+						{filteredRoster.map(char => (
 							<div key={char.id} className="teambuilder__card-wrap">
 								<CharacterCard
 									character={char}

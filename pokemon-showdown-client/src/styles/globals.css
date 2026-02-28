@@ -1,5 +1,5 @@
 /* ==========================================
-   DESIGN SYSTEM - The Prototype
+   DESIGN SYSTEM - BrawlCraft
    Minimalist Esports Dark UI
    ========================================== */
 
@@ -15,39 +15,39 @@
   --bg-04: #1e2a3a;
 
   /* Borders */
-  --border-subtle: rgba(255,255,255,0.06);
-  --border-default: rgba(255,255,255,0.12);
-  --border-strong: rgba(255,255,255,0.22);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
 
   /* Accent Colors */
   --accent-blue: #3b82f6;
-  --accent-blue-glow: rgba(59,130,246,0.35);
+  --accent-blue-glow: rgba(59, 130, 246, 0.35);
   --accent-purple: #8b5cf6;
-  --accent-purple-glow: rgba(139,92,246,0.35);
+  --accent-purple-glow: rgba(139, 92, 246, 0.35);
   --accent-cyan: #06b6d4;
   --accent-red: #ef4444;
-  --accent-red-glow: rgba(239,68,68,0.35);
+  --accent-red-glow: rgba(239, 68, 68, 0.35);
   --accent-gold: #f59e0b;
   --accent-green: #22c55e;
 
   /* Type Colors (Character Classes) */
-  --type-shadow:   #7c3aed;
-  --type-arcane:   #2563eb;
-  --type-holy:     #d97706;
-  --type-undead:   #6b7280;
-  --type-dragon:   #dc2626;
-  --type-nature:   #16a34a;
+  --type-shadow: #7c3aed;
+  --type-arcane: #2563eb;
+  --type-holy: #d97706;
+  --type-undead: #6b7280;
+  --type-dragon: #dc2626;
+  --type-nature: #16a34a;
 
   /* Text */
-  --text-primary:   #f1f5f9;
+  --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
-  --text-muted:     #475569;
-  --text-disabled:  #2d3748;
+  --text-muted: #475569;
+  --text-disabled: #2d3748;
 
   /* HP Bar Colors */
-  --hp-high:   #22c55e;
+  --hp-high: #22c55e;
   --hp-medium: #f59e0b;
-  --hp-low:    #ef4444;
+  --hp-low: #ef4444;
 
   /* Typography */
   --font-body: 'Inter', system-ui, sans-serif;
@@ -77,7 +77,9 @@
 }
 
 /* --- Reset & Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -117,17 +119,44 @@ button {
 }
 
 /* --- Scrollbar Styling --- */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg-01); }
-::-webkit-scrollbar-thumb { background: var(--bg-04); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--border-strong); }
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-01);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-04);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
 
 /* --- Typography Utilities --- */
-.font-display { font-family: var(--font-display); }
-.text-primary  { color: var(--text-primary); }
-.text-secondary { color: var(--text-secondary); }
-.text-muted    { color: var(--text-muted); }
-.text-accent   { color: var(--accent-blue); }
+.font-display {
+  font-family: var(--font-display);
+}
+
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-accent {
+  color: var(--accent-blue);
+}
 
 /* --- Layout Utilities --- */
 .container {
@@ -137,14 +166,37 @@ button {
   width: 100%;
 }
 
-.flex { display: flex; }
-.flex-col { flex-direction: column; }
-.items-center { align-items: center; }
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.gap-2 { gap: var(--space-2); }
-.gap-4 { gap: var(--space-4); }
-.gap-6 { gap: var(--space-6); }
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-2 {
+  gap: var(--space-2);
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+.gap-6 {
+  gap: var(--space-6);
+}
 
 /* --- Common Glass Panel --- */
 .panel {
@@ -155,7 +207,7 @@ button {
 }
 
 .panel-glow-blue {
-  box-shadow: 0 0 0 1px var(--accent-blue-glow), inset 0 1px 0 rgba(255,255,255,0.04);
+  box-shadow: 0 0 0 1px var(--accent-blue-glow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* --- Button Base --- */
@@ -180,21 +232,26 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0);
+  background: rgba(255, 255, 255, 0);
   transition: background var(--transition-fast);
 }
 
-.btn:hover::before { background: rgba(255,255,255,0.06); }
-.btn:active::before { background: rgba(255,255,255,0.1); }
+.btn:hover::before {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn:active::before {
+  background: rgba(255, 255, 255, 0.1);
+}
 
 .btn-primary {
   background: var(--accent-blue);
   color: #fff;
-  box-shadow: 0 0 20px var(--accent-blue-glow), 0 2px 4px rgba(0,0,0,0.4);
+  box-shadow: 0 0 20px var(--accent-blue-glow), 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .btn-primary:hover {
-  box-shadow: 0 0 32px var(--accent-blue-glow), 0 4px 12px rgba(0,0,0,0.4);
+  box-shadow: 0 0 32px var(--accent-blue-glow), 0 4px 12px rgba(0, 0, 0, 0.4);
   transform: translateY(-1px);
 }
 
@@ -235,44 +292,100 @@ button {
 
 /* --- Animations --- */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 12px var(--accent-blue-glow); }
-  50%       { box-shadow: 0 0 28px var(--accent-blue-glow); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 12px var(--accent-blue-glow);
+  }
+
+  50% {
+    box-shadow: 0 0 28px var(--accent-blue-glow);
+  }
 }
 
 @keyframes hp-drain {
-  from { width: var(--hp-from); }
-  to   { width: var(--hp-to); }
+  from {
+    width: var(--hp-from);
+  }
+
+  to {
+    width: var(--hp-to);
+  }
 }
 
 @keyframes toast-in {
-  from { opacity: 0; transform: translateX(100%); }
-  to   { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes toast-out {
-  from { opacity: 1; transform: translateX(0); }
-  to   { opacity: 0; transform: translateX(100%); }
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
 }
 
-.animate-fadeInUp    { animation: fadeInUp 0.35s ease both; }
-.animate-fadeIn      { animation: fadeIn 0.25s ease both; }
-.animate-slideRight  { animation: slideInRight 0.3s ease both; }
-.animate-pulse-glow  { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-fadeInUp {
+  animation: fadeInUp 0.35s ease both;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease both;
+}
+
+.animate-slideRight {
+  animation: slideInRight 0.3s ease both;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
 
 /* --- Divider --- */
 .divider {
@@ -282,9 +395,26 @@ button {
 }
 
 /* --- Type Color Helpers --- */
-.type-shadow  { --type-color: var(--type-shadow); }
-.type-arcane  { --type-color: var(--type-arcane); }
-.type-holy    { --type-color: var(--type-holy); }
-.type-undead  { --type-color: var(--type-undead); }
-.type-dragon  { --type-color: var(--type-dragon); }
-.type-nature  { --type-color: var(--type-nature); }
+.type-shadow {
+  --type-color: var(--type-shadow);
+}
+
+.type-arcane {
+  --type-color: var(--type-arcane);
+}
+
+.type-holy {
+  --type-color: var(--type-holy);
+}
+
+.type-undead {
+  --type-color: var(--type-undead);
+}
+
+.type-dragon {
+  --type-color: var(--type-dragon);
+}
+
+.type-nature {
+  --type-color: var(--type-nature);
+}

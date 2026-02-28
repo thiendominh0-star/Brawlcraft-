@@ -216,3 +216,42 @@
 	color: black;
 	box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
 }
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+	.craft-room {
+		padding: 20px 15px;
+	}
+
+	.craft-room__header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 15px;
+	}
+
+	.craft-room__title {
+		font-size: 1.5rem;
+		text-align: center;
+		width: 100%;
+	}
+
+	.craft-room__points {
+		width: 100%;
+		text-align: center;
+	}
+
+	.craft-room__body {
+		grid-template-columns: 1fr;
+	}
+
+	.craft-room__footer {
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.craft-room__footer .btn {
+		width: 100%;
+		margin-right: 0 !important;
+	}
+}

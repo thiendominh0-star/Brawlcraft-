@@ -3,8 +3,8 @@
  * Quản lý trạng thái đăng ký / đăng nhập (Lưu mock Database trong localStorage)
  */
 
-const AUTH_KEY = 'prototype_user_auth'
-const DB_KEY = 'prototype_users_db'
+const AUTH_KEY = 'brawlcraft_user_auth'
+const DB_KEY = 'brawlcraft_users_db'
 
 // "Cơ sở dữ liệu" (Array các user object)
 function getDB() {
