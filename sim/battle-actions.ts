@@ -300,8 +300,9 @@ export class BattleActions {
 		// =========== [BRAWLCRAFT COST LOGIC] ============
 		if (baseMove.cost && baseMove.cost.type === 'hp') {
 			const costPercent = baseMove.cost.value || 0;
+			const hpType = baseMove.cost.hp_type || 'current';
 			if (costPercent > 0) {
-				const costAmount = Math.ceil(pokemon.maxhp * (costPercent / 100));
+				const costAmount = Math.ceil((hpType === 'max' ? pokemon.maxhp : pokemon.hp) * (costPercent / 100));
 				if (pokemon.hp <= costAmount) {
 					this.battle.add('-fail', pokemon, 'move: ' + baseMove.name, '[msg]');
 					this.battle.add('-message', `(HP không đủ để trả giá cho chiêu thức này!)`);
@@ -312,6 +313,21 @@ export class BattleActions {
 				}
 				// Trừ máu ngay lập tức
 				this.battle.damage(costAmount, pokemon, pokemon, baseMove);
+			}
+		}
+
+		if (baseMove.cost && baseMove.cost.type === 'pp') {
+			const extraPp = baseMove.cost.value || 1;
+			let moveSlot = pokemon.moveSlots.find(m => m.id === baseMove.id);
+			if (moveSlot) {
+				if (moveSlot.pp < extraPp) {
+					this.battle.add('-fail', pokemon, 'move: ' + baseMove.name, '[msg]');
+					this.battle.add('-message', `(PP không đủ để thi triển kỹ năng này!)`);
+					this.battle.clearActiveMove(true);
+					pokemon.moveThisTurnResult = false;
+					return;
+				}
+				moveSlot.pp -= extraPp;
 			}
 		}
 		// ================================================

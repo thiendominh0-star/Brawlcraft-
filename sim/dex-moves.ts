@@ -169,7 +169,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	noPPBoosts?: boolean;
 
 	/** [BRAWLCRAFT EXTENSION] */
-	cost?: { type: string; value: number; };
+	cost?: { type: string; value: number; hp_type?: string; };
 	drawback?: { type: string; stat?: string; stage?: number; recoil?: number; };
 
 	// Z-move data

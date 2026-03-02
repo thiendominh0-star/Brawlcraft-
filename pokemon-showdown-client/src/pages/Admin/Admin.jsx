@@ -68,7 +68,14 @@ export default function Admin() {
 
 		// 2. Cost (Trả trước)
 		if (move.cost?.type === 'hp' && move.cost?.value > 0) {
-			parts.push(`Cost: Hi sinh ${move.cost.value}% HP hiện tại.`)
+			const hpType = move.cost.hp_type === 'max' ? 'Max HP' : 'HP hiện tại'
+			parts.push(`Cost: Hi sinh ${move.cost.value}% ${hpType}.`)
+		} else if (move.cost?.type === 'faint') {
+			parts.push(`Cost: Tự sát sau khi dùng chiêu.`)
+		} else if (move.cost?.type === 'charge') {
+			parts.push(`Cost: Tụ khí 1 lượt trước khi đánh.`)
+		} else if (move.cost?.type === 'pp') {
+			parts.push(`Cost: Tiêu hao ${move.cost.value || 1} PP.`)
 		}
 
 		// 3. Drawback (Hệ quả trả sau)
@@ -449,12 +456,33 @@ export default function Admin() {
 											{/* Cost */}
 											<div style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '4px'}}>
 												<label className="admin__move-label">Cost (Trả trước)</label>
-												<select className="admin__move-select" value={move.cost?.type || 'none'} onChange={e => setMoveNestedField(idx, 'cost', 'type', e.target.value)}>
+												<select className="admin__move-select" value={move.cost?.type || 'none'} onChange={e => {
+													const val = e.target.value
+													setMoveNestedField(idx, 'cost', 'type', val)
+													if (val === 'hp') {
+														setMoveNestedField(idx, 'cost', 'hp_type', 'current')
+														setMoveNestedField(idx, 'cost', 'value', 10)
+													} else if (val === 'pp') {
+														setMoveNestedField(idx, 'cost', 'value', 3)
+													}
+												}}>
 													<option value="none">Không có</option>
-													<option value="hp">Trừ % HP</option>
+													<option value="hp">Trừ % Máu (HP)</option>
+													<option value="faint">Tự sát (Faint)</option>
+													<option value="charge">Tụ khí 1 lượt (Charge)</option>
+													<option value="pp">Tiêu hao thêm PP</option>
 												</select>
 												{move.cost?.type === 'hp' && (
-													<input type="number" className="admin__input" style={{padding: '4px'}} min={1} max={99} value={move.cost.value || 0} onChange={e => setMoveNestedField(idx, 'cost', 'value', Number(e.target.value))} placeholder="% HP" />
+													<div style={{display: 'flex', gap: '5px'}}>
+														<select className="admin__move-select" style={{padding: '4px', flex: 1}} value={move.cost.hp_type || 'current'} onChange={e => setMoveNestedField(idx, 'cost', 'hp_type', e.target.value)}>
+															<option value="current">HP hiện tại</option>
+															<option value="max">Max HP</option>
+														</select>
+														<input type="number" className="admin__input" style={{padding: '4px', width: '60px'}} min={1} max={99} value={move.cost.value || 0} onChange={e => setMoveNestedField(idx, 'cost', 'value', Number(e.target.value))} placeholder="%" />
+													</div>
+												)}
+												{move.cost?.type === 'pp' && (
+													<input type="number" className="admin__input" style={{padding: '4px'}} min={1} max={20} value={move.cost.value || 1} onChange={e => setMoveNestedField(idx, 'cost', 'value', Number(e.target.value))} placeholder="Số PP tốn thêm" />
 												)}
 											</div>
 											{/* Drawback */}

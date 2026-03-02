@@ -118,12 +118,25 @@ function writeMovesFile(roster: any[]) {
 			content += `\t\tname: ${JSON.stringify(move.name)},\n`;
 			content += `\t\tpp: ${move.pp || 10},\n`;
 			content += `\t\tpriority: ${move.priority || 0},\n`;
-			content += `\t\tflags: { protect: 1, mirror: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
-
 			// Custom Data của BRAWLCRAFT
 			if (move.cost && move.cost.type !== 'none') {
 				content += `\t\tcost: ${JSON.stringify(move.cost)},\n`;
+				if (move.cost.type === 'faint') {
+					content += `\t\tselfdestruct: "always",\n`;
+				}
 			}
+
+			if (move.cost && move.cost.type === 'charge') {
+				content += `\t\tflags: { protect: 1, mirror: 1, charge: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
+				content += `\t\tcondition: {\n`;
+				content += `\t\t\tduration: 2,\n`;
+				content += `\t\t\tonLockMove: "${moveId}",\n`;
+				content += `\t\t\tonStart(pokemon) { this.add('-prepare', pokemon, "${move.name}"); },\n`;
+				content += `\t\t},\n`;
+			} else {
+				content += `\t\tflags: { protect: 1, mirror: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
+			}
+
 			if (move.drawback && move.drawback.type !== 'none') {
 				content += `\t\tdrawback: ${JSON.stringify(move.drawback)},\n`;
 			}
