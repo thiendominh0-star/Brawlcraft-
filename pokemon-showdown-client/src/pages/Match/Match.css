@@ -1,288 +1,74 @@
-.match {
-	min-height: 100dvh;
-	display: flex;
-	flex-direction: column;
-	background: var(--bg-00);
+.anim-attack {
+	animation: sprintForward 0.3s ease-in-out;
 }
 
-/* --- Topbar --- */
-.match__topbar {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: var(--space-3) var(--space-5);
-	background: var(--bg-01);
-	border-bottom: 1px solid var(--border-subtle);
-	z-index: 10;
+.anim-attack-reverse {
+	animation: sprintBackward 0.3s ease-in-out;
 }
 
-.match__leave-btn {
-	padding: var(--space-2) var(--space-4);
-	font-size: 0.8rem;
+.anim-hit {
+	animation: hitFlicker 0.4s ease-in-out;
 }
 
-.match__turn-info {
-	font-size: 1rem;
-	font-weight: 700;
-	letter-spacing: 0.18em;
-	color: var(--text-primary);
-	text-transform: uppercase;
-}
-
-.match__waiting-badge {
-	width: 24px;
-	text-align: right;
-}
-
-.match__waiting-dot {
-	display: inline-block;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: var(--accent-gold);
-	animation: blink 0.8s step-end infinite;
-}
-
-/* --- Arena --- */
-.match__arena {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	padding: var(--space-6);
-	gap: var(--space-4);
-	position: relative;
-	overflow: hidden;
-	min-height: 340px;
-}
-
-.match__arena-grid {
-	position: absolute;
-	inset: 0;
-	background-image:
-		linear-gradient(var(--border-subtle) 1px, transparent 1px),
-		linear-gradient(90deg, var(--border-subtle) 1px, transparent 1px);
-	background-size: 40px 40px;
-	mask-image: radial-gradient(ellipse 100% 80% at 50% 50%, black 20%, transparent 100%);
-	pointer-events: none;
-}
-
-/* --- Side Layouts --- */
-.match__side {
-	display: flex;
-	align-items: center;
-	gap: var(--space-5);
-	z-index: 1;
-}
-
-.match__side--enemy {
-	flex-direction: row-reverse;
-}
-
-.match__side--player {
-	flex-direction: row;
-}
-
-/* --- Fighters --- */
-.match__fighter {
-	flex-shrink: 0;
-}
-
-.match__fighter-avatar {
-	position: relative;
-	width: 80px;
-	height: 80px;
-	border-radius: var(--radius-lg);
-	background: color-mix(in srgb, var(--fc, var(--accent-blue)) 20%, var(--bg-03));
-	border: 1px solid color-mix(in srgb, var(--fc, var(--accent-blue)) 50%, transparent);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	box-shadow: 0 0 24px color-mix(in srgb, var(--fc, var(--accent-blue)) 30%, transparent);
-}
-
-.match__fighter-avatar span {
-	font-family: var(--font-display);
-	font-size: 1.8rem;
-	font-weight: 900;
-	color: var(--fc, var(--accent-blue));
-	position: relative;
-	z-index: 1;
-}
-
-.match__fighter-glow {
-	position: absolute;
-	inset: 0;
-	background: radial-gradient(circle at 50% 100%, var(--fc, var(--accent-blue)), transparent 70%);
-	opacity: 0.4;
-}
-
-.match__fighter-avatar--player {
-	width: 96px;
-	height: 96px;
-	animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-
-	0%,
-	100% {
-		transform: translateY(0);
+/* My Brawler Sprinting Forward (Trái -> Phải) */
+@keyframes sprintForward {
+	0% {
+		transform: translateX(0);
 	}
 
 	50% {
-		transform: translateY(-6px);
+		transform: translateX(50px) scale(1.1);
+	}
+
+	100% {
+		transform: translateX(0);
 	}
 }
 
-/* HP bars */
-.match__hpbar-wrap {
-	flex: 1;
-	max-width: 380px;
-}
-
-/* VS line */
-.match__vs-line {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 0 var(--space-6);
-	position: relative;
-	z-index: 1;
-}
-
-.match__vs-line::before,
-.match__vs-line::after {
-	content: '';
-	flex: 1;
-	height: 1px;
-	background: var(--border-subtle);
-}
-
-.match__vs-dot {
-	width: 6px;
-	height: 6px;
-	border-radius: 50%;
-	background: var(--border-default);
-	margin: 0 var(--space-4);
-}
-
-/* --- Battle Log --- */
-.match__log {
-	max-height: 120px;
-	overflow-y: auto;
-	padding: var(--space-3) var(--space-4);
-	margin: 0 var(--space-5);
-	scroll-behavior: smooth;
-	border-radius: var(--radius-md);
-	background: var(--bg-01);
-	border: 1px solid var(--border-subtle);
-}
-
-.match__log-empty {
-	color: var(--text-muted);
-	font-size: 0.8rem;
-	letter-spacing: 0.06em;
-	text-transform: uppercase;
-}
-
-.match__log-line {
-	font-size: 0.82rem;
-	color: var(--text-secondary);
-	line-height: 1.5;
-	padding: 1px 0;
-	animation: fadeIn 0.2s ease both;
-}
-
-.match__log-line--turn {
-	color: var(--text-muted);
-	font-size: 0.72rem;
-	letter-spacing: 0.08em;
-	text-align: center;
-	margin: var(--space-1) 0;
-	font-family: var(--font-display);
-}
-
-/* --- Game Over Panel --- */
-.match__over-panel {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: var(--space-4);
-	padding: var(--space-6);
-	background: var(--bg-02);
-	border-top: 1px solid var(--border-subtle);
-	animation: fadeInUp 0.4s ease both;
-}
-
-.match__over-text {
-	font-size: 1.8rem;
-	font-weight: 900;
-	letter-spacing: 0.12em;
-	color: var(--accent-gold);
-	text-shadow: 0 0 24px rgba(245, 158, 11, 0.4);
-}
-
-@keyframes blink {
-
-	0%,
-	100% {
-		opacity: 1;
+/* Enemy Brawler Sprinting Forward (Phải -> Trái) */
+@keyframes sprintBackward {
+	0% {
+		transform: translateX(0);
 	}
 
 	50% {
-		opacity: 0.2;
+		transform: translateX(-50px) scale(1.1);
+	}
+
+	100% {
+		transform: translateX(0);
 	}
 }
 
-/* --- Mobile Responsiveness --- */
-@media (max-width: 768px) {
-	.match__topbar {
-		flex-wrap: wrap;
-		justify-content: center;
-		padding: var(--space-2);
-		gap: var(--space-2);
+/* Hit Flicker: Lùi lại và Nháy Đỏ */
+@keyframes hitFlicker {
+	0% {
+		filter: drop-shadow(0 0 10px red) brightness(1);
+		transform: translateX(0);
 	}
 
-	.match__turn-info {
-		font-size: 0.85rem;
-		order: -1;
-		width: 100%;
-		text-align: center;
+	20% {
+		filter: drop-shadow(0 0 20px red) brightness(2) invert(0.2);
+		transform: translateX(-10px);
 	}
 
-	.match__arena {
-		padding: var(--space-3);
+	40% {
+		filter: drop-shadow(0 0 10px red) brightness(0.5);
+		transform: translateX(10px);
 	}
 
-	.match__side {
-		flex-direction: column !important;
-		gap: var(--space-2);
-		text-align: center;
+	60% {
+		filter: drop-shadow(0 0 20px red) brightness(2) invert(0.2);
+		transform: translateX(-10px);
 	}
 
-	.match__hpbar-wrap {
-		width: 100%;
-		max-width: 100%;
+	80% {
+		filter: drop-shadow(0 0 10px red) brightness(0.5);
+		transform: translateX(10px);
 	}
 
-	.match__fighter-avatar,
-	.match__fighter-avatar--player {
-		width: 64px;
-		height: 64px;
-	}
-
-	.match__fighter-avatar span {
-		font-size: 1.2rem;
-	}
-
-	.match__vs-line {
-		margin: var(--space-3) 0;
-	}
-
-	.match__log {
-		margin: 0 var(--space-2);
-		max-height: 100px;
+	100% {
+		filter: drop-shadow(0 0 5px red) brightness(1);
+		transform: translateX(0);
 	}
 }

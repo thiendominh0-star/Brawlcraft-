@@ -3,6 +3,7 @@ import {useNavigate, useParams} from 'react-router-dom'
 import {useToast} from '../../components/shared/ToastProvider.jsx'
 import client from '../../services/showdownClient.js'
 import {loadRoster} from '../../services/rosterStore.js'
+import './Match.css'
 
 function parseHPText(hpText) {
 	if (!hpText || hpText.includes('fnt')) return {hp: 0, maxHp: 0, fainted: true}
@@ -28,6 +29,10 @@ export default function Match() {
 	const [battleLog, setBattleLog] = useState([])
 	const [winner, setWinner] = useState(null)
 	const logRef = useRef(null)
+
+	// Animation States
+	const [animatingMy, setAnimatingMy] = useState('') // 'attack' | 'hit' | ''
+	const [animatingEnemy, setAnimatingEnemy] = useState('') // 'attack' | 'hit' | ''
 
 	const decodedRoomId = decodeURIComponent(roomId)
 
@@ -129,9 +134,13 @@ export default function Match() {
 				if (isMe) {
 					setActiveMy(prev => prev ? {...prev, hp, maxHp: maxHp || prev.maxHp, fainted} : prev)
 					setMyTeam(prev => prev.map(p => p.active ? {...p, hp, maxHp: maxHp || p.maxHp, fainted} : p))
+					setAnimatingMy('hit')
+					setTimeout(() => setAnimatingMy(''), 500)
 				} else {
 					setActiveEnemy(prev => prev ? {...prev, hp, maxHp: maxHp || prev.maxHp, fainted} : prev)
 					setEnemyTeam(prev => prev.map(p => p.active ? {...p, hp, maxHp: maxHp || p.maxHp, fainted} : p))
+					setAnimatingEnemy('hit')
+					setTimeout(() => setAnimatingEnemy(''), 500)
 				}
 			}),
 
@@ -151,9 +160,19 @@ export default function Match() {
 			client.on('battle:move', ({roomId: r, pokemon, move}) => {
 				if (r !== decodedRoomId) return
 				// format: p1a: Name
+				const isMe = pokemon.startsWith(myId)
 				const nameParts = pokemon.split(' ')
 				const name = nameParts.length > 1 ? nameParts.slice(1).join(' ') : pokemon
 				appendLog(`${name} used ${move}!`)
+
+				// Trigger Attack Animation
+				if (isMe) {
+					setAnimatingMy('attack')
+					setTimeout(() => setAnimatingMy(''), 500)
+				} else {
+					setAnimatingEnemy('attack')
+					setTimeout(() => setAnimatingEnemy(''), 500)
+				}
 			}),
 
 			client.on('battle:supereffective', () => {appendLog('It\'s super effective!'); addToast('⚡ Super Effective!', 'crit', 2000)}),
@@ -261,13 +280,16 @@ export default function Match() {
 									<div style={{background: 'rgba(0,0,0,0.7)', padding: '5px 15px', borderRadius: '4px', border: '2px solid #555', minWidth: '200px', marginBottom: '10px'}}>
 										<div style={{fontWeight: 'bold', fontSize: '1.2rem', textShadow: '1px 1px 0 #000'}}>{activeEnemy.name}</div>
 										<div style={{width: '100%', background: '#333', height: '10px', marginTop: '5px', borderRadius: '5px', overflow: 'hidden', border: '1px solid #111'}}>
-											<div style={{width: `${Math.max(0, (activeEnemy.hp / activeEnemy.maxHp) * 100)}%`, background: activeEnemy.hp / activeEnemy.maxHp > 0.5 ? '#5cb85c' : activeEnemy.hp / activeEnemy.maxHp > 0.2 ? '#f0ad4e' : '#d9534f', height: '100%', transition: 'width 0.3s'}}></div>
+											<div style={{width: `${Math.max(0, (activeEnemy.hp / activeEnemy.maxHp) * 100)}%`, background: activeEnemy.hp / activeEnemy.maxHp > 0.5 ? '#5cb85c' : activeEnemy.hp / activeEnemy.maxHp > 0.2 ? '#f0ad4e' : '#d9534f', height: '100%', transition: 'width 0.5s ease-out, background 0.3s'}}></div>
 										</div>
 										<div style={{textAlign: 'right', fontSize: '0.8rem'}}>{Math.floor((activeEnemy.hp / activeEnemy.maxHp) * 100)}%</div>
 									</div>
 
 									{/* Sprite */}
-									<div style={{width: '150px', height: '150px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', filter: 'drop-shadow(0px 10px 5px rgba(0,0,0,0.5))'}}>
+									<div
+										className={animatingEnemy === 'attack' ? 'anim-attack-reverse' : animatingEnemy === 'hit' ? 'anim-hit' : ''}
+										style={{width: '150px', height: '150px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', filter: 'drop-shadow(0px 10px 5px rgba(0,0,0,0.5))', zIndex: 10}}
+									>
 										{getCharImage(activeEnemy.name) ? <img src={getCharImage(activeEnemy.name)} style={{maxHeight: '100%'}} /> : <div style={{width: '120px', height: '120px', background: getTypeColor(getCharType(activeEnemy.name)), borderRadius: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '3px solid #fff', fontSize: '1.5rem', fontWeight: 'bold', color: '#000'}}>{activeEnemy.name.slice(0, 2).toUpperCase()}</div>}
 									</div>
 								</div>
@@ -279,7 +301,10 @@ export default function Match() {
 							{activeMy && !activeMy.fainted && (
 								<div style={{position: 'absolute', bottom: '10%', left: '15%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
 									{/* Sprite */}
-									<div style={{width: '180px', height: '180px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', filter: 'drop-shadow(0px 15px 5px rgba(0,0,0,0.6))', zIndex: 10}}>
+									<div
+										className={animatingMy === 'attack' ? 'anim-attack' : animatingMy === 'hit' ? 'anim-hit' : ''}
+										style={{width: '180px', height: '180px', display: 'flex', justifyContent: 'center', alignItems: 'flex-end', filter: 'drop-shadow(0px 15px 5px rgba(0,0,0,0.6))', zIndex: 10}}
+									>
 										{getCharImage(activeMy.name) ? <img src={getCharImage(activeMy.name)} style={{maxHeight: '100%'}} /> : <div style={{width: '140px', height: '140px', background: getTypeColor(getCharType(activeMy.name)), borderRadius: '10px', display: 'flex', justifyContent: 'center', alignItems: 'center', border: '4px solid #fff', fontSize: '2rem', fontWeight: 'bold', color: '#000'}}>{activeMy.name.slice(0, 2).toUpperCase()}</div>}
 									</div>
 
@@ -287,7 +312,7 @@ export default function Match() {
 									<div style={{background: 'rgba(0,0,0,0.85)', padding: '10px 20px', borderRadius: '4px', border: `3px solid ${getTypeColor(getCharType(activeMy.name))}`, minWidth: '250px', marginTop: '-30px', zIndex: 11, boxShadow: '0 4px 10px rgba(0,0,0,0.5)'}}>
 										<div style={{fontWeight: 'bold', fontSize: '1.3rem'}}>{activeMy.name}</div>
 										<div style={{width: '100%', background: '#333', height: '12px', marginTop: '8px', borderRadius: '6px', overflow: 'hidden', border: '1px solid #111'}}>
-											<div style={{width: `${Math.max(0, (activeMy.hp / activeMy.maxHp) * 100)}%`, background: activeMy.hp / activeMy.maxHp > 0.5 ? '#5cb85c' : activeMy.hp / activeMy.maxHp > 0.2 ? '#f0ad4e' : '#d9534f', height: '100%', transition: 'width 0.3s'}}></div>
+											<div style={{width: `${Math.max(0, (activeMy.hp / activeMy.maxHp) * 100)}%`, background: activeMy.hp / activeMy.maxHp > 0.5 ? '#5cb85c' : activeMy.hp / activeMy.maxHp > 0.2 ? '#f0ad4e' : '#d9534f', height: '100%', transition: 'width 0.5s ease-out, background 0.3s'}}></div>
 										</div>
 										<div style={{textAlign: 'right', fontSize: '0.9rem', marginTop: '4px'}}>{activeMy.hp} / {activeMy.maxHp} HP</div>
 									</div>
