@@ -13,7 +13,7 @@ export default function CraftRoom() {
 	const navigate = useNavigate();
 
 	const [brawlerName, setBrawlerName] = useState('Custom Brawler');
-	const [selectedType, setSelectedType] = useState('Shadow');
+	const [selectedTypes, setSelectedTypes] = useState(['Shadow']);
 	const [stats, setStats] = useState({
 		hp: 80,
 		atk: 80,
@@ -26,6 +26,16 @@ export default function CraftRoom() {
 	const currentBST = useMemo(() => {
 		return Object.values(stats).reduce((a, b) => a + b, 0);
 	}, [stats]);
+
+	const handleToggleType = (type) => {
+		if (selectedTypes.includes(type)) {
+			if (selectedTypes.length > 1) {
+				setSelectedTypes(selectedTypes.filter(t => t !== type));
+			}
+		} else if (selectedTypes.length < 2) {
+			setSelectedTypes([...selectedTypes, type]);
+		}
+	};
 
 	const pointsRemaining = MAX_BST - currentBST;
 
@@ -55,7 +65,7 @@ export default function CraftRoom() {
 			alert(`❌ KHÔNG HỢP LỆ! Mỗi chỉ số phải nằm trong khoảng từ ${MIN_STAT} đến ${MAX_STAT}.`);
 			return false;
 		}
-		alert(`✅ HỢP LỆ! Brawler "${brawlerName}" (Hệ ${selectedType}, Tổng ${currentBST} BST) đã đạt chuẩn Server!`);
+		alert(`✅ HỢP LỆ! Brawler "${brawlerName}" (Hệ ${selectedTypes.join('/')}, Tổng ${currentBST} BST) đã đạt chuẩn Server!`);
 		return true;
 	};
 
@@ -75,7 +85,7 @@ export default function CraftRoom() {
 			isCustom: true,
 			name: brawlerName,
 			species: brawlerName,
-			types: [selectedType],
+			types: selectedTypes,
 			baseStats: stats,
 			abilities: {0: 'Pressure'}, // Mặc định trước
 			moves: ['tackle', 'quickattack'], // Mặc định trước
