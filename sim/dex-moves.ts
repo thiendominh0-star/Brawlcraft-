@@ -93,6 +93,13 @@ export interface SecondaryEffect extends HitEffect {
 	 */
 	kingsrock?: boolean;
 	self?: HitEffect;
+
+	/** [BRAWLCRAFT EXTENSION] */
+	type?: string;
+	target?: string;
+	stat?: string;
+	stage?: number;
+	volatile?: string;
 }
 
 export interface MoveEventMethods {
@@ -129,7 +136,7 @@ export interface MoveEventMethods {
 	onMoveFail?: CommonHandlers['VoidMove'];
 	onModifyType?: (this: Battle, move: ActiveMove, pokemon: Pokemon, target: Pokemon) => void;
 	onModifyTarget?: (
-		this: Battle, relayVar: { target: Pokemon }, pokemon: Pokemon, target: Pokemon, move: ActiveMove
+		this: Battle, relayVar: { target: Pokemon; }, pokemon: Pokemon, target: Pokemon, move: ActiveMove
 	) => void;
 	onPrepareHit?: CommonHandlers['ResultMove'];
 	onTry?: CommonHandlers['ResultSourceMove'];
@@ -160,6 +167,10 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	damage?: number | 'level' | false | null;
 	contestType?: string;
 	noPPBoosts?: boolean;
+
+	/** [BRAWLCRAFT EXTENSION] */
+	cost?: { type: string; value: number; };
+	drawback?: { type: string; stat?: string; stage?: number; recoil?: number; };
 
 	// Z-move data
 	// -----------
@@ -192,7 +203,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	heal?: number[] | null;
 	forceSwitch?: boolean;
 	selfSwitch?: 'copyvolatile' | 'shedtail' | boolean;
-	selfBoost?: { boosts?: SparseBoostsTable };
+	selfBoost?: { boosts?: SparseBoostsTable; };
 	selfdestruct?: 'always' | 'ifHit' | boolean;
 	breaksProtect?: boolean;
 	/**
@@ -239,7 +250,7 @@ export interface MoveData extends EffectData, MoveEventMethods, HitEffect {
 	ignoreAccuracy?: boolean;
 	ignoreDefensive?: boolean;
 	ignoreEvasion?: boolean;
-	ignoreImmunity?: boolean | { [typeName: string]: boolean };
+	ignoreImmunity?: boolean | { [typeName: string]: boolean; };
 	ignoreNegativeOffensive?: boolean;
 	ignoreOffensive?: boolean;
 	ignorePositiveDefensive?: boolean;
@@ -280,8 +291,8 @@ export type ModdedMoveData = MoveData | Partial<Omit<MoveData, 'name'>> & {
 	gen?: number,
 };
 
-export interface MoveDataTable { [moveid: IDEntry]: MoveData }
-export interface ModdedMoveDataTable { [moveid: IDEntry]: ModdedMoveData }
+export interface MoveDataTable { [moveid: IDEntry]: MoveData; }
+export interface ModdedMoveDataTable { [moveid: IDEntry]: ModdedMoveData; }
 
 export interface Move extends Readonly<BasicEffect & MoveData> {
 	readonly effectType: 'Move';
@@ -424,7 +435,7 @@ export class DataMove extends BasicEffect implements Readonly<BasicEffect & Move
 	 * If an Object, its keys represent the types whose immunities are
 	 * ignored, and its values should only be true.
 	 */
-	readonly ignoreImmunity: { [typeName: string]: boolean } | boolean;
+	readonly ignoreImmunity: { [typeName: string]: boolean; } | boolean;
 	/** Base move PP. */
 	readonly pp: number;
 	/** Whether or not this move can receive PP boosts. */

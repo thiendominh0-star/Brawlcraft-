@@ -6,7 +6,7 @@ export class BattleActions {
 	battle: Battle;
 	dex: ModdedDex;
 
-	readonly MAX_MOVES: { readonly [k: string]: string } = {
+	readonly MAX_MOVES: { readonly [k: string]: string; } = {
 		Flying: 'Max Airstream',
 		Dark: 'Max Darkness',
 		Fire: 'Max Flare',
@@ -28,7 +28,7 @@ export class BattleActions {
 		Dragon: 'Max Wyrmwind',
 	};
 
-	readonly Z_MOVES: { readonly [k: string]: string } = {
+	readonly Z_MOVES: { readonly [k: string]: string; } = {
 		Poison: "Acid Downpour",
 		Fighting: "All-Out Pummeling",
 		Dark: "Black Hole Eclipse",
@@ -297,6 +297,25 @@ export class BattleActions {
 		// TODO: implement properly
 		const noLock = externalMove && !pokemon.volatiles['lockedmove'];
 
+		// =========== [BRAWLCRAFT COST LOGIC] ============
+		if (baseMove.cost && baseMove.cost.type === 'hp') {
+			const costPercent = baseMove.cost.value || 0;
+			if (costPercent > 0) {
+				const costAmount = Math.ceil(pokemon.maxhp * (costPercent / 100));
+				if (pokemon.hp <= costAmount) {
+					this.battle.add('-fail', pokemon, 'move: ' + baseMove.name, '[msg]');
+					this.battle.add('-message', `(HP không đủ để trả giá cho chiêu thức này!)`);
+					this.battle.clearActiveMove(true);
+					pokemon.moveThisTurnResult = false;
+					this.battle.faintMessages();
+					return;
+				}
+				// Trừ máu ngay lập tức
+				this.battle.damage(costAmount, pokemon, pokemon, baseMove);
+			}
+		}
+		// ================================================
+
 		if (zMove) {
 			if (pokemon.illusion) {
 				this.battle.singleEvent('End', this.dex.abilities.get('Illusion'), pokemon.abilityState, pokemon);
@@ -548,31 +567,31 @@ export class BattleActions {
 		if (targets.length > 1 && !move.smartTarget) move.spreadHit = true;
 
 		const moveSteps: ((targets: Pokemon[], pokemon: Pokemon, move: ActiveMove) =>
-		(number | boolean | "" | undefined)[] | undefined)[] = [
-			// 0. check for semi invulnerability
-			this.hitStepInvulnerabilityEvent,
+			(number | boolean | "" | undefined)[] | undefined)[] = [
+				// 0. check for semi invulnerability
+				this.hitStepInvulnerabilityEvent,
 
-			// 1. run the 'TryHit' event (Protect, Magic Bounce, Volt Absorb, etc.) (this is step 2 in gens 5 & 6, and step 4 in gen 4)
-			this.hitStepTryHitEvent,
+				// 1. run the 'TryHit' event (Protect, Magic Bounce, Volt Absorb, etc.) (this is step 2 in gens 5 & 6, and step 4 in gen 4)
+				this.hitStepTryHitEvent,
 
-			// 2. check for type immunity (this is step 1 in gens 4-6)
-			this.hitStepTypeImmunity,
+				// 2. check for type immunity (this is step 1 in gens 4-6)
+				this.hitStepTypeImmunity,
 
-			// 3. check for various move-specific immunities
-			this.hitStepTryImmunity,
+				// 3. check for various move-specific immunities
+				this.hitStepTryImmunity,
 
-			// 4. check accuracy
-			this.hitStepAccuracy,
+				// 4. check accuracy
+				this.hitStepAccuracy,
 
-			// 5. break protection effects
-			this.hitStepBreakProtect,
+				// 5. break protection effects
+				this.hitStepBreakProtect,
 
-			// 6. steal positive boosts (Spectral Thief)
-			this.hitStepStealBoosts,
+				// 6. steal positive boosts (Spectral Thief)
+				this.hitStepStealBoosts,
 
-			// 7. loop that processes each hit of the move (has its own steps per iteration)
-			this.hitStepMoveHitLoop,
-		];
+				// 7. loop that processes each hit of the move (has its own steps per iteration)
+				this.hitStepMoveHitLoop,
+			];
 		if (this.battle.gen <= 6) {
 			// Swap step 1 with step 2
 			[moveSteps[1], moveSteps[2]] = [moveSteps[2], moveSteps[1]];
@@ -1300,6 +1319,45 @@ export class BattleActions {
 						this.battle.runEvent('Hit', target, source, move);
 					}
 				}
+
+				// ============================================
+				// [BRAWLCRAFT EXTENSION] CUSTOM EFFECTS
+				// ============================================
+
+				// 1. DRAWBACK (Trả giá sau khi dùng chiêu)
+				if (moveData.drawback && !isSelf && !isSecondary) {
+					const db = moveData.drawback;
+					if (db.type === 'stat' && db.stat) {
+						// Tự giảm chỉ số bản thân
+						const bst: any = {};
+						bst[db.stat] = -(db.stage || 1);
+						this.battle.boost(bst, source, source, move, true);
+					}
+				}
+
+				// 2. SECONDARY EFFECT (Tác dụng phụ lên Kẻ địch / Bản thân khi trúng đòn)
+				const sf = moveData.secondary;
+				if (sf && sf.type !== 'none' && !isSelf && !isSecondary) {
+					// Quay Gacha theo Chance (%)
+					const roll = this.battle.random(100);
+					if (!sf.chance || roll < sf.chance) {
+						// TRÚNG EFFECT!
+						let effTarget = target;
+						if (sf.target && sf.target === 'self') effTarget = source;
+
+						if (sf.type === 'stat' && sf.stat) {
+							// Tăng hoặc Giảm chỉ số
+							const bst: any = {};
+							bst[sf.stat] = sf.stage || -1;
+							this.battle.boost(bst, effTarget, source, move, true);
+						} else if (sf.type === 'volatile' && sf.volatile) {
+							// Flinch, Confusion, Leech Seed...
+							effTarget.addVolatile(sf.volatile, source, move);
+						}
+					}
+				}
+				// ============================================
+
 			}
 			if (moveData.selfdestruct === 'ifHit' && damage[i] !== false) {
 				this.battle.faint(source, source, move);
@@ -1521,35 +1579,35 @@ export class BattleActions {
 			this.battle.boost(move.zMove.boost, pokemon, pokemon, zPower);
 		} else if (move.zMove?.effect) {
 			switch (move.zMove.effect) {
-			case 'heal':
-				this.battle.heal(pokemon.maxhp, pokemon, pokemon, zPower);
-				break;
-			case 'healreplacement':
-				pokemon.side.addSlotCondition(pokemon, 'healreplacement', pokemon, move);
-				break;
-			case 'clearnegativeboost':
-				const boosts: SparseBoostsTable = {};
-				let i: BoostID;
-				for (i in pokemon.boosts) {
-					if (pokemon.boosts[i] < 0) {
-						boosts[i] = 0;
-					}
-				}
-				pokemon.setBoost(boosts);
-				this.battle.add('-clearnegativeboost', pokemon, '[zeffect]');
-				break;
-			case 'redirect':
-				pokemon.addVolatile('followme', pokemon, zPower);
-				break;
-			case 'crit2':
-				pokemon.addVolatile('focusenergy', pokemon, zPower);
-				break;
-			case 'curse':
-				if (pokemon.hasType('Ghost')) {
+				case 'heal':
 					this.battle.heal(pokemon.maxhp, pokemon, pokemon, zPower);
-				} else {
-					this.battle.boost({ atk: 1 }, pokemon, pokemon, zPower);
-				}
+					break;
+				case 'healreplacement':
+					pokemon.side.addSlotCondition(pokemon, 'healreplacement', pokemon, move);
+					break;
+				case 'clearnegativeboost':
+					const boosts: SparseBoostsTable = {};
+					let i: BoostID;
+					for (i in pokemon.boosts) {
+						if (pokemon.boosts[i] < 0) {
+							boosts[i] = 0;
+						}
+					}
+					pokemon.setBoost(boosts);
+					this.battle.add('-clearnegativeboost', pokemon, '[zeffect]');
+					break;
+				case 'redirect':
+					pokemon.addVolatile('followme', pokemon, zPower);
+					break;
+				case 'crit2':
+					pokemon.addVolatile('focusenergy', pokemon, zPower);
+					break;
+				case 'curse':
+					if (pokemon.hasType('Ghost')) {
+						this.battle.heal(pokemon.maxhp, pokemon, pokemon, zPower);
+					} else {
+						this.battle.boost({ atk: 1 }, pokemon, pokemon, zPower);
+					}
 			}
 		}
 	}
@@ -1560,8 +1618,8 @@ export class BattleActions {
 
 	combineResults<T extends number | boolean | null | '' | undefined,
 		U extends number | boolean | null | '' | undefined>(
-		left: T, right: U
-	): T | U {
+			left: T, right: U
+		): T | U {
 		const NOT_FAILURE = 'string';
 		const NULL = 'object';
 		const resultsPriorities = ['undefined', NOT_FAILURE, NULL, 'boolean', 'number'];

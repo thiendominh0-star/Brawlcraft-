@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import CharacterCard from '../../components/shared/CharacterCard.jsx'
 import {
 	loadRoster, saveRoster, resetRoster, nameToId, createBlankChar, createBlankMove,
-	AVAILABLE_TYPES, AVAILABLE_CATEGORIES, AVAILABLE_ABILITIES, AVAILABLE_ITEMS, STAT_KEYS, STAT_LABELS,
+	AVAILABLE_TYPES, AVAILABLE_CATEGORIES, AVAILABLE_ABILITIES, AVAILABLE_ITEMS, STAT_KEYS, STAT_LABELS, AVAILABLE_STATS
 } from '../../services/rosterStore.js'
 import './Admin.css'
 
@@ -47,6 +47,49 @@ export default function Admin() {
 		const moves = getMoves()
 		moves[idx] = {...moves[idx], [key]: val}
 		setField('moves', moves)
+	}
+
+	const setMoveNestedField = (idx, parentKey, childKey, val) => {
+		const moves = getMoves()
+		const currentMove = moves[idx]
+		const currentParent = currentMove[parentKey] || {}
+		moves[idx] = {
+			...currentMove,
+			[parentKey]: {...currentParent, [childKey]: val}
+		}
+		setField('moves', moves)
+	}
+
+	const generateMoveDescription = (move) => {
+		let parts = []
+
+		// 1. Base Info
+		parts.push(`[${move.category}] ${move.category === 'Status' ? '—' : move.power + ' DMG'} | ${move.accuracy}% ACC | Pri: ${move.priority > 0 ? '+' : ''}${move.priority}`)
+
+		// 2. Cost (Trả trước)
+		if (move.cost?.type === 'hp' && move.cost?.value > 0) {
+			parts.push(`Cost: Hi sinh ${move.cost.value}% HP hiện tại.`)
+		}
+
+		// 3. Drawback (Hệ quả trả sau)
+		if (move.drawback?.type === 'stat') {
+			parts.push(`Drawback: Tự giảm ${move.drawback.stage} bậc ${move.drawback.stat.toUpperCase()}.`)
+		}
+
+		// 4. Secondary Effect (Tác dụng phụ lên Địch/Bản thân khi trúng đòn)
+		const sec = move.secondary
+		if (sec && sec.type !== 'none') {
+			let effText = `${sec.chance}% cơ hội`
+			if (sec.type === 'stat') {
+				const effAction = sec.stage > 0 ? 'tăng' : 'giảm'
+				effText += ` ${effAction} ${Math.abs(sec.stage)} bậc ${sec.stat.toUpperCase()} của ${sec.target === 'self' ? 'Bản thân' : 'Mục tiêu'}.`
+			} else if (sec.type === 'volatile' && sec.volatile === 'flinch') {
+				effText += ` gây Choáng (Flinch) mục tiêu trong 1 hiệp.`
+			}
+			parts.push(effText)
+		}
+
+		return parts.join(' ')
 	}
 
 	const addMove = () => {
@@ -353,18 +396,21 @@ export default function Admin() {
 										<div className="admin__move-field">
 											<label className="admin__move-label">Category</label>
 											<select className="admin__move-select"
-												value={move.category} onChange={e => setMoveField(idx, 'category', e.target.value)}>
+												value={move.category} onChange={e => {
+													setMoveField(idx, 'category', e.target.value)
+													if (e.target.value === 'Status') setMoveField(idx, 'power', 0)
+												}}>
 												{AVAILABLE_CATEGORIES.map(c => <option key={c} value={c}>{CATEGORY_ICON[c]} {c}</option>)}
 											</select>
 										</div>
 									</div>
 
-									<div className="admin__move-stats">
+									<div className="admin__move-stats" style={{flexWrap: 'wrap'}}>
 										{/* Power */}
 										<div className="admin__move-stat">
 											<label className="admin__move-label">PWR</label>
 											<input type="number" min={0} max={250}
-												value={move.category === 'Status' ? '—' : move.power}
+												value={move.category === 'Status' ? 0 : move.power}
 												disabled={move.category === 'Status'}
 												onChange={e => setMoveField(idx, 'power', Number(e.target.value))}
 												className="admin__move-stat-input"
@@ -379,6 +425,14 @@ export default function Admin() {
 												className="admin__move-stat-input" />
 										</div>
 
+										{/* Priority */}
+										<div className="admin__move-stat">
+											<label className="admin__move-label">PRI</label>
+											<input type="number" min={-6} max={6} value={move.priority || 0}
+												onChange={e => setMoveField(idx, 'priority', Number(e.target.value))}
+												className="admin__move-stat-input" />
+										</div>
+
 										{/* PP */}
 										<div className="admin__move-stat">
 											<label className="admin__move-label">PP</label>
@@ -388,12 +442,84 @@ export default function Admin() {
 										</div>
 									</div>
 
-									{/* Effect / Description */}
-									<div className="admin__move-field">
-										<label className="admin__move-label">Effect / Ghi chú</label>
-										<input className="admin__move-input" type="text" value={move.effect}
-											onChange={e => setMoveField(idx, 'effect', e.target.value)}
-											placeholder="VD: Raises ATK by 1, May paralyze..." maxLength={80} />
+									{/* 2. Condition: Cost & Drawback */}
+									<div style={{background: 'var(--bg-01)', padding: '10px', borderRadius: '4px', border: '1px solid var(--border-default)'}}>
+										<div style={{fontSize: '0.7rem', fontWeight: 'bold', color: 'var(--accent-red)', marginBottom: '8px', textTransform: 'uppercase'}}>Conditions</div>
+										<div style={{display: 'flex', gap: '15px'}}>
+											{/* Cost */}
+											<div style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '4px'}}>
+												<label className="admin__move-label">Cost (Trả trước)</label>
+												<select className="admin__move-select" value={move.cost?.type || 'none'} onChange={e => setMoveNestedField(idx, 'cost', 'type', e.target.value)}>
+													<option value="none">Không có</option>
+													<option value="hp">Trừ % HP</option>
+												</select>
+												{move.cost?.type === 'hp' && (
+													<input type="number" className="admin__input" style={{padding: '4px'}} min={1} max={99} value={move.cost.value || 0} onChange={e => setMoveNestedField(idx, 'cost', 'value', Number(e.target.value))} placeholder="% HP" />
+												)}
+											</div>
+											{/* Drawback */}
+											<div style={{flex: 1, display: 'flex', flexDirection: 'column', gap: '4px'}}>
+												<label className="admin__move-label">Drawback (Trả sau)</label>
+												<select className="admin__move-select" value={move.drawback?.type || 'none'} onChange={e => setMoveNestedField(idx, 'drawback', 'type', e.target.value)}>
+													<option value="none">Không có</option>
+													<option value="stat">Tự giảm Chỉ số</option>
+												</select>
+												{move.drawback?.type === 'stat' && (
+													<div style={{display: 'flex', gap: '5px'}}>
+														<select className="admin__move-select" style={{padding: '4px', flex: 1}} value={move.drawback.stat || 'atk'} onChange={e => setMoveNestedField(idx, 'drawback', 'stat', e.target.value)}>
+															{AVAILABLE_STATS.map(s => <option key={s} value={s}>{s.toUpperCase()}</option>)}
+														</select>
+														<input type="number" className="admin__input" style={{padding: '4px', width: '60px'}} min={1} max={6} value={move.drawback.stage || 1} onChange={e => setMoveNestedField(idx, 'drawback', 'stage', Number(e.target.value))} title="Số bậc" />
+													</div>
+												)}
+											</div>
+										</div>
+									</div>
+
+									{/* 3. Secondary Effect */}
+									<div style={{background: 'var(--bg-01)', padding: '10px', borderRadius: '4px', border: '1px solid var(--border-default)'}}>
+										<div style={{fontSize: '0.7rem', fontWeight: 'bold', color: 'var(--accent-blue)', marginBottom: '8px', textTransform: 'uppercase'}}>Secondary Effect</div>
+
+										<div style={{display: 'flex', gap: '10px', marginBottom: '8px'}}>
+											<select className="admin__move-select" style={{flex: 1}} value={move.secondary?.type || 'none'} onChange={e => setMoveNestedField(idx, 'secondary', 'type', e.target.value)}>
+												<option value="none">Không có Effect</option>
+												<option value="stat">Tăng/Giảm Chỉ Số</option>
+												<option value="volatile">Hiệu ứng Bất ổn (Flinch)</option>
+											</select>
+											{move.secondary?.type !== 'none' && (
+												<input type="number" className="admin__input" style={{width: '70px', padding: '4px'}} min={1} max={100} value={move.secondary?.chance || 100} onChange={e => setMoveNestedField(idx, 'secondary', 'chance', Number(e.target.value))} placeholder="Tỉ lệ %" title="Tỉ lệ vỡ effect %" />
+											)}
+										</div>
+
+										{move.secondary?.type === 'stat' && (
+											<div style={{display: 'flex', gap: '5px'}}>
+												<select className="admin__move-select" style={{padding: '4px', flex: 1}} value={move.secondary.target || 'enemy'} onChange={e => setMoveNestedField(idx, 'secondary', 'target', e.target.value)}>
+													<option value="enemy">Kẻ địch</option>
+													<option value="self">Bản thân</option>
+												</select>
+												<select className="admin__move-select" style={{padding: '4px', flex: 1}} value={move.secondary.stat || 'def'} onChange={e => setMoveNestedField(idx, 'secondary', 'stat', e.target.value)}>
+													{AVAILABLE_STATS.map(s => <option key={s} value={s}>{s.toUpperCase()}</option>)}
+												</select>
+												<input type="number" className="admin__input" style={{padding: '4px', width: '80px'}} min={-6} max={6} value={move.secondary.stage || -1} onChange={e => setMoveNestedField(idx, 'secondary', 'stage', Number(e.target.value))} title="Số bậc (-/+) " />
+											</div>
+										)}
+
+										{move.secondary?.type === 'volatile' && (
+											<div style={{display: 'flex', gap: '5px'}}>
+												<select className="admin__move-select" style={{padding: '4px', flex: 1}} value={move.secondary.volatile || 'none'} onChange={e => setMoveNestedField(idx, 'secondary', 'volatile', e.target.value)}>
+													<option value="none">-- Chọn hiệu ứng --</option>
+													<option value="flinch">Choáng (Flinch) 1 turn</option>
+												</select>
+											</div>
+										)}
+									</div>
+
+									{/* Auto Generated Description */}
+									<div className="admin__move-field" style={{background: 'rgba(59, 130, 246, 0.1)', padding: '10px', borderLeft: '3px solid var(--accent-blue)', borderRadius: '0 4px 4px 0'}}>
+										<label className="admin__move-label" style={{color: 'var(--accent-blue)'}}>Auto Generator</label>
+										<div style={{fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: '1.4', marginTop: '4px', fontStyle: 'italic'}}>
+											"{generateMoveDescription(move)}"
+										</div>
 									</div>
 								</div>
 							))}

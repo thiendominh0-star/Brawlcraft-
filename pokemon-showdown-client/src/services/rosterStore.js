@@ -101,6 +101,7 @@ export const AVAILABLE_ITEMS = ['Life Orb', 'Leftovers', 'Choice Scarf', 'Focus 
 
 export const STAT_KEYS = ['hp', 'atk', 'def', 'spa', 'spd', 'spe']
 export const STAT_LABELS = {hp: 'HP', atk: 'ATK', def: 'DEF', spa: 'SPA', spd: 'SPD', spe: 'SPE'}
+export const AVAILABLE_STATS = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', 'evasion']
 
 /** Đọc roster từ localStorage, fallback về DEFAULT nếu rỗng */
 export function loadRoster() {
@@ -153,7 +154,11 @@ export function createBlankMove(slotIndex = 0) {
 		category: 'Physical',
 		power: 80,
 		accuracy: 100,
+		priority: 0,
 		pp: 15,
-		effect: '',
+		cost: {type: 'none', value: 0}, // Trả trước: 'hp' (trừ %hp hiện tại), 'none'
+		drawback: {type: 'none', stat: 'atk', stage: 1}, // Trả sau: 'stat' (self-drop), 'recoil' (% dmg), 'none'
+		secondary: {chance: 100, type: 'none', target: 'enemy', stat: 'def', stage: 1, volatile: 'none'}, // Effect: 'stat' (buff/debuff), 'status' (burn/para), 'volatile' (flinch)
+		effect: '', // Text mô tả sinh tự động
 	}
 }

@@ -117,8 +117,20 @@ function writeMovesFile(roster: any[]) {
 			content += `\t\tcategory: ${JSON.stringify(move.category || 'Physical')},\n`;
 			content += `\t\tname: ${JSON.stringify(move.name)},\n`;
 			content += `\t\tpp: ${move.pp || 10},\n`;
-			content += `\t\tpriority: 0,\n`;
+			content += `\t\tpriority: ${move.priority || 0},\n`;
 			content += `\t\tflags: { protect: 1, mirror: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
+
+			// Custom Data của BRAWLCRAFT
+			if (move.cost && move.cost.type !== 'none') {
+				content += `\t\tcost: ${JSON.stringify(move.cost)},\n`;
+			}
+			if (move.drawback && move.drawback.type !== 'none') {
+				content += `\t\tdrawback: ${JSON.stringify(move.drawback)},\n`;
+			}
+			if (move.secondary && move.secondary.type !== 'none') {
+				content += `\t\tsecondary: ${JSON.stringify(move.secondary)},\n`;
+			}
+
 			content += `\t\tshortDesc: ${JSON.stringify(move.effect || '')},\n`;
 			content += `\t\ttarget: "normal",\n`;
 			content += `\t\ttype: ${JSON.stringify(move.type || 'Normal')},\n`;
