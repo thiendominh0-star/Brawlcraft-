@@ -18,6 +18,7 @@ export default function Teambuilder() {
 	const [selectingSlot, setSelectingSlot] = useState(null) // 0-5
 	const [showBackup, setShowBackup] = useState(false)
 	const [backupText, setBackupText] = useState('')
+	const [searchQuery, setSearchQuery] = useState('')
 
 	useEffect(() => {
 		const adminRoster = loadRoster();
@@ -146,21 +147,38 @@ export default function Teambuilder() {
 
 	// View: Roster Selection Mode
 	if (selectingSlot !== null) {
+		const filteredRoster = roster.filter(char => char.name.toLowerCase().includes(searchQuery.toLowerCase()))
+
 		return (
 			<div className="teambuilder">
-				<header className="teambuilder__header">
-					<button className="btn btn-secondary" onClick={() => setSelectingSlot(null)}>← Cancel</button>
-					<h1 className="teambuilder__title font-display">Select a Brawler</h1>
+				<header className="teambuilder__header" style={{display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap'}}>
+					<div style={{display: 'flex', alignItems: 'center', gap: '20px'}}>
+						<button className="btn btn-secondary" onClick={() => {setSelectingSlot(null); setSearchQuery('');}}>← Cancel</button>
+						<h1 className="teambuilder__title font-display" style={{margin: 0}}>Select a Brawler</h1>
+					</div>
+					<input
+						className="admin__input"
+						type="text"
+						placeholder="🔍 Search hero by name..."
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						style={{marginLeft: 'auto', width: '100%', maxWidth: '300px', padding: '10px', flex: '1 1 200px'}}
+					/>
 				</header>
 				<div className="tb-roster-grid" style={{padding: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px'}}>
-					{roster.map(char => (
-						<div key={char.id} className="tb-roster-card" onClick={() => handleSelectBrawler(char)}>
+					{filteredRoster.map(char => (
+						<div key={char.id} className="tb-roster-card" onClick={() => {handleSelectBrawler(char); setSearchQuery('');}}>
 							<div className="tb-avatar" style={{background: 'var(--bg-03)', padding: '10px', borderRadius: '4px', textAlign: 'center', cursor: 'pointer'}}>
 								<h3 style={{color: 'var(--accent-purple)', margin: 0}}>{char.name}</h3>
 								<div style={{fontSize: '0.8rem', color: '#999'}}>{char.types.join('/')}</div>
 							</div>
 						</div>
 					))}
+					{filteredRoster.length === 0 && (
+						<div style={{gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--text-muted)'}}>
+							No brawlers found matching "{searchQuery}"
+						</div>
+					)}
 				</div>
 			</div>
 		)
