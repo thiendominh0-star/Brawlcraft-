@@ -39,10 +39,8 @@ export default function Admin() {
 	/* ---- Moves helpers ---- */
 	const getMoves = () => {
 		const base = Array.isArray(form.moves) ? form.moves : []
-		// Pad to 4 slots
-		const padded = [...base]
-		while (padded.length < 4) padded.push(createBlankMove(padded.length))
-		return padded.slice(0, 4)
+		if (base.length === 0) return [createBlankMove(0)]
+		return base
 	}
 
 	const setMoveField = (idx, key, val) => {
@@ -51,10 +49,16 @@ export default function Admin() {
 		setField('moves', moves)
 	}
 
-	const clearMove = (idx) => {
+	const addMove = () => {
 		const moves = getMoves()
-		moves[idx] = createBlankMove(idx)
-		setField('moves', moves)
+		if (moves.length >= 10) return
+		setField('moves', [...moves, createBlankMove(moves.length)])
+	}
+
+	const removeMove = (idx) => {
+		const moves = getMoves()
+		if (moves.length <= 1) return
+		setField('moves', moves.filter((_, i) => i !== idx))
 	}
 
 	/* ---- Image ---- */
@@ -214,18 +218,20 @@ export default function Admin() {
 
 							{/* Ability */}
 							<div className="admin__field">
-								<label className="admin__field-label">Ability (Kỹ năng Nội tại)</label>
-								<select className="admin__input" value={form.ability || 'No Ability'} onChange={e => setField('ability', e.target.value)}>
-									{AVAILABLE_ABILITIES.map(a => <option key={a} value={a}>{a}</option>)}
-								</select>
-							</div>
-
-							{/* Item */}
-							<div className="admin__field">
-								<label className="admin__field-label">Held Item (Trang bị hỗ trợ)</label>
-								<select className="admin__input" value={form.item || 'No Item'} onChange={e => setField('item', e.target.value)}>
-									{AVAILABLE_ITEMS.map(i => <option key={i} value={i}>{i}</option>)}
-								</select>
+								<label className="admin__field-label">Pool Đặc Tính (Abilities)</label>
+								<div className="admin__type-grid">
+									{AVAILABLE_ABILITIES.map(a => (
+										<button key={a} type="button"
+											className={`admin__type-btn ${form.abilities?.includes(a) ? 'admin__type-btn--active' : ''}`}
+											style={{'--tc': '#f59e0b'}}
+											onClick={() => {
+												const has = form.abilities?.includes(a);
+												if (has && form.abilities.length === 1) return;
+												const newA = has ? form.abilities.filter(x => x !== a) : [...(form.abilities || []), a];
+												setField('abilities', newA);
+											}}>{a}</button>
+									))}
+								</div>
 							</div>
 
 							{/* Types */}
@@ -316,7 +322,7 @@ export default function Admin() {
 											<span className="admin__move-category-badge">
 												{CATEGORY_ICON[move.category]} {move.category}
 											</span>
-											<button className="admin__move-clear" onClick={() => clearMove(idx)} title="Clear slot">✕</button>
+											<button className="admin__move-clear" onClick={() => removeMove(idx)} title="Xóa chiêu">✕</button>
 										</div>
 									</div>
 
@@ -392,6 +398,12 @@ export default function Admin() {
 								</div>
 							))}
 						</div>
+
+						{moves.length < 10 && (
+							<button type="button" className="btn btn-secondary" onClick={addMove} style={{marginTop: '1rem', width: '100%'}}>
+								+ Thêm Chiêu Thức vào Pool ({moves.length}/10)
+							</button>
+						)}
 
 						{/* Save button */}
 						<div className="admin__moves-footer">

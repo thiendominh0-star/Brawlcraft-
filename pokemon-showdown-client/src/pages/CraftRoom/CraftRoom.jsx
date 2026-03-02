@@ -99,11 +99,11 @@ export default function CraftRoom() {
 
 	return (
 		<div className="craft-room">
-			<div className="craft-room__header">
+			<div className="craft-room__header animate-fadeInDown">
 				<button className="btn btn-secondary" onClick={() => navigate('/teambuilder')}>
-					← QUA LẠI TEAMBUILDER
+					← Back
 				</button>
-				<h1 className="craft-room__title font-display">PHÒNG CHẾ TẠO (CRAFT ROOM)</h1>
+				<h1 className="font-display">⚒ BRAWLER FORGE</h1>
 				<div className="craft-room__points">
 					ĐIỂM KHẢ DỤNG: <span className={pointsRemaining === 0 ? 'text-success' : 'text-warning'}>{pointsRemaining}</span> / {MAX_BST}
 				</div>
@@ -123,13 +123,13 @@ export default function CraftRoom() {
 					</div>
 
 					<div className="form-group">
-						<label>Hệ (Type)</label>
+						<label>Hệ (Types - Chọn tối đa 2)</label>
 						<div className="type-grid">
 							{ALL_TYPES.map(type => (
 								<button
 									key={type}
-									className={`type-btn type-btn--${type.toLowerCase()} ${selectedType === type ? 'active' : ''}`}
-									onClick={() => setSelectedType(type)}
+									className={`type-btn type-btn--${type.toLowerCase()} ${selectedTypes.includes(type) ? 'active' : ''}`}
+									onClick={() => handleToggleType(type)}
 								>
 									{type}
 								</button>

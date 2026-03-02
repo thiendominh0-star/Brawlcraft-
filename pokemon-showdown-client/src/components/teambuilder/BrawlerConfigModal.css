@@ -1,0 +1,153 @@
+.brawler-modal-backdrop {
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(5px);
+	z-index: 1000;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--space-4);
+}
+
+.brawler-modal {
+	background: var(--bg-01);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+	width: 100%;
+	max-width: 480px;
+	max-height: 90vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
+	overflow: hidden;
+}
+
+.brawler-modal__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--space-4) var(--space-5);
+	background: var(--bg-02);
+	border-bottom: 1px solid var(--border-subtle);
+}
+
+.brawler-modal__header h2 {
+	margin: 0;
+	font-size: 1.2rem;
+	letter-spacing: 0.1em;
+	color: var(--text-primary);
+}
+
+.brawler-modal__close {
+	background: none;
+	border: none;
+	color: var(--text-muted);
+	font-size: 1.2rem;
+	cursor: pointer;
+	padding: 5px;
+	transition: color 0.2s;
+}
+
+.brawler-modal__close:hover {
+	color: var(--accent-red);
+}
+
+.brawler-modal__body {
+	padding: var(--space-5);
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-5);
+}
+
+.brawler-modal__field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+}
+
+.brawler-modal__field label {
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	color: var(--text-muted);
+	text-transform: uppercase;
+}
+
+.brawler-modal__select {
+	padding: var(--space-3);
+	background: var(--bg-03);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	color: var(--text-primary);
+	font-family: inherit;
+	font-size: 0.95rem;
+	outline: none;
+	cursor: pointer;
+}
+
+.brawler-modal__select:hover {
+	border-color: var(--border-strong);
+}
+
+.brawler-modal__moves {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+}
+
+.brawler-modal__move {
+	padding: var(--space-3);
+	background: var(--bg-02);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	transition: all 0.2s;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.brawler-modal__move:hover {
+	border-color: var(--border-strong);
+	background: var(--bg-03);
+}
+
+.brawler-modal__move--selected {
+	background: color-mix(in srgb, var(--accent-blue) 15%, transparent);
+	border-color: var(--accent-blue);
+}
+
+.brawler-modal__move-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.brawler-modal__move-name {
+	font-weight: 700;
+	color: var(--text-primary);
+}
+
+.brawler-modal__move-type {
+	font-size: 0.75rem;
+	padding: 2px 8px;
+	background: var(--bg-04);
+	border-radius: 12px;
+	color: var(--text-secondary);
+	font-weight: 600;
+}
+
+.brawler-modal__move-sub {
+	font-size: 0.75rem;
+	color: var(--text-muted);
+}
+
+.brawler-modal__footer {
+	padding: var(--space-4) var(--space-5);
+	background: var(--bg-02);
+	border-top: 1px solid var(--border-subtle);
+	display: flex;
+	gap: var(--space-3);
+}

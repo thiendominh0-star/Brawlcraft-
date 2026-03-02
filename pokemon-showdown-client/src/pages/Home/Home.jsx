@@ -18,7 +18,9 @@ export default function Home() {
 
 	const [status, setStatus] = useState('idle')
 	const [playerName, setPlayerName] = useState(user ? user.displayName : '')
-	const [connected, setConnected] = useState(false)
+	const [connected, setConnected] = useState(client.connected || false)
+	const [teams, setTeams] = useState([])
+	const [selectedTeamId, setSelectedTeamId] = useState('')
 	const [selectedFormat, setSelectedFormat] = useState('gen9brawlcraftstandard')
 	const cleanups = useRef([])
 
@@ -46,7 +48,46 @@ export default function Home() {
 		]
 		cleanups.current = unsubs
 		return () => unsubs.forEach(u => u?.())
-	}, [navigate, user])
+	}, [navigate, user, selectedFormat])
+
+	useEffect(() => {
+		// Load teams from localStorage
+		try {
+			const saved = localStorage.getItem('brawlcraft_teams')
+			if (saved) {
+				const ts = JSON.parse(saved)
+				setTeams(ts)
+				if (ts.length > 0) {
+					setSelectedTeamId(ts[0].id)
+				}
+			} else {
+				// Fallback if not migrated yet
+				const oldSaved = localStorage.getItem('brawlcraft_team')
+				if (oldSaved) {
+					const ts = [{id: 't1', name: 'My First Team', format: 'gen9brawlcraftstandard', brawlers: JSON.parse(oldSaved)}]
+					setTeams(ts)
+					setSelectedTeamId('t1')
+				} else {
+					// AUTO INJECT FOR TESTING
+					const ts = [{
+						id: 't1', name: 'Test Team', format: 'gen9brawlcraftstandard',
+						brawlers: [
+							{uid: "1", id: "shadowblade", name: "Shadow Blade", types: ["Shadow"], ability: "Swift Step", item: "Life Orb", moves: [{id: "shadowslash", name: "Shadow Slash", type: "Shadow", category: "Physical", power: 90, accuracy: 100}], baseStats: {hp: 340, atk: 120, def: 80, spa: 70, spd: 75, spe: 110}},
+							{uid: "2", id: "arcanesniper", name: "Arcane Sniper", types: ["Arcane"], ability: "Arcane Mastery", item: "Leftovers", moves: [{id: "arcanebolt", name: "Arcane Bolt", type: "Arcane", category: "Special", power: 95, accuracy: 100}], baseStats: {hp: 290, atk: 85, def: 65, spa: 130, spd: 80, spe: 120}},
+							{uid: "3", id: "holyknight", name: "Holy Knight", types: ["Holy"], ability: "Thick Hide", item: "Choice Scarf", moves: [{id: "holysmite", name: "Holy Smite", type: "Holy", category: "Physical", power: 85, accuracy: 100}], baseStats: {hp: 420, atk: 105, def: 115, spa: 75, spd: 110, spe: 70}},
+							{uid: "4", id: "undeadbrute", name: "Undead Brute", types: ["Undead"], ability: "Berserker", item: "Focus Sash", moves: [{id: "bonecrusher", name: "Bone Crusher", type: "Undead", category: "Physical", power: 100, accuracy: 95}], baseStats: {hp: 480, atk: 135, def: 130, spa: 40, spd: 60, spe: 45}},
+							{uid: "5", id: "dragonmage", name: "Dragon Mage", types: ["Dragon", "Arcane"], ability: "Arcane Mastery", item: "Life Orb", moves: [{id: "dragonpulse", name: "Dragon Pulse", type: "Dragon", category: "Special", power: 95, accuracy: 100}], baseStats: {hp: 310, atk: 80, def: 70, spa: 145, spd: 90, spe: 105}},
+							{uid: "6", id: "naturegolem", name: "Nature Golem", types: ["Nature"], ability: "Thick Hide", item: "Leftovers", moves: [{id: "rockslam", name: "Rock Slam", type: "Nature", category: "Physical", power: 90, accuracy: 100}], baseStats: {hp: 400, atk: 100, def: 140, spa: 60, spd: 120, spe: 35}}
+						]
+					}];
+					setTeams(ts);
+					setSelectedTeamId('t1');
+					localStorage.setItem('brawlcraft_teams', JSON.stringify(ts));
+				}
+			}
+		} catch (e) { /* ignore */}
+
+	}, [])
 
 	const handleFindMatch = () => {
 		if (status === 'searching') {
@@ -55,14 +96,10 @@ export default function Home() {
 			return
 		}
 
-		let teamData = []
-		try {
-			const saved = localStorage.getItem('brawlcraft_team')
-			if (saved) teamData = JSON.parse(saved)
-		} catch (e) { /* ignore */}
+		const selectedTeam = teams.find(t => t.id === selectedTeamId)
 
-		if (!teamData || teamData.length === 0) {
-			alert('Vui lòng tạo đội hình trong Teambuilder trước khi tìm trận!')
+		if (!selectedTeam || !selectedTeam.brawlers || selectedTeam.brawlers.length === 0) {
+			alert('Vui lòng chọn một đội hình hợp lệ trong Teambuilder trước khi tìm trận!')
 			return
 		}
 
@@ -71,7 +108,7 @@ export default function Home() {
 			client.connect()
 		} else {
 			setStatus('searching')
-			const packedTeam = packTeamForShowdown(teamData)
+			const packedTeam = packTeamForShowdown(selectedTeam.brawlers)
 			client.findBattle(selectedFormat, packedTeam)
 		}
 	}
@@ -81,6 +118,8 @@ export default function Home() {
 		client.disconnect()
 		navigate('/login')
 	}
+
+	const hasTeam = teams.length > 0 && selectedTeamId !== '' && teams.find(t => t.id === selectedTeamId)?.brawlers?.length > 0
 
 	// If rendering before redirect happens
 	if (!user) return null
@@ -114,12 +153,27 @@ export default function Home() {
 						<select
 							className="home__format-select"
 							value={selectedFormat}
-							onChange={(e) => setSelectedFormat(e.target.value)}
+							onChange={e => setSelectedFormat(e.target.value)}
 							disabled={status !== 'idle'}
 						>
-							<option value="gen9brawlcraftstandard">Brawlcraft Standard</option>
-							<option value="gen9brawlcraftcustom">Brawlcraft Custom (Crafted)</option>
+							<option value="gen9brawlcraftstandard">BrawlCraft Standard</option>
+							<option value="gen9brawlcraftcustom">BrawlCraft Custom</option>
 						</select>
+
+						{/* Team selector */}
+						{teams.length > 0 && (
+							<select
+								className="home__format-select"
+								value={selectedTeamId}
+								onChange={e => setSelectedTeamId(e.target.value)}
+								disabled={status !== 'idle'}
+								style={{borderTop: 'none', borderRadius: '0', background: 'var(--bg-02)'}}
+							>
+								{teams.map(t => (
+									<option key={t.id} value={t.id}>{t.name} ({t.brawlers?.length || 0}/6)</option>
+								))}
+							</select>
+						)}
 					</div>
 
 					<button
@@ -128,7 +182,7 @@ export default function Home() {
 						onClick={handleFindMatch}
 						disabled={status === 'connecting'}
 					>
-						{status === 'idle' && '⚔ FIND MATCH'}
+						{status === 'idle' && (connected ? '⚔ BATTLE!' : '⚔ FIND MATCH')}
 						{status === 'connecting' && '◌ CONNECTING...'}
 						{status === 'searching' && '✕ CANCEL SEARCH'}
 					</button>

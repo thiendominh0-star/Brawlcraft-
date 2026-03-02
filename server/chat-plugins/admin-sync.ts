@@ -74,16 +74,21 @@ function writeCharactersFile(roster: any[]) {
 		const name = char.name || 'Unknown';
 		const types = JSON.stringify(char.types || ['Normal']);
 		const bs = char.baseStats || { hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100 };
-		const ability = char.ability || 'No Ability';
-		// Bỏ khoảng trắng khi lưu tên ability -> ID
-		const abilityId = ability.replace(/\\s+/g, '');
+		const abilitiesArr = (char.abilities && char.abilities.length > 0) ? char.abilities : ['No Ability'];
+		let abilitiesStr = '{';
+		abilitiesArr.forEach((ab: string, idx: number) => {
+			const key = idx === 0 ? '0' : idx === 1 ? '1' : idx === 2 ? 'H' : 'S';
+			abilitiesStr += `${key}: ${JSON.stringify(ab)}`;
+			if (idx < abilitiesArr.length - 1) abilitiesStr += ', ';
+		});
+		abilitiesStr += '}';
 
 		content += `\t${id}: {\n`;
 		content += `\t\tnum: ${index + 1},\n`;
 		content += `\t\tname: ${JSON.stringify(name)},\n`;
 		content += `\t\ttypes: ${types},\n`;
 		content += `\t\tbaseStats: { hp: ${bs.hp}, atk: ${bs.atk}, def: ${bs.def}, spa: ${bs.spa}, spd: ${bs.spd}, spe: ${bs.spe} },\n`;
-		content += `\t\tabilities: {0: ${JSON.stringify(ability)}},\n`;
+		content += `\t\tabilities: ${abilitiesStr},\n`;
 		content += `\t\tweightkg: 100,\n`;
 		content += `\t},\n`;
 	});

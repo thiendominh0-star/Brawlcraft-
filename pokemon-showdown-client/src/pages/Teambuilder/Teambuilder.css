@@ -233,3 +233,55 @@
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
+
+/* --- Team List Mode --- */
+.team-list__card {
+	background: var(--bg-02);
+	border: 1px solid var(--border-subtle);
+	border-radius: var(--radius-lg);
+	padding: var(--space-4) var(--space-5);
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.team-list__card:hover {
+	border-color: var(--accent-blue);
+	transform: translateY(-2px);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.team-list__card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 5px;
+}
+
+.team-list__card-header h3 {
+	margin: 0;
+	color: var(--text-primary);
+	font-family: var(--font-display);
+}
+
+.team-list__preview {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.team-list__mini-slot {
+	width: 40px;
+	height: 40px;
+	border-radius: var(--radius-sm);
+	background: var(--bg-03);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid var(--border-default);
+	font-size: 0.8rem;
+}
+
+.team-list__mini-slot--empty {
+	color: var(--text-disabled);
+	border-style: dashed;
+}

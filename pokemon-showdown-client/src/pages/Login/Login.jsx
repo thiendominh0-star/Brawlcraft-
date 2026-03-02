@@ -6,8 +6,11 @@ import './Login.css'
 export default function Login() {
 	const navigate = useNavigate()
 	const [isRegister, setIsRegister] = useState(false)
-	const [username, setUsername] = useState('')
-	const [password, setPassword] = useState('')
+	const [username, setUsername] = useState(() => localStorage.getItem('brawlcraft_saved_username') || '')
+	const [password, setPassword] = useState(() => localStorage.getItem('brawlcraft_saved_password') || '')
+	const [rememberMe, setRememberMe] = useState(() => localStorage.getItem('brawlcraft_remember') === 'true')
+	const [showPassword, setShowPassword] = useState(false)
+
 	const [error, setError] = useState('')
 	const [success, setSuccess] = useState('')
 
@@ -25,6 +28,15 @@ export default function Login() {
 			} else {
 				// Luồng Đăng nhập
 				login(username, password)
+				if (rememberMe) {
+					localStorage.setItem('brawlcraft_remember', 'true')
+					localStorage.setItem('brawlcraft_saved_username', username)
+					localStorage.setItem('brawlcraft_saved_password', password)
+				} else {
+					localStorage.removeItem('brawlcraft_remember')
+					localStorage.removeItem('brawlcraft_saved_username')
+					localStorage.removeItem('brawlcraft_saved_password')
+				}
 				navigate('/')
 			}
 		} catch (err) {
@@ -68,13 +80,35 @@ export default function Login() {
 
 					<div className="login-field">
 						<label>Password</label>
-						<input
-							type="password"
-							placeholder="Nhập mật khẩu"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-						/>
+						<div className="login-password-wrap">
+							<input
+								type={showPassword ? "text" : "password"}
+								placeholder="Nhập mật khẩu"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+							/>
+							<button
+								type="button"
+								className="login-eye-btn"
+								onClick={() => setShowPassword(!showPassword)}
+								title={showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+							>
+								{showPassword ? '👁' : '👁‍🗨'}
+							</button>
+						</div>
 					</div>
+
+					{!isRegister && (
+						<div className="login-field login-remember">
+							<input
+								type="checkbox"
+								id="rememberMe"
+								checked={rememberMe}
+								onChange={(e) => setRememberMe(e.target.checked)}
+							/>
+							<label htmlFor="rememberMe">Nhớ mật khẩu đăng nhập</label>
+						</div>
+					)}
 
 					<button type="submit" className="btn btn-primary login-btn">
 						{isRegister ? 'Tạo tài khoản' : 'Đăng nhập'}

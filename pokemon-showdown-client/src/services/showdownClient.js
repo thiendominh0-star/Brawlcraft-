@@ -182,6 +182,10 @@ class ShowdownClient {
 					}
 					break;
 
+				case 'poke':
+					this._emit('battle:poke', {roomId, player: args[0], details: args[1], item: args[2]});
+					break;
+
 				case 'switch':
 				case 'drag':
 				case 'replace':

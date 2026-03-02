@@ -3,7 +3,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		section: "Custom Project",
 	},
 	{
-		name: "[Gen 9] Brawlcraft Standard",
+		name: "Brawlcraft Standard",
 		desc: "Chế độ sử dụng Brawler mặc định. Không dùng Brawler tự chế.",
 		mod: 'gen8',
 		rated: true,
@@ -15,7 +15,7 @@ export const Formats: import('../sim/dex-formats').FormatList = [
 		],
 	},
 	{
-		name: "[Gen 9] Brawlcraft Custom",
+		name: "Brawlcraft Custom",
 		desc: "Chế độ cho phép mang 1 Brawler Tự chế vào team.",
 		mod: 'gen8',
 		rated: true,

@@ -12,16 +12,16 @@ ws.onopen = () => {
 
 	// Create a valid team of 6 different characters to pass Species Clause
 	const team = [
-		'pikachu||||tackle||||||100|',
-		'arcanesniper||||tackle||||||100|',
-		'shadowblade||||tackle||||||100|',
-		'holyknight||||tackle||||||100|',
-		'undeadbrute||||tackle||||||100|',
-		'dragonmage||||tackle||||||100|'
+		'shadowblade||lifeorb|swiftstep|shadowslash,phantomstrike||||||100|',
+		'arcanesniper||leftovers|arcanemastery|arcanebolt,magicsnipe||||||100|',
+		'holyknight||choicescarf|thickhide|holysmite,sacredblade||||||100|',
+		'undeadbrute||focussash|berserker|bonecrusher,deathgrip||||||100|',
+		'dragonmage||lifeorb|arcanemastery|dragonpulse,wyrmfire||||||100|',
+		'naturegolem||leftovers|thickhide|rockslam,gaiaburst||||||100|'
 	].join(']');
 
 	send(ws, `|/utm ${team}`);
-	send(ws, '|/search gen9brawlcraftcustom');
+	send(ws, '|/search gen9brawlcraftstandard');
 };
 
 ws.onmessage = (ev) => {

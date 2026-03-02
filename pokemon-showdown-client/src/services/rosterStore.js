@@ -12,8 +12,7 @@ const DEFAULT_ROSTER = [
 		id: 'shadowblade',
 		name: 'Shadow Blade',
 		types: ['Shadow'],
-		ability: 'Swift Step',
-		item: 'Life Orb',
+		abilities: ['Swift Step'],
 		imageUrl: '',
 		baseStats: {hp: 340, atk: 120, def: 80, spa: 70, spd: 75, spe: 110},
 		moves: [
@@ -27,6 +26,7 @@ const DEFAULT_ROSTER = [
 		id: 'arcanesniper',
 		name: 'Arcane Sniper',
 		types: ['Arcane'],
+		abilities: ['Arcane Mastery'],
 		imageUrl: '',
 		baseStats: {hp: 290, atk: 85, def: 65, spa: 130, spd: 80, spe: 120},
 		moves: [
@@ -40,6 +40,7 @@ const DEFAULT_ROSTER = [
 		id: 'holyknight',
 		name: 'Holy Knight',
 		types: ['Holy'],
+		abilities: ['Thick Hide'],
 		imageUrl: '',
 		baseStats: {hp: 420, atk: 105, def: 115, spa: 75, spd: 110, spe: 70},
 		moves: [
@@ -53,6 +54,7 @@ const DEFAULT_ROSTER = [
 		id: 'undeadbrute',
 		name: 'Undead Brute',
 		types: ['Undead'],
+		abilities: ['Berserker'],
 		imageUrl: '',
 		baseStats: {hp: 480, atk: 135, def: 130, spa: 40, spd: 60, spe: 45},
 		moves: [
@@ -66,6 +68,7 @@ const DEFAULT_ROSTER = [
 		id: 'dragonmage',
 		name: 'Dragon Mage',
 		types: ['Dragon', 'Arcane'],
+		abilities: ['Arcane Mastery', 'Swift Step'],
 		imageUrl: '',
 		baseStats: {hp: 310, atk: 80, def: 70, spa: 145, spd: 90, spe: 105},
 		moves: [
@@ -79,6 +82,7 @@ const DEFAULT_ROSTER = [
 		id: 'naturegolem',
 		name: 'Nature Golem',
 		types: ['Nature'],
+		abilities: ['Thick Hide'],
 		imageUrl: '',
 		baseStats: {hp: 400, atk: 100, def: 140, spa: 60, spd: 120, spe: 35},
 		moves: [
@@ -132,11 +136,11 @@ export function createBlankChar() {
 		id: '',
 		name: '',
 		types: ['Shadow'],
-		ability: 'No Ability',
+		abilities: ['No Ability'],
 		item: 'No Item',
 		imageUrl: '',
 		baseStats: {hp: 300, atk: 100, def: 80, spa: 80, spd: 80, spe: 80},
-		moves: [createBlankMove(), createBlankMove(), createBlankMove(), createBlankMove()],
+		moves: [createBlankMove()],
 	}
 }
 
