@@ -26,9 +26,12 @@ export const PluginServer = http.createServer((req, res) => {
 		req.on('end', () => {
 			try {
 				if (!body) throw new Error("Empty body");
-				const roster = JSON.parse(body);
+				const payload = JSON.parse(body);
+				const roster = payload.roster || [];
+				const customMoves = payload.customMoves || [];
+
 				writeCharactersFile(roster);
-				writeMovesFile(roster);
+				writeMovesFile(customMoves);
 
 				// 1. Build lại Typescript sang JS
 				child_process.execSync('node build', { cwd: path.join(__dirname, '../../../') });
@@ -98,57 +101,52 @@ function writeCharactersFile(roster: any[]) {
 }
 
 // Hàm ghi file Moves
-function writeMovesFile(roster: any[]) {
+function writeMovesFile(customMoves: any[]) {
 	let content = `export const Moves: import('../sim/dex-moves').MoveDataTable = {\n`;
 	let moveIndex = 1;
 
-	roster.forEach(char => {
-		if (!char.moves || !Array.isArray(char.moves)) return;
+	customMoves.forEach((move: any) => {
+		if (!move.name) return;
+		const moveId = move.name.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-		content += `\t// --- Moves của ${char.name} ---\n`;
-		char.moves.forEach((move: any) => {
-			if (!move.name) return;
-			const moveId = move.name.toLowerCase().replace(/[^a-z0-9]/g, '');
-
-			content += `\t${moveId}: {\n`;
-			content += `\t\tnum: ${moveIndex++},\n`;
-			content += `\t\taccuracy: ${move.accuracy || 100},\n`;
-			content += `\t\tbasePower: ${move.power || 0},\n`;
-			content += `\t\tcategory: ${JSON.stringify(move.category || 'Physical')},\n`;
-			content += `\t\tname: ${JSON.stringify(move.name)},\n`;
-			content += `\t\tpp: ${move.pp || 10},\n`;
-			content += `\t\tpriority: ${move.priority || 0},\n`;
-			// Custom Data của BRAWLCRAFT
-			if (move.cost && move.cost.type !== 'none') {
-				content += `\t\tcost: ${JSON.stringify(move.cost)},\n`;
-				if (move.cost.type === 'faint') {
-					content += `\t\tselfdestruct: "always",\n`;
-				}
+		content += `\t${moveId}: {\n`;
+		content += `\t\tnum: ${moveIndex++},\n`;
+		content += `\t\taccuracy: ${move.accuracy || 100},\n`;
+		content += `\t\tbasePower: ${move.power || 0},\n`;
+		content += `\t\tcategory: ${JSON.stringify(move.category || 'Physical')},\n`;
+		content += `\t\tname: ${JSON.stringify(move.name)},\n`;
+		content += `\t\tpp: ${move.pp || 10},\n`;
+		content += `\t\tpriority: ${move.priority || 0},\n`;
+		// Custom Data của BRAWLCRAFT
+		if (move.cost && move.cost.type !== 'none') {
+			content += `\t\tcost: ${JSON.stringify(move.cost)},\n`;
+			if (move.cost.type === 'faint') {
+				content += `\t\tselfdestruct: "always",\n`;
 			}
+		}
 
-			if (move.cost && move.cost.type === 'charge') {
-				content += `\t\tflags: { protect: 1, mirror: 1, charge: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
-				content += `\t\tcondition: {\n`;
-				content += `\t\t\tduration: 2,\n`;
-				content += `\t\t\tonLockMove: "${moveId}",\n`;
-				content += `\t\t\tonStart(pokemon) { this.add('-prepare', pokemon, "${move.name}"); },\n`;
-				content += `\t\t},\n`;
-			} else {
-				content += `\t\tflags: { protect: 1, mirror: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
-			}
+		if (move.cost && move.cost.type === 'charge') {
+			content += `\t\tflags: { protect: 1, mirror: 1, charge: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
+			content += `\t\tcondition: {\n`;
+			content += `\t\t\tduration: 2,\n`;
+			content += `\t\t\tonLockMove: "${moveId}",\n`;
+			content += `\t\t\tonStart(pokemon) { this.add('-prepare', pokemon, "${move.name}"); },\n`;
+			content += `\t\t},\n`;
+		} else {
+			content += `\t\tflags: { protect: 1, mirror: 1 ${move.category === 'Physical' ? ', contact: 1' : ''} },\n`;
+		}
 
-			if (move.drawback && move.drawback.type !== 'none') {
-				content += `\t\tdrawback: ${JSON.stringify(move.drawback)},\n`;
-			}
-			if (move.secondary && move.secondary.type !== 'none') {
-				content += `\t\tsecondary: ${JSON.stringify(move.secondary)},\n`;
-			}
+		if (move.drawback && move.drawback.type !== 'none') {
+			content += `\t\tdrawback: ${JSON.stringify(move.drawback)},\n`;
+		}
+		if (move.secondary && move.secondary.type !== 'none') {
+			content += `\t\tsecondary: ${JSON.stringify(move.secondary)},\n`;
+		}
 
-			content += `\t\tshortDesc: ${JSON.stringify(move.effect || '')},\n`;
-			content += `\t\ttarget: "normal",\n`;
-			content += `\t\ttype: ${JSON.stringify(move.type || 'Normal')},\n`;
-			content += `\t},\n\n`;
-		});
+		content += `\t\tshortDesc: ${JSON.stringify(move.effect || '')},\n`;
+		content += `\t\ttarget: "normal",\n`;
+		content += `\t\ttype: ${JSON.stringify(move.type || 'Normal')},\n`;
+		content += `\t},\n\n`;
 	});
 
 	content += `};\n`;

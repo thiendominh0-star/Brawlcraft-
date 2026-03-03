@@ -88,7 +88,7 @@ export default function CraftRoom() {
 			types: selectedTypes,
 			baseStats: stats,
 			abilities: {0: 'Pressure'}, // Mặc định trước
-			moves: ['tackle', 'quickattack'], // Mặc định trước
+			moves: [], // Teambuilder sẽ Load từ Pool chung
 			level: 100,
 			item: '',
 		};

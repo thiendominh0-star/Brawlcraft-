@@ -208,6 +208,14 @@ export default function Home() {
 						◈ Teambuilder
 					</button>
 
+					<button
+						id="btn-craft"
+						className="btn btn-secondary"
+						onClick={() => navigate('/craft')}
+					>
+						⚒ Craft Brawler
+					</button>
+
 					{user.isAdmin && (
 						<button
 							id="btn-admin"

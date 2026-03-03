@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
-import {loadRoster} from '../../services/rosterStore.js'
+import {loadRoster, loadMoves} from '../../services/rosterStore.js'
 import './Teambuilder.css'
 
 export default function Teambuilder() {
@@ -19,6 +19,7 @@ export default function Teambuilder() {
 	const [showBackup, setShowBackup] = useState(false)
 	const [backupText, setBackupText] = useState('')
 	const [searchQuery, setSearchQuery] = useState('')
+	const [customMoves, setCustomMoves] = useState([])
 
 	useEffect(() => {
 		const adminRoster = loadRoster();
@@ -28,6 +29,7 @@ export default function Teambuilder() {
 			if (j) customRoster = JSON.parse(j);
 		} catch (e) { }
 		setRoster([...customRoster, ...adminRoster]);
+		setCustomMoves(loadMoves());
 	}, [])
 
 	const saveTeams = (newTeams) => {
@@ -93,7 +95,8 @@ export default function Teambuilder() {
 	const updateBrawlerMove = (brawlerIndex, moveIndex, moveId) => {
 		const brawler = activeTeam.brawlers[brawlerIndex]
 		const charData = roster.find(c => c.id === brawler.id)
-		const moveData = charData.moves.find(m => m.id === moveId)
+		const movePool = charData.isCustom ? customMoves : charData.moves
+		const moveData = movePool.find(m => m.id === moveId)
 
 		let newMoves = [...brawler.moves]
 		if (moveData) {
@@ -165,20 +168,29 @@ export default function Teambuilder() {
 						style={{marginLeft: 'auto', width: '100%', maxWidth: '300px', padding: '10px', flex: '1 1 200px'}}
 					/>
 				</header>
-				<div className="tb-roster-grid" style={{padding: '20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px'}}>
-					{filteredRoster.map(char => (
+				<div style={{padding: '0 20px', marginTop: '20px', color: 'var(--text-secondary)', fontWeight: 'bold', borderBottom: '1px solid var(--border-default)', paddingBottom: '10px'}}>◆ CUSTOM BRAWLERS </div>
+				<div className="tb-roster-grid" style={{padding: '10px 20px 20px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px'}}>
+					{filteredRoster.filter(c => c.isCustom).map(char => (
 						<div key={char.id} className="tb-roster-card" onClick={() => {handleSelectBrawler(char); setSearchQuery('');}}>
-							<div className="tb-avatar" style={{background: 'var(--bg-03)', padding: '10px', borderRadius: '4px', textAlign: 'center', cursor: 'pointer'}}>
-								<h3 style={{color: 'var(--accent-purple)', margin: 0}}>{char.name}</h3>
+							<div className="tb-avatar" style={{background: 'var(--bg-02)', border: '2px solid var(--accent-purple)', padding: '10px', borderRadius: '4px', textAlign: 'center', cursor: 'pointer', boxShadow: '0 0 10px rgba(124, 58, 237, 0.3)'}}>
+								<h3 style={{color: '#fff', margin: 0}}>{char.name}</h3>
+								<div style={{fontSize: '0.8rem', color: '#ffd700', fontWeight: 'bold'}}>★ CUSTOM</div>
+							</div>
+						</div>
+					))}
+					{filteredRoster.filter(c => c.isCustom).length === 0 && <div style={{color: 'var(--text-muted)'}}>Không tìm thấy bộ Custom Brawlers nào do bạn chế tạo.</div>}
+				</div>
+
+				<div style={{padding: '0 20px', color: 'var(--text-secondary)', fontWeight: 'bold', borderBottom: '1px solid var(--border-default)', paddingBottom: '10px'}}>◆ OFFICIAL GAME BRAWLERS</div>
+				<div className="tb-roster-grid" style={{padding: '10px 20px 30px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px'}}>
+					{filteredRoster.filter(c => !c.isCustom).map(char => (
+						<div key={char.id} className="tb-roster-card" onClick={() => {handleSelectBrawler(char); setSearchQuery('');}}>
+							<div className="tb-avatar" style={{background: 'var(--bg-03)', border: '1px solid var(--border-default)', padding: '10px', borderRadius: '4px', textAlign: 'center', cursor: 'pointer'}}>
+								<h3 style={{color: 'var(--accent-blue)', margin: 0}}>{char.name}</h3>
 								<div style={{fontSize: '0.8rem', color: '#999'}}>{char.types.join('/')}</div>
 							</div>
 						</div>
 					))}
-					{filteredRoster.length === 0 && (
-						<div style={{gridColumn: '1 / -1', textAlign: 'center', padding: '40px', color: 'var(--text-muted)'}}>
-							No brawlers found matching "{searchQuery}"
-						</div>
-					)}
 				</div>
 			</div>
 		)
@@ -246,13 +258,6 @@ export default function Teambuilder() {
 					onChange={e => updateActiveTeam({name: e.target.value})}
 					style={{marginLeft: '10px', width: '250px'}}
 				/>
-				<button
-					className="btn btn-primary"
-					onClick={() => navigate('/craft')}
-					style={{marginLeft: 'auto', marginRight: '20px'}}
-				>
-					⚒ CRAFT BRAWLER
-				</button>
 			</header>
 
 			<div className="tb-builder-body" style={{padding: '20px', maxWidth: '1000px', margin: '0 auto', width: '100%'}}>
@@ -305,12 +310,15 @@ export default function Teambuilder() {
 								<div style={{width: '200px'}}>
 									<label style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase'}}>Moves</label>
 									<div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
-										{[0, 1, 2, 3].map(mIdx => (
-											<select className="admin__input" key={mIdx} value={brawler.moves[mIdx]?.id || ''} onChange={(e) => updateBrawlerMove(index, mIdx, e.target.value)} style={{padding: '6px'}}>
-												<option value="">- Select move -</option>
-												{charData.moves.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
-											</select>
-										))}
+										{[0, 1, 2, 3].map(mIdx => {
+											const movePool = charData.isCustom ? customMoves : charData.moves;
+											return (
+												<select className="admin__input" key={mIdx} value={brawler.moves[mIdx]?.id || ''} onChange={(e) => updateBrawlerMove(index, mIdx, e.target.value)} style={{padding: '6px'}}>
+													<option value="">- Select move -</option>
+													{movePool.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
+												</select>
+											)
+										})}
 									</div>
 								</div>
 

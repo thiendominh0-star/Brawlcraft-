@@ -5,6 +5,7 @@
  */
 
 const STORAGE_KEY = 'brawlcraft_roster'
+const STORAGE_KEY_MOVES = 'brawlcraft_moves'
 
 // Default roster - dùng khi localStorage chưa có dữ liệu
 const DEFAULT_ROSTER = [
@@ -126,6 +127,23 @@ export function resetRoster() {
 	return DEFAULT_ROSTER.map(c => ({...c}))
 }
 
+/** Đọc Moves từ localStorage */
+export function loadMoves() {
+	try {
+		const raw = localStorage.getItem(STORAGE_KEY_MOVES)
+		if (raw) {
+			const parsed = JSON.parse(raw)
+			if (Array.isArray(parsed)) return parsed
+		}
+	} catch (e) { /* ignore */}
+	return []
+}
+
+/** Lưu Moves vào localStorage */
+export function saveMoves(moves) {
+	localStorage.setItem(STORAGE_KEY_MOVES, JSON.stringify(moves))
+}
+
 /** Tạo ID từ tên (slug) */
 export function nameToId(name) {
 	return name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 20) || `char${Date.now()}`
@@ -156,9 +174,9 @@ export function createBlankMove(slotIndex = 0) {
 		accuracy: 100,
 		priority: 0,
 		pp: 15,
-		cost: {type: 'none', value: 0}, // Trả trước: 'hp' (trừ %hp hiện tại), 'none'
-		drawback: {type: 'none', stat: 'atk', stage: 1}, // Trả sau: 'stat' (self-drop), 'recoil' (% dmg), 'none'
-		secondary: {chance: 100, type: 'none', target: 'enemy', stat: 'def', stage: 1, volatile: 'none'}, // Effect: 'stat' (buff/debuff), 'status' (burn/para), 'volatile' (flinch)
-		effect: '', // Text mô tả sinh tự động
+		cost: {type: 'none'}, // Mặc định là none (Không có optional)
+		drawback: {type: 'none'}, // Không có drawback optional
+		secondary: {type: 'none'}, // Không có effect optional
+		effect: '',
 	}
 }
