@@ -417,17 +417,17 @@ export default function Admin() {
 
 							{/* Conditions (Optional) */}
 							<div style={{background: 'var(--bg-01)', padding: '15px', borderRadius: '4px', border: '1px solid var(--border-default)', marginTop: '15px'}}>
-								<div style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--accent-red)', marginBottom: '10px', textTransform: 'uppercase'}}>Conditions / Giá Trả (Optional)</div>
+								<div style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--accent-red)', marginBottom: '10px', textTransform: 'uppercase'}}>CONDITION</div>
 								<div style={{display: 'flex', gap: '20px', flexWrap: 'wrap'}}>
 									{/* Cost */}
 									<div style={{flex: 1, minWidth: '250px', display: 'flex', flexDirection: 'column', gap: '4px'}}>
-										<label className="admin__move-label" style={{color: 'var(--text-secondary)'}}>Cost (Trả trước)</label>
+										<label className="admin__move-label" style={{color: 'var(--text-secondary)'}}>COST</label>
 										<select className="admin__move-select" value={formMove.cost?.type || 'none'} onChange={e => {
 											const val = e.target.value; setMoveNestedField('cost', 'type', val)
 											if (val === 'hp') {setMoveNestedField('cost', 'hp_type', 'current'); setMoveNestedField('cost', 'value', 10);}
 											else if (val === 'pp') {setMoveNestedField('cost', 'value', 3);}
 										}}>
-											<option value="none">Không có Giá Trả Trước (Tùy chọn)</option>
+											<option value="none">Không</option>
 											<option value="hp">Hi sinh % Máu (HP / Max HP)</option>
 											<option value="faint">Tự sát (Faint)</option>
 											<option value="charge">Tụ khí 1 lượt (Charge)</option>
@@ -448,9 +448,9 @@ export default function Admin() {
 									</div>
 									{/* Drawback */}
 									<div style={{flex: 1, minWidth: '250px', display: 'flex', flexDirection: 'column', gap: '4px'}}>
-										<label className="admin__move-label" style={{color: 'var(--text-secondary)'}}>Drawback (Trả sau)</label>
+										<label className="admin__move-label" style={{color: 'var(--text-secondary)'}}>DRAWBACK</label>
 										<select className="admin__move-select" value={formMove.drawback?.type || 'none'} onChange={e => setMoveNestedField('drawback', 'type', e.target.value)}>
-											<option value="none">Không có Thâm Hụt (Tùy chọn)</option>
+											<option value="none">Không</option>
 											<option value="stat">Tự giảm Chỉ số cơ bản</option>
 										</select>
 										{formMove.drawback?.type === 'stat' && (
@@ -467,10 +467,10 @@ export default function Admin() {
 
 							{/* Secondary Effect */}
 							<div style={{background: 'var(--bg-01)', padding: '15px', borderRadius: '4px', border: '1px solid var(--border-default)', marginTop: '15px'}}>
-								<div style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--accent-blue)', marginBottom: '10px', textTransform: 'uppercase'}}>Secondary Effect (Optional)</div>
+								<div style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--accent-blue)', marginBottom: '10px', textTransform: 'uppercase'}}>SECONDARY EFFECT</div>
 								<div style={{display: 'flex', gap: '10px', marginBottom: '8px', flexWrap: 'wrap'}}>
 									<select className="admin__move-select" style={{flex: 1, minWidth: '200px'}} value={formMove.secondary?.type || 'none'} onChange={e => setMoveNestedField('secondary', 'type', e.target.value)}>
-										<option value="none">Không có Hiệu Ứng Phụ (Tùy chọn)</option>
+										<option value="none">Không</option>
 										<option value="stat">Tăng/Giảm Chỉ Số của Địch hoặc Bản thân</option>
 										<option value="volatile">Khống chế (Flinch)</option>
 									</select>

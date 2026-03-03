@@ -16,7 +16,7 @@ export default function Home() {
 	const navigate = useNavigate()
 	const user = getCurrentUser()
 
-	const [status, setStatus] = useState('idle')
+	const [status, setStatus] = useState(client.connected ? 'idle' : 'connecting')
 	const [playerName, setPlayerName] = useState(user ? user.displayName : '')
 	const [connected, setConnected] = useState(client.connected || false)
 	const [teams, setTeams] = useState([])
@@ -47,6 +47,12 @@ export default function Home() {
 			}),
 		]
 		cleanups.current = unsubs
+
+		// Tự động kết nối nếu chưa có kết nối nào
+		if (!client.connected) {
+			client.connect()
+		}
+
 		return () => unsubs.forEach(u => u?.())
 	}, [navigate, user, selectedFormat])
 
@@ -187,18 +193,7 @@ export default function Home() {
 						{status === 'searching' && '✕ CANCEL SEARCH'}
 					</button>
 
-					{!connected && status === 'idle' && (
-						<button
-							id="btn-connect"
-							className="btn btn-secondary"
-							onClick={() => {
-								setStatus('connecting')
-								client.connect()
-							}}
-						>
-							▸ Connect Server
-						</button>
-					)}
+
 
 					<button
 						id="btn-teambuilder"
