@@ -12,6 +12,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Shadow",
+		critRatio: 2,
 	},
 
 	darkveil: {
@@ -23,9 +24,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: { protect: 1, mirror: 1 },
-		shortDesc: "Raises user DEF by 1",
-		target: "normal",
+		shortDesc: "Raises user DEF by 1",
 		type: "Shadow",
+		boosts: {"def":1},
 	},
 
 	phantomstrike: {
@@ -40,6 +41,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "High crit ratio",
 		target: "normal",
 		type: "Shadow",
+		critRatio: 2,
 	},
 
 	nightfall: {
@@ -54,6 +56,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Shadow",
+		secondary: {"chance":30,"volatileStatus":"flinch"},
 	},
 
 	// --- Moves của Arcane Sniper ---
@@ -69,6 +72,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Arcane",
+		secondary: {"chance":10,"boosts":{"spd":-1}},
 	},
 
 	magicsnipe: {
@@ -94,9 +98,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: { protect: 1, mirror: 1 },
-		shortDesc: "Raises user SPD by 1",
-		target: "normal",
+		shortDesc: "Raises user SPD by 1",
 		type: "Arcane",
+		boosts: {"spd":1},
 	},
 
 	manaleak: {
@@ -111,6 +115,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "Lowers target SPA by 1",
 		target: "normal",
 		type: "Arcane",
+		secondary: {"chance":100,"boosts":{"spa":-1}},
 	},
 
 	// --- Moves của Holy Knight ---
@@ -137,9 +142,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: { protect: 1, mirror: 1 },
-		shortDesc: "Raises user DEF+SPD by 1",
-		target: "normal",
+		shortDesc: "Raises user DEF+SPD by 1",
 		type: "Holy",
+		boosts: {"def":1,"spd":1},
 	},
 
 	radianceburst: {
@@ -154,6 +159,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "May burn target",
 		target: "normal",
 		type: "Holy",
+		secondary: {"chance":30,"status":"brn"},
 	},
 
 	sacredblade: {
@@ -168,6 +174,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "High crit ratio",
 		target: "normal",
 		type: "Holy",
+		critRatio: 2,
 	},
 
 	// --- Moves của Undead Brute ---
@@ -183,6 +190,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "May lower target DEF",
 		target: "normal",
 		type: "Undead",
+		secondary: {"chance":20,"boosts":{"def":-1}},
 	},
 
 	deathgrip: {
@@ -197,6 +205,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Undead",
+		secondary: {"chance":100,"volatileStatus":"partiallytrapped"},
 	},
 
 	plagueaura: {
@@ -211,6 +220,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "Poisons target",
 		target: "normal",
 		type: "Undead",
+		status: "psn",
 	},
 
 	tombstomp: {
@@ -225,6 +235,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Undead",
+		secondary: {"chance":30,"volatileStatus":"flinch"},
 	},
 
 	// --- Moves của Dragon Mage ---
@@ -254,6 +265,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "Heals 50% of damage dealt",
 		target: "normal",
 		type: "Arcane",
+		drain: [1,2],
 	},
 
 	wyrmfire: {
@@ -268,6 +280,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Dragon",
+		self: {"boosts":{"spa":-2}},
 	},
 
 	timewarp: {
@@ -279,9 +292,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 8,
 		priority: 0,
 		flags: { protect: 1, mirror: 1 },
-		shortDesc: "User moves first next turn",
-		target: "normal",
+		shortDesc: "User moves first next turn",
 		type: "Arcane",
+		boosts: {"spe":2},
 	},
 
 	// --- Moves của Nature Golem ---
@@ -297,6 +310,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Nature",
+		secondary: {"chance":30,"volatileStatus":"confusion"},
 	},
 
 	thornwall: {
@@ -308,9 +322,9 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 0,
 		flags: { protect: 1, mirror: 1 },
-		shortDesc: "Raises user DEF by 2",
-		target: "normal",
+		shortDesc: "Raises user DEF by 2",
 		type: "Nature",
+		boosts: {"def":2},
 	},
 
 	gaiaburst: {
@@ -325,6 +339,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "",
 		target: "normal",
 		type: "Nature",
+		self: {"boosts":{"spe":-1}},
 	},
 
 	entangle: {
@@ -339,6 +354,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		shortDesc: "Lowers target SPE by 2",
 		target: "normal",
 		type: "Nature",
+		boosts: {"spe":-2},
 	},
 
 
@@ -355,6 +371,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Shadow",
 
+		critRatio: 2,
 	},
 	holybash: {
 		num: 102,
@@ -453,6 +470,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Holy",
 
+		basePowerCallback: function (pokemon, target, move) { if (this.queue.willMove(target)) return move.basePower; this.debug('iron fist boost'); return move.basePower * 1.5; },
 	},
 	quickslash: {
 		num: 109,
@@ -523,6 +541,8 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Holy",
 
+		ignoreDefensive: true,
+		ignoreEvasion: true,
 	},
 	tidalwave: {
 		num: 114,
@@ -621,6 +641,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Shadow",
 
+		status: "slp",
 	},
 	healinglight: {
 		num: 121,
@@ -635,6 +656,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Holy",
 		target: "self", heal: [1, 2],
+		heal: [1,2],
 	},
 	dragondance: {
 		num: 122,
@@ -649,6 +671,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Dragon",
 		target: "self", boosts: { atk: 1, spe: 1 },
+		boosts: {"atk":1,"spe":1},
 	},
 	arcaneshield: {
 		num: 123,
@@ -663,6 +686,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Arcane",
 		target: "self", boosts: { def: 1, spd: 1 },
+		boosts: {"def":1,"spd":1},
 	},
 	naturegrowth: {
 		num: 124,
@@ -677,6 +701,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Nature",
 		target: "self", boosts: { spa: 1, spd: 1 },
+		boosts: {"spa":1,"spd":1},
 	},
 	shadowcloak: {
 		num: 125,
@@ -691,6 +716,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Shadow",
 		target: "self", boosts: { evasion: 1 },
+		boosts: {"evasion":1},
 	},
 	undeadcurse: {
 		num: 126,
@@ -705,6 +731,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Undead",
 
+		volatileStatus: "curse",
 	},
 	astraltrance: {
 		num: 127,
@@ -719,6 +746,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Arcane",
 		target: "self", boosts: { spa: 2 },
+		boosts: {"spa":2},
 	},
 	holyward: {
 		num: 128,
@@ -729,10 +757,10 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		pp: 10,
 		priority: 4,
 		flags: { protect: 1, mirror: 1 },
-		shortDesc: "Protects user from all attacks this turn.",
-		target: "normal",
+		shortDesc: "Protects user from all attacks this turn.",
 		type: "Holy",
 
+		volatileStatus: "protect",
 	},
 	naturesgrace: {
 		num: 129,
@@ -747,6 +775,7 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 		target: "normal",
 		type: "Nature",
 
+		onHit: function (pokemon) { this.add('-cureteam', pokemon, '[from] move: Nature Grace'); for (const ally of pokemon.side.pokemon) { ally.cureStatus(); } },
 	},
 	bloodpact: {
 		num: 130,
@@ -761,5 +790,6 @@ export const Moves: import('../sim/dex-moves').MoveDataTable = {
 
 		type: "Shadow",
 		target: "self", boosts: { atk: 2, spa: 2, def: -1, spd: -1 },
+		boosts: {"atk":2,"spa":2,"def":-1,"spd":-1},
 	},
 };
