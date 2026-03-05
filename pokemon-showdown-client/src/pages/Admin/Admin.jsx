@@ -302,7 +302,7 @@ export default function Admin() {
 									<label className="admin__label">Types (Chọn tối đa 2)</label>
 									<div className="admin__types-grid">
 										{AVAILABLE_TYPES.map(t => (
-											<button key={t} className={`admin__type-btn ${form.types.includes(t) ? `admin__type-btn--${t.toLowerCase()} active` : ''}`} onClick={() => toggleType(t)}>{t}</button>
+											<button key={t} className={`admin__type-btn ${form.types.includes(t) ? `type-${t.toLowerCase()} active` : ''}`} onClick={() => toggleType(t)}>{t}</button>
 										))}
 									</div>
 								</div>
@@ -414,6 +414,26 @@ export default function Admin() {
 							</div>
 
 							<hr style={{margin: '20px 0', borderColor: 'var(--border-default)'}} />
+
+							{/* Signature Move config */}
+							<div style={{background: 'var(--bg-01)', padding: '15px', borderRadius: '4px', border: '1px solid var(--border-default)', marginTop: '15px'}}>
+								<div style={{fontSize: '0.8rem', fontWeight: 'bold', color: '#fbbf24', marginBottom: '10px', textTransform: 'uppercase'}}>✨ ĐẶC QUYỀN (SIGNATURE MOVE)</div>
+								<div style={{display: 'flex', gap: '20px', alignItems: 'center', flexWrap: 'wrap'}}>
+									<label style={{display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', color: 'var(--text-primary)', fontWeight: 'bold'}}>
+										<input type="checkbox" checked={formMove.isSignature || false} onChange={e => {
+											setMoveField('isSignature', e.target.checked);
+											if (!e.target.checked) setMoveField('signatureBrawler', '');
+										}} style={{width: '20px', height: '20px', accentColor: '#fbbf24'}} />
+										Kỹ Năng Độc Bản
+									</label>
+									{formMove.isSignature && (
+										<select className="admin__move-select" style={{flex: 1, minWidth: '200px', borderColor: '#fbbf24', outline: 'none'}} value={formMove.signatureBrawler || ''} onChange={e => setMoveField('signatureBrawler', e.target.value)}>
+											<option value="">-- Chọn Tướng Khóa Độc Quyền --</option>
+											{roster.map(char => <option key={char.id} value={char.id}>{char.name}</option>)}
+										</select>
+									)}
+								</div>
+							</div>
 
 							{/* Conditions (Optional) */}
 							<div style={{background: 'var(--bg-01)', padding: '15px', borderRadius: '4px', border: '1px solid var(--border-default)', marginTop: '15px'}}>

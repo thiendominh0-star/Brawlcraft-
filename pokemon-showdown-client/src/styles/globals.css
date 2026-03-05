@@ -37,6 +37,15 @@
   --type-undead: #6b7280;
   --type-dragon: #dc2626;
   --type-nature: #16a34a;
+  --type-mecha: #94a3b8;
+  --type-plasma: #06b6d4;
+  --type-cosmic: #c026d3;
+  --type-frost: #38bdf8;
+  --type-inferno: #f97316;
+  --type-tempest: #eab308;
+  --type-venom: #84cc16;
+  --type-martial: #b91c1c;
+  --type-illusion: #f472b6;
 
   /* Text */
   --text-primary: #f1f5f9;
@@ -417,4 +426,40 @@ button {
 
 .type-nature {
   --type-color: var(--type-nature);
+}
+
+.type-mecha {
+  --type-color: var(--type-mecha);
+}
+
+.type-plasma {
+  --type-color: var(--type-plasma);
+}
+
+.type-cosmic {
+  --type-color: var(--type-cosmic);
+}
+
+.type-frost {
+  --type-color: var(--type-frost);
+}
+
+.type-inferno {
+  --type-color: var(--type-inferno);
+}
+
+.type-tempest {
+  --type-color: var(--type-tempest);
+}
+
+.type-venom {
+  --type-color: var(--type-venom);
+}
+
+.type-martial {
+  --type-color: var(--type-martial);
+}
+
+.type-illusion {
+  --type-color: var(--type-illusion);
 }

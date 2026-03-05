@@ -138,7 +138,7 @@ export default function CraftRoom() {
 							{ALL_TYPES.map(type => (
 								<button
 									key={type}
-									className={`type-btn type-btn--${type.toLowerCase()} ${selectedTypes.includes(type) ? 'active' : ''}`}
+									className={`type-btn type-${type.toLowerCase()} ${selectedTypes.includes(type) ? 'active' : ''}`}
 									onClick={() => handleToggleType(type)}
 								>
 									{type}

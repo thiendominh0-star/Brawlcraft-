@@ -311,11 +311,22 @@ export default function Teambuilder() {
 									<label style={{fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-muted)', textTransform: 'uppercase'}}>Moves</label>
 									<div style={{display: 'flex', flexDirection: 'column', gap: '8px'}}>
 										{[0, 1, 2, 3].map(mIdx => {
-											const movePool = charData.isCustom ? customMoves : charData.moves;
+											let movePool = charData.isCustom ? customMoves : charData.moves;
+											movePool = movePool.filter(m => !m.isSignature || m.signatureBrawler === charData.id);
+											const sortedPool = [...movePool].sort((a, b) => {
+												if (a.isSignature && !b.isSignature) return -1;
+												if (!a.isSignature && b.isSignature) return 1;
+												return a.name.localeCompare(b.name);
+											});
+
 											return (
 												<select className="admin__input" key={mIdx} value={brawler.moves[mIdx]?.id || ''} onChange={(e) => updateBrawlerMove(index, mIdx, e.target.value)} style={{padding: '6px'}}>
 													<option value="">- Select move -</option>
-													{movePool.map(m => <option key={m.id} value={m.id}>{m.name}</option>)}
+													{sortedPool.map(m => (
+														<option key={m.id} value={m.id} style={m.isSignature ? {fontWeight: 'bold', color: '#fbbf24', background: '#3f3f46'} : {}}>
+															{m.isSignature ? `★ ${m.name} (Chỉ ${charData.name})` : m.name}
+														</option>
+													))}
 												</select>
 											)
 										})}

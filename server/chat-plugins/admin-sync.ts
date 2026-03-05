@@ -118,6 +118,10 @@ function writeMovesFile(customMoves: any[]) {
 		content += `\t\tpp: ${move.pp || 10},\n`;
 		content += `\t\tpriority: ${move.priority || 0},\n`;
 		// Custom Data của BRAWLCRAFT
+		if (move.isSignature) {
+			content += `\t\tisSignature: true,\n`;
+			if (move.signatureBrawler) content += `\t\tsignatureBrawler: ${JSON.stringify(move.signatureBrawler)},\n`;
+		}
 		if (move.cost && move.cost.type !== 'none') {
 			content += `\t\tcost: ${JSON.stringify(move.cost)},\n`;
 			if (move.cost.type === 'faint') {

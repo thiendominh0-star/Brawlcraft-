@@ -96,7 +96,7 @@
 }
 
 .type-btn {
-	background: rgba(255, 255, 255, 0.05);
+	background: color-mix(in srgb, var(--type-color, #888) 10%, transparent);
 	border: 1px solid rgba(255, 255, 255, 0.1);
 	color: white;
 	padding: 10px;
@@ -107,58 +107,13 @@
 }
 
 .type-btn:hover {
-	background: rgba(255, 255, 255, 0.15);
+	background: color-mix(in srgb, var(--type-color, #888) 30%, transparent);
 }
 
 .type-btn.active {
-	border-color: var(--accent-blue);
-	box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
-}
-
-/* Hardcoded some colors for Types */
-.type-btn--shadow.active {
-	background: #6b21a8;
-	border-color: #a855f7;
-}
-
-.type-btn--arcane.active {
-	background: #1d4ed8;
-	border-color: #3b82f6;
-}
-
-.type-btn--holy.active {
-	background: #b45309;
-	border-color: #f59e0b;
-}
-
-.type-btn--undead.active {
-	background: #374151;
-	border-color: #9ca3af;
-}
-
-.type-btn--dragon.active {
-	background: #991b1b;
-	border-color: #ef4444;
-}
-
-.type-btn--nature.active {
-	background: #166534;
-	border-color: #22c55e;
-}
-
-.type-btn--steel.active {
-	background: #475569;
-	border-color: #cbd5e1;
-}
-
-.type-btn--fire.active {
-	background: #c2410c;
-	border-color: #f97316;
-}
-
-.type-btn--water.active {
-	background: #0369a1;
-	border-color: #0ea5e9;
+	background: color-mix(in srgb, var(--type-color, #888) 60%, transparent);
+	border-color: var(--type-color, #888);
+	box-shadow: 0 0 15px color-mix(in srgb, var(--type-color, #888) 50%, transparent);
 }
 
 .stats-list {

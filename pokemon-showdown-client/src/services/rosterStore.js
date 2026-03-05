@@ -9,181 +9,1067 @@ const STORAGE_KEY_MOVES = 'brawlcraft_moves'
 
 // Default roster - dùng khi localStorage chưa có dữ liệu
 const DEFAULT_ROSTER = [
-	{
-		id: 'shadowblade',
-		name: 'Shadow Blade',
-		types: ['Shadow'],
-		abilities: ['Swift Step'],
-		imageUrl: '',
-		baseStats: {hp: 340, atk: 120, def: 80, spa: 70, spd: 75, spe: 110},
-		moves: [
-			{id: 'shadowslash', name: 'Shadow Slash', type: 'Shadow', category: 'Physical', power: 90, accuracy: 100, pp: 15, effect: ''},
-			{id: 'darkveil', name: 'Dark Veil', type: 'Shadow', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Raises user DEF by 1'},
-			{id: 'phantomstrike', name: 'Phantom Strike', type: 'Shadow', category: 'Physical', power: 110, accuracy: 90, pp: 10, effect: 'High crit ratio'},
-			{id: 'nightfall', name: 'Nightfall', type: 'Shadow', category: 'Special', power: 80, accuracy: 100, pp: 15, effect: ''},
-		],
-	},
-	{
-		id: 'arcanesniper',
-		name: 'Arcane Sniper',
-		types: ['Arcane'],
-		abilities: ['Arcane Mastery'],
-		imageUrl: '',
-		baseStats: {hp: 290, atk: 85, def: 65, spa: 130, spd: 80, spe: 120},
-		moves: [
-			{id: 'arcanebolt', name: 'Arcane Bolt', type: 'Arcane', category: 'Special', power: 95, accuracy: 100, pp: 15, effect: ''},
-			{id: 'magicsnipe', name: 'Magic Snipe', type: 'Arcane', category: 'Special', power: 120, accuracy: 85, pp: 8, effect: 'Always strikes last'},
-			{id: 'runicshield', name: 'Runic Shield', type: 'Arcane', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Raises user SPD by 1'},
-			{id: 'manaleak', name: 'Mana Leak', type: 'Arcane', category: 'Special', power: 75, accuracy: 100, pp: 20, effect: 'Lowers target SPA by 1'},
-		],
-	},
-	{
-		id: 'holyknight',
-		name: 'Holy Knight',
-		types: ['Holy'],
-		abilities: ['Thick Hide'],
-		imageUrl: '',
-		baseStats: {hp: 420, atk: 105, def: 115, spa: 75, spd: 110, spe: 70},
-		moves: [
-			{id: 'holysmite', name: 'Holy Smite', type: 'Holy', category: 'Physical', power: 85, accuracy: 100, pp: 15, effect: ''},
-			{id: 'divineshield', name: 'Divine Shield', type: 'Holy', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Raises user DEF+SPD by 1'},
-			{id: 'radianceburst', name: 'Radiance Burst', type: 'Holy', category: 'Special', power: 100, accuracy: 90, pp: 10, effect: 'May burn target'},
-			{id: 'sacredblade', name: 'Sacred Blade', type: 'Holy', category: 'Physical', power: 110, accuracy: 95, pp: 10, effect: 'High crit ratio'},
-		],
-	},
-	{
-		id: 'undeadbrute',
-		name: 'Undead Brute',
-		types: ['Undead'],
-		abilities: ['Berserker'],
-		imageUrl: '',
-		baseStats: {hp: 480, atk: 135, def: 130, spa: 40, spd: 60, spe: 45},
-		moves: [
-			{id: 'bonecrusher', name: 'Bone Crusher', type: 'Undead', category: 'Physical', power: 100, accuracy: 95, pp: 10, effect: 'May lower target DEF'},
-			{id: 'deathgrip', name: 'Death Grip', type: 'Undead', category: 'Physical', power: 120, accuracy: 80, pp: 8, effect: ''},
-			{id: 'plagueaura', name: 'Plague Aura', type: 'Undead', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Poisons target'},
-			{id: 'tombstomp', name: 'Tomb Stomp', type: 'Undead', category: 'Physical', power: 80, accuracy: 100, pp: 15, effect: ''},
-		],
-	},
-	{
-		id: 'dragonmage',
-		name: 'Dragon Mage',
-		types: ['Dragon', 'Arcane'],
-		abilities: ['Arcane Mastery', 'Swift Step'],
-		imageUrl: '',
-		baseStats: {hp: 310, atk: 80, def: 70, spa: 145, spd: 90, spe: 105},
-		moves: [
-			{id: 'dragonpulse', name: 'Dragon Pulse', type: 'Dragon', category: 'Special', power: 95, accuracy: 100, pp: 15, effect: ''},
-			{id: 'arcanedrain', name: 'Arcane Drain', type: 'Arcane', category: 'Special', power: 75, accuracy: 100, pp: 15, effect: 'Heals 50% of damage dealt'},
-			{id: 'wyrmfire', name: 'Wyrm Fire', type: 'Dragon', category: 'Special', power: 130, accuracy: 80, pp: 8, effect: ''},
-			{id: 'timewarp', name: 'Time Warp', type: 'Arcane', category: 'Status', power: 0, accuracy: 100, pp: 8, effect: 'User moves first next turn'},
-		],
-	},
-	{
-		id: 'naturegolem',
-		name: 'Nature Golem',
-		types: ['Nature'],
-		abilities: ['Thick Hide'],
-		imageUrl: '',
-		baseStats: {hp: 400, atk: 100, def: 140, spa: 60, spd: 120, spe: 35},
-		moves: [
-			{id: 'rockslam', name: 'Rock Slam', type: 'Nature', category: 'Physical', power: 90, accuracy: 100, pp: 15, effect: ''},
-			{id: 'thornwall', name: 'Thorn Wall', type: 'Nature', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Raises user DEF by 2'},
-			{id: 'gaiaburst', name: 'Gaia Burst', type: 'Nature', category: 'Special', power: 110, accuracy: 90, pp: 10, effect: ''},
-			{id: 'entangle', name: 'Entangle', type: 'Nature', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Lowers target SPE by 2'},
-		],
-	},
-,
-	{
-		id: 'crimsonassassin',
-		name: 'Crimson Assassin',
-		types: ['Shadow', 'Dragon'],
-		abilities: ['Swift Step'],
-		imageUrl: '',
-		baseStats: {hp: 310, atk: 140, def: 60, spa: 50, spd: 65, spe: 130},
-		moves: [],
-	},
-	{
-		id: 'tidalshaman',
-		name: 'Tidal Shaman',
-		types: ['Nature', 'Arcane'],
-		abilities: ['Arcane Mastery'],
-		imageUrl: '',
-		baseStats: {hp: 380, atk: 60, def: 85, spa: 110, spd: 120, spe: 80},
-		moves: [],
-	},
-	{
-		id: 'ironsentinel',
-		name: 'Iron Sentinel',
-		types: ['Holy'],
-		abilities: ['Thick Hide'],
-		imageUrl: '',
-		baseStats: {hp: 450, atk: 90, def: 150, spa: 60, spd: 110, spe: 40},
-		moves: [],
-	},
-	{
-		id: 'voidwalker',
-		name: 'Void Walker',
-		types: ['Undead', 'Shadow'],
-		abilities: ['Berserker'],
-		imageUrl: '',
-		baseStats: {hp: 500, atk: 110, def: 90, spa: 100, spd: 90, spe: 50},
-		moves: [],
-	},
-	{
-		id: 'astralweaver',
-		name: 'Astral Weaver',
-		types: ['Arcane'],
-		abilities: ['Arcane Mastery'],
-		imageUrl: '',
-		baseStats: {hp: 280, atk: 40, def: 70, spa: 150, spd: 85, spe: 115},
-		moves: [],
-	},
-	{
-		id: 'stormdrake',
-		name: 'Storm Drake',
-		types: ['Dragon', 'Nature'],
-		abilities: ['Thick Hide'],
-		imageUrl: '',
-		baseStats: {hp: 350, atk: 125, def: 85, spa: 105, spd: 85, spe: 100},
-		moves: [],
-	}
+  {
+    "id": "noxphantom",
+    "name": "Nox Phantom",
+    "types": [
+      "Shadow",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 250,
+      "atk": 110,
+      "def": 50,
+      "spa": 50,
+      "spd": 50,
+      "spe": 120
+    },
+    "moves": []
+  },
+  {
+    "id": "voidweaver",
+    "name": "Void Weaver",
+    "types": [
+      "Shadow",
+      "Cosmic"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 400,
+      "atk": 50,
+      "def": 80,
+      "spa": 90,
+      "spd": 110,
+      "spe": 60
+    },
+    "moves": []
+  },
+  {
+    "id": "arcanearchmage",
+    "name": "Arcane Archmage",
+    "types": [
+      "Arcane"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 220,
+      "atk": 40,
+      "def": 50,
+      "spa": 120,
+      "spd": 90,
+      "spe": 110
+    },
+    "moves": []
+  },
+  {
+    "id": "runicgolem",
+    "name": "Runic Golem",
+    "types": [
+      "Arcane",
+      "Mecha"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 350,
+      "atk": 70,
+      "def": 120,
+      "spa": 60,
+      "spd": 110,
+      "spe": 50
+    },
+    "moves": []
+  },
+  {
+    "id": "seraphknight",
+    "name": "Seraph Knight",
+    "types": [
+      "Holy",
+      "Martial"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 300,
+      "atk": 100,
+      "def": 100,
+      "spa": 60,
+      "spd": 80,
+      "spe": 90
+    },
+    "moves": []
+  },
+  {
+    "id": "oracleoflight",
+    "name": "Oracle of Light",
+    "types": [
+      "Holy"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 380,
+      "atk": 40,
+      "def": 70,
+      "spa": 90,
+      "spd": 110,
+      "spe": 85
+    },
+    "moves": []
+  },
+  {
+    "id": "lichking",
+    "name": "Lich King",
+    "types": [
+      "Undead",
+      "Frost"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 280,
+      "atk": 60,
+      "def": 75,
+      "spa": 115,
+      "spd": 120,
+      "spe": 80
+    },
+    "moves": []
+  },
+  {
+    "id": "bonecolossus",
+    "name": "Bone Colossus",
+    "types": [
+      "Undead",
+      "Nature"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 450,
+      "atk": 110,
+      "def": 110,
+      "spa": 50,
+      "spd": 60,
+      "spe": 40
+    },
+    "moves": []
+  },
+  {
+    "id": "crimsonwyrm",
+    "name": "Crimson Wyrm",
+    "types": [
+      "Dragon",
+      "Inferno"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 320,
+      "atk": 125,
+      "def": 90,
+      "spa": 70,
+      "spd": 80,
+      "spe": 95
+    },
+    "moves": []
+  },
+  {
+    "id": "astraldrake",
+    "name": "Astral Drake",
+    "types": [
+      "Dragon",
+      "Cosmic"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 310,
+      "atk": 80,
+      "def": 80,
+      "spa": 130,
+      "spd": 90,
+      "spe": 105
+    },
+    "moves": []
+  },
+  {
+    "id": "gaiatitan",
+    "name": "Gaia Titan",
+    "types": [
+      "Nature",
+      "Martial"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 420,
+      "atk": 115,
+      "def": 115,
+      "spa": 60,
+      "spd": 80,
+      "spe": 55
+    },
+    "moves": []
+  },
+  {
+    "id": "florasylph",
+    "name": "Flora Sylph",
+    "types": [
+      "Nature",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 260,
+      "atk": 60,
+      "def": 70,
+      "spa": 100,
+      "spd": 110,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "cyberblade09",
+    "name": "Cyberblade 09",
+    "types": [
+      "Mecha",
+      "Shadow"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 270,
+      "atk": 115,
+      "def": 80,
+      "spa": 50,
+      "spd": 70,
+      "spe": 120
+    },
+    "moves": []
+  },
+  {
+    "id": "aegisbastion",
+    "name": "Aegis Bastion",
+    "types": [
+      "Mecha",
+      "Plasma"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 350,
+      "atk": 70,
+      "def": 130,
+      "spa": 100,
+      "spd": 90,
+      "spe": 40
+    },
+    "moves": []
+  },
+  {
+    "id": "reactorcore",
+    "name": "Reactor Core",
+    "types": [
+      "Plasma"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 320,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    },
+    "moves": []
+  },
+  {
+    "id": "voltstalker",
+    "name": "Volt Stalker",
+    "types": [
+      "Plasma",
+      "Tempest"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 240,
+      "atk": 100,
+      "def": 60,
+      "spa": 90,
+      "spd": 65,
+      "spe": 130
+    },
+    "moves": []
+  },
+  {
+    "id": "nebulaweaver",
+    "name": "Nebula Weaver",
+    "types": [
+      "Cosmic",
+      "Arcane"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 300,
+      "atk": 50,
+      "def": 80,
+      "spa": 125,
+      "spd": 110,
+      "spe": 95
+    },
+    "moves": []
+  },
+  {
+    "id": "starfirecolossus",
+    "name": "Starfire Colossus",
+    "types": [
+      "Cosmic",
+      "Inferno"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 400,
+      "atk": 120,
+      "def": 90,
+      "spa": 70,
+      "spd": 80,
+      "spe": 70
+    },
+    "moves": []
+  },
+  {
+    "id": "glacierknight",
+    "name": "Glacier Knight",
+    "types": [
+      "Frost",
+      "Martial"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 350,
+      "atk": 115,
+      "def": 115,
+      "spa": 50,
+      "spd": 80,
+      "spe": 65
+    },
+    "moves": []
+  },
+  {
+    "id": "cryomage",
+    "name": "Cryo Mage",
+    "types": [
+      "Frost",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 280,
+      "atk": 50,
+      "def": 70,
+      "spa": 110,
+      "spd": 90,
+      "spe": 110
+    },
+    "moves": []
+  },
+  {
+    "id": "ignisdemon",
+    "name": "Ignis Demon",
+    "types": [
+      "Inferno",
+      "Undead"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 260,
+      "atk": 80,
+      "def": 60,
+      "spa": 115,
+      "spd": 80,
+      "spe": 105
+    },
+    "moves": []
+  },
+  {
+    "id": "vulcanbrute",
+    "name": "Vulcan Brute",
+    "types": [
+      "Inferno",
+      "Mecha"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 380,
+      "atk": 120,
+      "def": 110,
+      "spa": 60,
+      "spd": 75,
+      "spe": 60
+    },
+    "moves": []
+  },
+  {
+    "id": "galezephyr",
+    "name": "Gale Zephyr",
+    "types": [
+      "Tempest"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 240,
+      "atk": 90,
+      "def": 60,
+      "spa": 90,
+      "spd": 70,
+      "spe": 140
+    },
+    "moves": []
+  },
+  {
+    "id": "stormbringer",
+    "name": "Storm Bringer",
+    "types": [
+      "Tempest",
+      "Cosmic"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 330,
+      "atk": 70,
+      "def": 85,
+      "spa": 110,
+      "spd": 85,
+      "spe": 100
+    },
+    "moves": []
+  },
+  {
+    "id": "toxicarachne",
+    "name": "Toxic Arachne",
+    "types": [
+      "Venom",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 270,
+      "atk": 90,
+      "def": 70,
+      "spa": 80,
+      "spd": 110,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "oozemutant",
+    "name": "Ooze Mutant",
+    "types": [
+      "Venom",
+      "Nature"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 390,
+      "atk": 80,
+      "def": 120,
+      "spa": 85,
+      "spd": 60,
+      "spe": 45
+    },
+    "moves": []
+  },
+  {
+    "id": "ironmonk",
+    "name": "Iron Monk",
+    "types": [
+      "Martial",
+      "Holy"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 360,
+      "atk": 120,
+      "def": 110,
+      "spa": 50,
+      "spd": 90,
+      "spe": 40
+    },
+    "moves": []
+  },
+  {
+    "id": "swiftassassin",
+    "name": "Swift Assassin",
+    "types": [
+      "Martial",
+      "Tempest"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 250,
+      "atk": 120,
+      "def": 60,
+      "spa": 50,
+      "spd": 60,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "miragefox",
+    "name": "Mirage Fox",
+    "types": [
+      "Illusion",
+      "Arcane"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 250,
+      "atk": 60,
+      "def": 60,
+      "spa": 115,
+      "spd": 80,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "nightmarefiend",
+    "name": "Nightmare Fiend",
+    "types": [
+      "Illusion",
+      "Shadow"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 290,
+      "atk": 110,
+      "def": 70,
+      "spa": 110,
+      "spd": 70,
+      "spe": 90
+    },
+    "moves": []
+  }
 ]
 
-
 const DEFAULT_MOVES = [
-	{id: 'crimsonblade', name: 'Crimson Blade', type: 'Shadow', category: 'Physical', power: 95, accuracy: 100, pp: 15, effect: 'High crit chance.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'holybash', name: 'Holy Bash', type: 'Holy', category: 'Physical', power: 80, accuracy: 100, pp: 20, effect: '30% chance to flinch.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'dragonsweep', name: 'Dragon Sweep', type: 'Dragon', category: 'Physical', power: 110, accuracy: 90, pp: 10, effect: 'Hits all adjacent foes.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'naturefang', name: 'Nature Fang', type: 'Nature', category: 'Physical', power: 75, accuracy: 100, pp: 15, effect: 'Heals 50% of damage dealt.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'undeadstrike', name: 'Undead Strike', type: 'Undead', category: 'Physical', power: 120, accuracy: 100, pp: 15, effect: 'User takes recoil damage.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'arcaneedge', name: 'Arcane Edge', type: 'Arcane', category: 'Physical', power: 90, accuracy: 100, pp: 15, effect: 'Bypasses accuracy checks.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'voidcrush', name: 'Void Crush', type: 'Undead', category: 'Physical', power: 100, accuracy: 90, pp: 10, effect: '20% chance to lower DEF.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'ironfist', name: 'Iron Fist', type: 'Holy', category: 'Physical', power: 85, accuracy: 100, pp: 15, effect: 'Power increases if user goes last.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'quickslash', name: 'Quick Slash', type: 'Shadow', category: 'Physical', power: 40, accuracy: 100, pp: 30, effect: 'Usually goes first.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'savagebite', name: 'Savage Bite', type: 'Dragon', category: 'Physical', power: 65, accuracy: 95, pp: 15, effect: 'Bite attack with 10% flinch.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'astralbeam', name: 'Astral Beam', type: 'Arcane', category: 'Special', power: 90, accuracy: 100, pp: 15, effect: '10% chance to lower enemy SpD.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'shadowburst', name: 'Shadow Burst', type: 'Shadow', category: 'Special', power: 130, accuracy: 90, pp: 5, effect: 'Lowers user SpA by 2.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'divinewrath', name: 'Divine Wrath', type: 'Holy', category: 'Special', power: 100, accuracy: 100, pp: 10, effect: 'Ignores target stat changes.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'tidalwave', name: 'Tidal Wave', type: 'Nature', category: 'Special', power: 95, accuracy: 100, pp: 10, effect: 'Hits all adjacent targets.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'soulburn', name: 'Soul Burn', type: 'Undead', category: 'Special', power: 80, accuracy: 100, pp: 15, effect: '20% chance to burn target (reduces ATK).', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'dragonbreath', name: 'Dragon Breath', type: 'Dragon', category: 'Special', power: 60, accuracy: 100, pp: 20, effect: '30% chance to paralyze target.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'naturepulse', name: 'Nature Pulse', type: 'Nature', category: 'Special', power: 80, accuracy: 100, pp: 20, effect: 'No additional effect.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'arcanestorm', name: 'Arcane Storm', type: 'Arcane', category: 'Special', power: 110, accuracy: 70, pp: 10, effect: 'High power, low accuracy.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'holysmend', name: 'Holy Smite', type: 'Holy', category: 'Special', power: 60, accuracy: 100, pp: 25, effect: 'Never misses.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'darkvoid', name: 'Dark Void', type: 'Shadow', category: 'Status', power: 0, accuracy: 80, pp: 5, effect: 'Hits hard but might miss.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'healinglight', name: 'Healing Light', type: 'Holy', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Heals user by 50% max HP.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'dragondance', name: 'Dragon Dance', type: 'Dragon', category: 'Status', power: 0, accuracy: 100, pp: 20, effect: 'Raises user ATK and SPE by 1.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'arcaneshield', name: 'Arcane Shield', type: 'Arcane', category: 'Status', power: 0, accuracy: 100, pp: 15, effect: 'Raises user DEF and SpD by 1.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'naturegrowth', name: 'Nature Growth', type: 'Nature', category: 'Status', power: 0, accuracy: 100, pp: 15, effect: 'Raises user SpA and SpD by 1.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'shadowcloak', name: 'Shadow Cloak', type: 'Shadow', category: 'Status', power: 0, accuracy: 100, pp: 15, effect: 'Raises evasiveness by 1.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'undeadcurse', name: 'Undead Curse', type: 'Undead', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Curses target, dealing 1/4 HP damage per turn.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'astraltrance', name: 'Astral Trance', type: 'Arcane', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Raises user SpA by 2.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'holyward', name: 'Holy Ward', type: 'Holy', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Protects user from all attacks this turn.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'naturesgrace', name: 'Nature Grace', type: 'Nature', category: 'Status', power: 0, accuracy: 100, pp: 5, effect: 'Heals entire team of status conditions.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-	{id: 'bloodpact', name: 'Blood Pact', type: 'Shadow', category: 'Status', power: 0, accuracy: 100, pp: 10, effect: 'Raises ATK/SPA by 2, lowers DEF/SPD by 1.', cost: {type: 'none'}, drawback: {type: 'none'}, secondary: {type: 'none'} },
-];
-export const AVAILABLE_TYPES = ['Shadow', 'Arcane', 'Holy', 'Undead', 'Dragon', 'Nature']
+  {
+    "id": "phantomambush",
+    "name": "Phantom Ambush",
+    "type": "Shadow",
+    "category": "Physical",
+    "basePower": 80,
+    "accuracy": 100,
+    "priority": 1,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "noxphantom"
+  },
+  {
+    "id": "shadowtangle",
+    "name": "Shadow Tangle",
+    "type": "Shadow",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": 90,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "voidweaver"
+  },
+  {
+    "id": "manadetonation",
+    "name": "Mana Detonation",
+    "type": "Arcane",
+    "category": "Special",
+    "basePower": 130,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "arcanearchmage"
+  },
+  {
+    "id": "runicovercharge",
+    "name": "Runic Overcharge",
+    "type": "Arcane",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "priority": 0,
+    "target": "self",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "runicgolem"
+  },
+  {
+    "id": "divinesmite",
+    "name": "Divine Smite",
+    "type": "Holy",
+    "category": "Physical",
+    "basePower": 90,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "seraphknight"
+  },
+  {
+    "id": "aegisaura",
+    "name": "Aegis Aura",
+    "type": "Holy",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "priority": 0,
+    "target": "allySide",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "oracleoflight"
+  },
+  {
+    "id": "soulharvest",
+    "name": "Soul Harvest",
+    "type": "Undead",
+    "category": "Special",
+    "basePower": 70,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "lichking"
+  },
+  {
+    "id": "gravepulverize",
+    "name": "Grave Pulverize",
+    "type": "Undead",
+    "category": "Physical",
+    "basePower": 120,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "bonecolossus"
+  },
+  {
+    "id": "dragonswrath",
+    "name": "Dragons Wrath",
+    "type": "Dragon",
+    "category": "Physical",
+    "basePower": 100,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "crimsonwyrm"
+  },
+  {
+    "id": "meteordive",
+    "name": "Meteor Dive",
+    "type": "Dragon",
+    "category": "Special",
+    "basePower": 140,
+    "accuracy": 90,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "astraldrake"
+  },
+  {
+    "id": "quagmirequake",
+    "name": "Quagmire Quake",
+    "type": "Nature",
+    "category": "Physical",
+    "basePower": 90,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "gaiatitan"
+  },
+  {
+    "id": "sporecloud",
+    "name": "Spore Cloud",
+    "type": "Nature",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "florasylph"
+  },
+  {
+    "id": "vibroslash",
+    "name": "Vibro Slash",
+    "type": "Mecha",
+    "category": "Physical",
+    "basePower": 75,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "cyberblade09"
+  },
+  {
+    "id": "orbitalcannon",
+    "name": "Orbital Cannon",
+    "type": "Plasma",
+    "category": "Special",
+    "basePower": 150,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "aegisbastion"
+  },
+  {
+    "id": "meltdown",
+    "name": "Meltdown",
+    "type": "Plasma",
+    "category": "Special",
+    "basePower": 250,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "allAdjacent",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "reactorcore"
+  },
+  {
+    "id": "plasmachain",
+    "name": "Plasma Chain",
+    "type": "Plasma",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "voltstalker"
+  },
+  {
+    "id": "singularity",
+    "name": "Singularity",
+    "type": "Cosmic",
+    "category": "Special",
+    "basePower": 100,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "nebulaweaver"
+  },
+  {
+    "id": "supernovasmash",
+    "name": "Supernova Smash",
+    "type": "Cosmic",
+    "category": "Physical",
+    "basePower": 120,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "starfirecolossus"
+  },
+  {
+    "id": "zeropointstrike",
+    "name": "Zero Point Strike",
+    "type": "Frost",
+    "category": "Physical",
+    "basePower": 85,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "glacierknight"
+  },
+  {
+    "id": "flashfreeze",
+    "name": "Flash Freeze",
+    "type": "Frost",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "cryomage"
+  },
+  {
+    "id": "hellfirerain",
+    "name": "Hellfire Rain",
+    "type": "Inferno",
+    "category": "Special",
+    "basePower": 95,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "allAdjacentFoes",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "ignisdemon"
+  },
+  {
+    "id": "thermitepunch",
+    "name": "Thermite Punch",
+    "type": "Inferno",
+    "category": "Physical",
+    "basePower": 100,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "vulcanbrute"
+  },
+  {
+    "id": "hurricanekick",
+    "name": "Hurricane Kick",
+    "type": "Tempest",
+    "category": "Physical",
+    "basePower": 70,
+    "accuracy": 100,
+    "priority": 1,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "galezephyr"
+  },
+  {
+    "id": "thunderstrikecloud",
+    "name": "Thunderstrike Cloud",
+    "type": "Tempest",
+    "category": "Special",
+    "basePower": 110,
+    "accuracy": 70,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "stormbringer"
+  },
+  {
+    "id": "venomousfang",
+    "name": "Venomous Fang",
+    "type": "Venom",
+    "category": "Physical",
+    "basePower": 50,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "toxicarachne"
+  },
+  {
+    "id": "acidicvomit",
+    "name": "Acidic Vomit",
+    "type": "Venom",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "oozemutant"
+  },
+  {
+    "id": "zencounter",
+    "name": "Zen Counter",
+    "type": "Martial",
+    "category": "Physical",
+    "basePower": 0,
+    "accuracy": 100,
+    "priority": -5,
+    "target": "scripted",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "ironmonk"
+  },
+  {
+    "id": "flurrystrikes",
+    "name": "Flurry Strikes",
+    "type": "Martial",
+    "category": "Physical",
+    "basePower": 25,
+    "accuracy": 90,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "swiftassassin"
+  },
+  {
+    "id": "mindshatter",
+    "name": "Mind Shatter",
+    "type": "Illusion",
+    "category": "Special",
+    "basePower": 80,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "miragefox"
+  },
+  {
+    "id": "dreameater",
+    "name": "Dream Eater",
+    "type": "Illusion",
+    "category": "Special",
+    "basePower": 100,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Signature Move",
+    "isSignature": true,
+    "signatureBrawler": "nightmarefiend"
+  },
+  {
+    "id": "strike",
+    "name": "Strike",
+    "type": "Martial",
+    "category": "Physical",
+    "basePower": 50,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Universal Move",
+    "isSignature": false,
+    "signatureBrawler": ""
+  },
+  {
+    "id": "blast",
+    "name": "Blast",
+    "type": "Plasma",
+    "category": "Special",
+    "basePower": 60,
+    "accuracy": 100,
+    "priority": 0,
+    "target": "normal",
+    "desc": "Universal Move",
+    "isSignature": false,
+    "signatureBrawler": ""
+  },
+  {
+    "id": "guard",
+    "name": "Guard",
+    "type": "Holy",
+    "category": "Status",
+    "basePower": 0,
+    "accuracy": true,
+    "priority": 0,
+    "target": "self",
+    "desc": "Universal Move",
+    "isSignature": false,
+    "signatureBrawler": ""
+  }
+]
+
+export const AVAILABLE_TYPES = ['Shadow', 'Arcane', 'Holy', 'Undead', 'Dragon', 'Nature', 'Mecha', 'Plasma', 'Cosmic', 'Frost', 'Inferno', 'Tempest', 'Venom', 'Martial', 'Illusion']
 export const AVAILABLE_CATEGORIES = ['Physical', 'Special', 'Status']
 export const AVAILABLE_ABILITIES = ['Berserker', 'Arcane Mastery', 'Thick Hide', 'Swift Step', 'No Ability']
 export const AVAILABLE_ITEMS = ['Life Orb', 'Leftovers', 'Choice Scarf', 'Focus Sash', 'No Item']
@@ -194,77 +1080,79 @@ export const AVAILABLE_STATS = ['atk', 'def', 'spa', 'spd', 'spe', 'accuracy', '
 
 /** Đọc roster từ localStorage, fallback về DEFAULT nếu rỗng */
 export function loadRoster() {
-	try {
-		const raw = localStorage.getItem(STORAGE_KEY)
-		if (raw) {
-			const parsed = JSON.parse(raw)
-			if (Array.isArray(parsed) && parsed.length > 0) return parsed
-		}
-	} catch (e) { /* ignore */}
-	return DEFAULT_ROSTER.map(c => ({...c}))
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed) && parsed.length > 0) return parsed
+    }
+  } catch (e) { /* ignore */}
+  return DEFAULT_ROSTER.map(c => ({...c}))
 }
 
 /** Lưu roster vào localStorage */
 export function saveRoster(roster) {
-	localStorage.setItem(STORAGE_KEY, JSON.stringify(roster))
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(roster))
 }
 
 /** Reset về DEFAULT */
 export function resetRoster() {
-	localStorage.removeItem(STORAGE_KEY)
-	return DEFAULT_ROSTER.map(c => ({...c}))
+  localStorage.removeItem(STORAGE_KEY)
+  return DEFAULT_ROSTER.map(c => ({...c}))
 }
 
 /** Đọc Moves từ localStorage */
 export function loadMoves() {
-	try {
-		const raw = localStorage.getItem(STORAGE_KEY_MOVES)
-		if (raw) {
-			const parsed = JSON.parse(raw)
-			if (Array.isArray(parsed)) return parsed
-		}
-	} catch (e) { /* ignore */}
-	return DEFAULT_MOVES.map(m => ({...m}))
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_MOVES)
+    if (raw) {
+      const parsed = JSON.parse(raw)
+      if (Array.isArray(parsed)) return parsed
+    }
+  } catch (e) { /* ignore */}
+  return DEFAULT_MOVES.map(m => ({...m}))
 }
 
 /** Lưu Moves vào localStorage */
 export function saveMoves(moves) {
-	localStorage.setItem(STORAGE_KEY_MOVES, JSON.stringify(moves))
+  localStorage.setItem(STORAGE_KEY_MOVES, JSON.stringify(moves))
 }
 
 /** Tạo ID từ tên (slug) */
 export function nameToId(name) {
-	return name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 20) || `char${Date.now()}`
+  return name.toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 20) || `char${Date.now()}`
 }
 
 /** Tạo một nhân vật rỗng mới */
 export function createBlankChar() {
-	return {
-		id: '',
-		name: '',
-		types: ['Shadow'],
-		abilities: ['No Ability'],
-		item: 'No Item',
-		imageUrl: '',
-		baseStats: {hp: 300, atk: 100, def: 80, spa: 80, spd: 80, spe: 80},
-		moves: [createBlankMove()],
-	}
+  return {
+    id: '',
+    name: '',
+    types: ['Shadow'],
+    abilities: ['No Ability'],
+    item: 'No Item',
+    imageUrl: '',
+    baseStats: {hp: 300, atk: 100, def: 80, spa: 80, spd: 80, spe: 80},
+    moves: [createBlankMove()],
+  }
 }
 
 /** Tạo một move rỗng */
 export function createBlankMove(slotIndex = 0) {
-	return {
-		id: `move_${Date.now()}_${slotIndex}`,
-		name: '',
-		type: 'Shadow',
-		category: 'Physical',
-		power: 80,
-		accuracy: 100,
-		priority: 0,
-		pp: 15,
-		cost: {type: 'none'}, // Mặc định là none (Không có optional)
-		drawback: {type: 'none'}, // Không có drawback optional
-		secondary: {type: 'none'}, // Không có effect optional
-		effect: '',
-	}
+  return {
+    id: `move_${Date.now()}_${slotIndex}`,
+    name: '',
+    type: 'Shadow',
+    category: 'Physical',
+    power: 80,
+    accuracy: 100,
+    priority: 0,
+    pp: 15,
+    isSignature: false,
+    signatureBrawler: '',
+    cost: {type: 'none'}, // Mặc định là none (Không có optional)
+    drawback: {type: 'none'}, // Không có drawback optional
+    secondary: {type: 'none'}, // Không có effect optional
+    effect: '',
+  }
 }

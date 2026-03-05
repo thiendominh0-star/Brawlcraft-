@@ -1,0 +1,628 @@
+[
+  {
+    "id": "noxphantom",
+    "name": "Nox Phantom",
+    "types": [
+      "Shadow",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 250,
+      "atk": 110,
+      "def": 50,
+      "spa": 50,
+      "spd": 50,
+      "spe": 120
+    },
+    "moves": []
+  },
+  {
+    "id": "voidweaver",
+    "name": "Void Weaver",
+    "types": [
+      "Shadow",
+      "Cosmic"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 400,
+      "atk": 50,
+      "def": 80,
+      "spa": 90,
+      "spd": 110,
+      "spe": 60
+    },
+    "moves": []
+  },
+  {
+    "id": "arcanearchmage",
+    "name": "Arcane Archmage",
+    "types": [
+      "Arcane"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 220,
+      "atk": 40,
+      "def": 50,
+      "spa": 120,
+      "spd": 90,
+      "spe": 110
+    },
+    "moves": []
+  },
+  {
+    "id": "runicgolem",
+    "name": "Runic Golem",
+    "types": [
+      "Arcane",
+      "Mecha"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 350,
+      "atk": 70,
+      "def": 120,
+      "spa": 60,
+      "spd": 110,
+      "spe": 50
+    },
+    "moves": []
+  },
+  {
+    "id": "seraphknight",
+    "name": "Seraph Knight",
+    "types": [
+      "Holy",
+      "Martial"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 300,
+      "atk": 100,
+      "def": 100,
+      "spa": 60,
+      "spd": 80,
+      "spe": 90
+    },
+    "moves": []
+  },
+  {
+    "id": "oracleoflight",
+    "name": "Oracle of Light",
+    "types": [
+      "Holy"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 380,
+      "atk": 40,
+      "def": 70,
+      "spa": 90,
+      "spd": 110,
+      "spe": 85
+    },
+    "moves": []
+  },
+  {
+    "id": "lichking",
+    "name": "Lich King",
+    "types": [
+      "Undead",
+      "Frost"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 280,
+      "atk": 60,
+      "def": 75,
+      "spa": 115,
+      "spd": 120,
+      "spe": 80
+    },
+    "moves": []
+  },
+  {
+    "id": "bonecolossus",
+    "name": "Bone Colossus",
+    "types": [
+      "Undead",
+      "Nature"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 450,
+      "atk": 110,
+      "def": 110,
+      "spa": 50,
+      "spd": 60,
+      "spe": 40
+    },
+    "moves": []
+  },
+  {
+    "id": "crimsonwyrm",
+    "name": "Crimson Wyrm",
+    "types": [
+      "Dragon",
+      "Inferno"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 320,
+      "atk": 125,
+      "def": 90,
+      "spa": 70,
+      "spd": 80,
+      "spe": 95
+    },
+    "moves": []
+  },
+  {
+    "id": "astraldrake",
+    "name": "Astral Drake",
+    "types": [
+      "Dragon",
+      "Cosmic"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 310,
+      "atk": 80,
+      "def": 80,
+      "spa": 130,
+      "spd": 90,
+      "spe": 105
+    },
+    "moves": []
+  },
+  {
+    "id": "gaiatitan",
+    "name": "Gaia Titan",
+    "types": [
+      "Nature",
+      "Martial"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 420,
+      "atk": 115,
+      "def": 115,
+      "spa": 60,
+      "spd": 80,
+      "spe": 55
+    },
+    "moves": []
+  },
+  {
+    "id": "florasylph",
+    "name": "Flora Sylph",
+    "types": [
+      "Nature",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 260,
+      "atk": 60,
+      "def": 70,
+      "spa": 100,
+      "spd": 110,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "cyberblade09",
+    "name": "Cyberblade 09",
+    "types": [
+      "Mecha",
+      "Shadow"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 270,
+      "atk": 115,
+      "def": 80,
+      "spa": 50,
+      "spd": 70,
+      "spe": 120
+    },
+    "moves": []
+  },
+  {
+    "id": "aegisbastion",
+    "name": "Aegis Bastion",
+    "types": [
+      "Mecha",
+      "Plasma"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 350,
+      "atk": 70,
+      "def": 130,
+      "spa": 100,
+      "spd": 90,
+      "spe": 40
+    },
+    "moves": []
+  },
+  {
+    "id": "reactorcore",
+    "name": "Reactor Core",
+    "types": [
+      "Plasma"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 320,
+      "atk": 95,
+      "def": 95,
+      "spa": 95,
+      "spd": 95,
+      "spe": 95
+    },
+    "moves": []
+  },
+  {
+    "id": "voltstalker",
+    "name": "Volt Stalker",
+    "types": [
+      "Plasma",
+      "Tempest"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 240,
+      "atk": 100,
+      "def": 60,
+      "spa": 90,
+      "spd": 65,
+      "spe": 130
+    },
+    "moves": []
+  },
+  {
+    "id": "nebulaweaver",
+    "name": "Nebula Weaver",
+    "types": [
+      "Cosmic",
+      "Arcane"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 300,
+      "atk": 50,
+      "def": 80,
+      "spa": 125,
+      "spd": 110,
+      "spe": 95
+    },
+    "moves": []
+  },
+  {
+    "id": "starfirecolossus",
+    "name": "Starfire Colossus",
+    "types": [
+      "Cosmic",
+      "Inferno"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 400,
+      "atk": 120,
+      "def": 90,
+      "spa": 70,
+      "spd": 80,
+      "spe": 70
+    },
+    "moves": []
+  },
+  {
+    "id": "glacierknight",
+    "name": "Glacier Knight",
+    "types": [
+      "Frost",
+      "Martial"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 350,
+      "atk": 115,
+      "def": 115,
+      "spa": 50,
+      "spd": 80,
+      "spe": 65
+    },
+    "moves": []
+  },
+  {
+    "id": "cryomage",
+    "name": "Cryo Mage",
+    "types": [
+      "Frost",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 280,
+      "atk": 50,
+      "def": 70,
+      "spa": 110,
+      "spd": 90,
+      "spe": 110
+    },
+    "moves": []
+  },
+  {
+    "id": "ignisdemon",
+    "name": "Ignis Demon",
+    "types": [
+      "Inferno",
+      "Undead"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 260,
+      "atk": 80,
+      "def": 60,
+      "spa": 115,
+      "spd": 80,
+      "spe": 105
+    },
+    "moves": []
+  },
+  {
+    "id": "vulcanbrute",
+    "name": "Vulcan Brute",
+    "types": [
+      "Inferno",
+      "Mecha"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 380,
+      "atk": 120,
+      "def": 110,
+      "spa": 60,
+      "spd": 75,
+      "spe": 60
+    },
+    "moves": []
+  },
+  {
+    "id": "galezephyr",
+    "name": "Gale Zephyr",
+    "types": [
+      "Tempest"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 240,
+      "atk": 90,
+      "def": 60,
+      "spa": 90,
+      "spd": 70,
+      "spe": 140
+    },
+    "moves": []
+  },
+  {
+    "id": "stormbringer",
+    "name": "Storm Bringer",
+    "types": [
+      "Tempest",
+      "Cosmic"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 330,
+      "atk": 70,
+      "def": 85,
+      "spa": 110,
+      "spd": 85,
+      "spe": 100
+    },
+    "moves": []
+  },
+  {
+    "id": "toxicarachne",
+    "name": "Toxic Arachne",
+    "types": [
+      "Venom",
+      "Illusion"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 270,
+      "atk": 90,
+      "def": 70,
+      "spa": 80,
+      "spd": 110,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "oozemutant",
+    "name": "Ooze Mutant",
+    "types": [
+      "Venom",
+      "Nature"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 390,
+      "atk": 80,
+      "def": 120,
+      "spa": 85,
+      "spd": 60,
+      "spe": 45
+    },
+    "moves": []
+  },
+  {
+    "id": "ironmonk",
+    "name": "Iron Monk",
+    "types": [
+      "Martial",
+      "Holy"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 360,
+      "atk": 120,
+      "def": 110,
+      "spa": 50,
+      "spd": 90,
+      "spe": 40
+    },
+    "moves": []
+  },
+  {
+    "id": "swiftassassin",
+    "name": "Swift Assassin",
+    "types": [
+      "Martial",
+      "Tempest"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 250,
+      "atk": 120,
+      "def": 60,
+      "spa": 50,
+      "spd": 60,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "miragefox",
+    "name": "Mirage Fox",
+    "types": [
+      "Illusion",
+      "Arcane"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 250,
+      "atk": 60,
+      "def": 60,
+      "spa": 115,
+      "spd": 80,
+      "spe": 115
+    },
+    "moves": []
+  },
+  {
+    "id": "nightmarefiend",
+    "name": "Nightmare Fiend",
+    "types": [
+      "Illusion",
+      "Shadow"
+    ],
+    "abilities": [
+      "No Ability"
+    ],
+    "imageUrl": "",
+    "baseStats": {
+      "hp": 290,
+      "atk": 110,
+      "def": 70,
+      "spa": 110,
+      "spd": 70,
+      "spe": 90
+    },
+    "moves": []
+  }
+]
