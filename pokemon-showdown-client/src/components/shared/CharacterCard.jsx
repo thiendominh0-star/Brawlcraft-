@@ -7,6 +7,15 @@ const TYPE_COLOR_MAP = {
 	undead: {color: '#6b7280', label: 'Undead'},
 	dragon: {color: '#dc2626', label: 'Dragon'},
 	nature: {color: '#16a34a', label: 'Nature'},
+	mecha: {color: '#94a3b8', label: 'Mecha'},
+	plasma: {color: '#06b6d4', label: 'Plasma'},
+	cosmic: {color: '#d946ef', label: 'Cosmic'},
+	frost: {color: '#38bdf8', label: 'Frost'},
+	inferno: {color: '#f97316', label: 'Inferno'},
+	tempest: {color: '#fde047', label: 'Tempest'},
+	venom: {color: '#a3e635', label: 'Venom'},
+	martial: {color: '#b91c1c', label: 'Martial'},
+	illusion: {color: '#f472b6', label: 'Illusion'},
 }
 
 /**

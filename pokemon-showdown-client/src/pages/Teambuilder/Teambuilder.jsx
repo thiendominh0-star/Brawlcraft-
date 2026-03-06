@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {loadRoster, loadMoves} from '../../services/rosterStore.js'
+import CharacterCard from '../../components/shared/CharacterCard.jsx'
 import './Teambuilder.css'
 
 export default function Teambuilder() {
@@ -171,11 +172,9 @@ export default function Teambuilder() {
 				<div style={{padding: '0 20px', marginTop: '20px', color: 'var(--text-secondary)', fontWeight: 'bold', borderBottom: '1px solid var(--border-default)', paddingBottom: '10px'}}>◆ CUSTOM BRAWLERS </div>
 				<div className="tb-roster-grid" style={{padding: '10px 20px 20px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px'}}>
 					{filteredRoster.filter(c => c.isCustom).map(char => (
-						<div key={char.id} className="tb-roster-card" onClick={() => {handleSelectBrawler(char); setSearchQuery('');}}>
-							<div className="tb-avatar" style={{background: 'var(--bg-02)', border: '2px solid var(--accent-purple)', padding: '10px', borderRadius: '4px', textAlign: 'center', cursor: 'pointer', boxShadow: '0 0 10px rgba(124, 58, 237, 0.3)'}}>
-								<h3 style={{color: '#fff', margin: 0}}>{char.name}</h3>
-								<div style={{fontSize: '0.8rem', color: '#ffd700', fontWeight: 'bold'}}>★ CUSTOM</div>
-							</div>
+						<div key={char.id} className="tb-roster-card" style={{position: 'relative'}}>
+							<div style={{position: 'absolute', top: '-10px', right: '-10px', background: '#fbbf24', color: '#000', fontWeight: 'bold', padding: '2px 8px', borderRadius: '10px', fontSize: '0.7rem', zIndex: 10, boxShadow: '0 2px 4px rgba(0,0,0,0.5)'}}>★ CUSTOM</div>
+							<CharacterCard character={char} onClick={() => {handleSelectBrawler(char); setSearchQuery('');}} />
 						</div>
 					))}
 					{filteredRoster.filter(c => c.isCustom).length === 0 && <div style={{color: 'var(--text-muted)'}}>Không tìm thấy bộ Custom Brawlers nào do bạn chế tạo.</div>}
@@ -184,11 +183,8 @@ export default function Teambuilder() {
 				<div style={{padding: '0 20px', color: 'var(--text-secondary)', fontWeight: 'bold', borderBottom: '1px solid var(--border-default)', paddingBottom: '10px'}}>◆ OFFICIAL GAME BRAWLERS</div>
 				<div className="tb-roster-grid" style={{padding: '10px 20px 30px 20px', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))', gap: '15px'}}>
 					{filteredRoster.filter(c => !c.isCustom).map(char => (
-						<div key={char.id} className="tb-roster-card" onClick={() => {handleSelectBrawler(char); setSearchQuery('');}}>
-							<div className="tb-avatar" style={{background: 'var(--bg-03)', border: '1px solid var(--border-default)', padding: '10px', borderRadius: '4px', textAlign: 'center', cursor: 'pointer'}}>
-								<h3 style={{color: 'var(--accent-blue)', margin: 0}}>{char.name}</h3>
-								<div style={{fontSize: '0.8rem', color: '#999'}}>{char.types.join('/')}</div>
-							</div>
+						<div key={char.id} className="tb-roster-card">
+							<CharacterCard character={char} onClick={() => {handleSelectBrawler(char); setSearchQuery('');}} />
 						</div>
 					))}
 				</div>

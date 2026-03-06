@@ -104,13 +104,13 @@ export default function CraftRoom() {
 		localStorage.setItem('brawlcraft_customs', JSON.stringify(existing));
 
 		alert('Chế tạo Brawler thành công!');
-		navigate('/teambuilder');
+		navigate('/');
 	};
 
 	return (
 		<div className="craft-room">
 			<div className="craft-room__header animate-fadeInDown">
-				<button className="btn btn-secondary" onClick={() => navigate('/teambuilder')}>
+				<button className="btn btn-secondary" onClick={() => navigate('/')}>
 					← Back
 				</button>
 				<h1 className="font-display">⚒ BRAWLER FORGE</h1>
