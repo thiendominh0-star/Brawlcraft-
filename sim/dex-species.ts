@@ -31,8 +31,8 @@ export interface CosmeticFormeData {
 }
 
 export type ModdedSpeciesData = SpeciesData | CosmeticFormeData |
-	Partial<Omit<SpeciesData, 'name'>> & { inherit: true } |
-	Partial<Omit<CosmeticFormeData, 'isCosmeticForme'>> & { inherit: true };
+	Partial<Omit<SpeciesData, 'name'>> & { inherit: true; } |
+	Partial<Omit<CosmeticFormeData, 'isCosmeticForme'>> & { inherit: true; };
 
 export interface SpeciesFormatsData {
 	doublesTier?: TierTypes.Doubles | TierTypes.Other;
@@ -42,30 +42,30 @@ export interface SpeciesFormatsData {
 	tier?: TierTypes.Singles | TierTypes.Other;
 }
 
-export type ModdedSpeciesFormatsData = SpeciesFormatsData & { inherit?: true };
+export type ModdedSpeciesFormatsData = SpeciesFormatsData & { inherit?: true; };
 
 export interface LearnsetData {
-	learnset?: { [moveid: IDEntry]: MoveSource[] };
+	learnset?: { [moveid: IDEntry]: MoveSource[]; };
 	eventData?: EventInfo[];
 	eventOnly?: boolean;
 	encounters?: EventInfo[];
 	exists?: boolean;
 }
 
-export type ModdedLearnsetData = LearnsetData & { inherit?: true };
+export type ModdedLearnsetData = LearnsetData & { inherit?: true; };
 
 export interface PokemonGoData {
 	encounters?: string[];
-	LGPERestrictiveMoves?: { [moveid: string]: number | null };
+	LGPERestrictiveMoves?: { [moveid: string]: number | null; };
 }
 
-export interface SpeciesDataTable { [speciesid: IDEntry]: SpeciesData | CosmeticFormeData }
-export interface ModdedSpeciesDataTable { [speciesid: IDEntry]: ModdedSpeciesData }
-export interface SpeciesFormatsDataTable { [speciesid: IDEntry]: SpeciesFormatsData }
-export interface ModdedSpeciesFormatsDataTable { [speciesid: IDEntry]: ModdedSpeciesFormatsData }
-export interface LearnsetDataTable { [speciesid: IDEntry]: LearnsetData }
-export interface ModdedLearnsetDataTable { [speciesid: IDEntry]: ModdedLearnsetData }
-export interface PokemonGoDataTable { [speciesid: IDEntry]: PokemonGoData }
+export interface SpeciesDataTable { [speciesid: IDEntry]: SpeciesData | CosmeticFormeData; }
+export interface ModdedSpeciesDataTable { [speciesid: IDEntry]: ModdedSpeciesData; }
+export interface SpeciesFormatsDataTable { [speciesid: IDEntry]: SpeciesFormatsData; }
+export interface ModdedSpeciesFormatsDataTable { [speciesid: IDEntry]: ModdedSpeciesFormatsData; }
+export interface LearnsetDataTable { [speciesid: IDEntry]: LearnsetData; }
+export interface ModdedLearnsetDataTable { [speciesid: IDEntry]: ModdedLearnsetData; }
+export interface PokemonGoDataTable { [speciesid: IDEntry]: PokemonGoData; }
 
 /**
  * Describes a possible way to get a move onto a pokemon.
@@ -89,11 +89,9 @@ export interface PokemonGoDataTable { [speciesid: IDEntry]: PokemonGoData }
  * is otherwise ignored by the learnset checker (which will actually
  * check prevos for compatibility).
  */
-export type MoveSource = `${
-	1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-}${
-	'M' | 'T' | 'L' | 'R' | 'E' | 'D' | 'S' | 'V' | 'C'
-}${string}`;
+export type MoveSource = `${1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	}${'M' | 'T' | 'L' | 'R' | 'E' | 'D' | 'S' | 'V' | 'C'
+	}${string}`;
 
 export class Species extends BasicEffect implements Readonly<BasicEffect & SpeciesFormatsData> {
 	declare readonly effectType: 'Pokemon';
@@ -198,7 +196,7 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 	 */
 	readonly gender: GenderName;
 	/** Gender ratio. Should add up to 1 unless genderless. */
-	readonly genderRatio: { M: number, F: number };
+	readonly genderRatio: { M: number, F: number; };
 	/** Base stats. */
 	readonly baseStats: StatsTable;
 	/** Max HP. Overrides usual HP calculations (for Shedinja). */
@@ -313,8 +311,8 @@ export class Species extends BasicEffect implements Readonly<BasicEffect & Speci
 		this.gender = data.gender || '';
 		this.genderRatio = data.genderRatio || (this.gender === 'M' ? { M: 1, F: 0 } :
 			this.gender === 'F' ? { M: 0, F: 1 } :
-			this.gender === 'N' ? { M: 0, F: 0 } :
-			{ M: 0.5, F: 0.5 });
+				this.gender === 'N' ? { M: 0, F: 0 } :
+					{ M: 0.5, F: 0.5 });
 		this.requiredItem = data.requiredItem || undefined;
 		this.requiredItems = data.requiredItems || (this.requiredItem ? [this.requiredItem] : undefined);
 		this.baseStats = data.baseStats || { hp: 0, atk: 0, def: 0, spa: 0, spd: 0, spe: 0 };
@@ -377,7 +375,7 @@ export class Learnset {
 	 * Keeps track of exactly how a pokemon might learn a move, in the
 	 * form moveid:sources[].
 	 */
-	readonly learnset?: { [moveid: string]: MoveSource[] };
+	readonly learnset?: { [moveid: string]: MoveSource[]; };
 	/** True if the only way to get this Pokemon is from events. */
 	readonly eventOnly: boolean;
 	/** List of event data for each event. */
@@ -488,7 +486,7 @@ export class DexSpecies {
 
 		if (!this.dex.data.Characters.hasOwnProperty(id)) {
 			let aliasTo = '';
-			const formeNames: { [k: IDEntry]: IDEntry[] } = {
+			const formeNames: { [k: IDEntry]: IDEntry[]; } = {
 				alola: ['a', 'alola', 'alolan'],
 				galar: ['g', 'galar', 'galarian'],
 				hisui: ['h', 'hisui', 'hisuian'],
@@ -633,8 +631,8 @@ export class DexSpecies {
 	getMovePool(id: ID, isNatDex = false): Set<ID> {
 		let eggMovesOnly = false;
 		let maxGen = this.dex.gen;
-		const gen3HMMoves = ['cut', 'fly', 'surf', 'strength', 'flash', 'rocksmash', 'waterfall', 'dive'];
-		const gen4HMMoves = ['cut', 'fly', 'surf', 'strength', 'rocksmash', 'waterfall', 'rockclimb'];
+		const gen3HMMoves = ['cut', 'fly', 'strength', 'flash', 'rocksmash'];
+		const gen4HMMoves = ['cut', 'fly', 'strength', 'rocksmash', 'rockclimb'];
 		const movePool = new Set<ID>();
 		for (const { species, learnset } of this.getFullLearnset(id)) {
 			if (!eggMovesOnly) eggMovesOnly = this.eggMovesOnly(species, this.get(id));
@@ -694,11 +692,11 @@ export class DexSpecies {
 		return movePool;
 	}
 
-	getFullLearnset(id: ID): (Learnset & { learnset: NonNullable<Learnset['learnset']> })[] {
+	getFullLearnset(id: ID): (Learnset & { learnset: NonNullable<Learnset['learnset']>; })[] {
 		const originalSpecies = this.get(id);
 		let species: Species | null = originalSpecies;
-		const out: (Learnset & { learnset: NonNullable<Learnset['learnset']> })[] = [];
-		const alreadyChecked: { [k: string]: boolean } = {};
+		const out: (Learnset & { learnset: NonNullable<Learnset['learnset']>; })[] = [];
+		const alreadyChecked: { [k: string]: boolean; } = {};
 
 		while (species?.name && !alreadyChecked[species.id]) {
 			alreadyChecked[species.id] = true;

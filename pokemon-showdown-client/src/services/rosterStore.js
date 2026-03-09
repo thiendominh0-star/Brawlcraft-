@@ -28,7 +28,60 @@ const DEFAULT_ROSTER = [
       "spd": 50,
       "spe": 120
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "phantomambush",
+        "name": "Phantom Ambush",
+        "type": "Shadow",
+        "category": "Physical",
+        "basePower": 80,
+        "accuracy": 100,
+        "priority": 1,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "noxphantom"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "voidweaver",
@@ -49,7 +102,60 @@ const DEFAULT_ROSTER = [
       "spd": 110,
       "spe": 60
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "shadowtangle",
+        "name": "Shadow Tangle",
+        "type": "Shadow",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": 90,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "voidweaver"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "arcanearchmage",
@@ -69,7 +175,60 @@ const DEFAULT_ROSTER = [
       "spd": 90,
       "spe": 110
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "manadetonation",
+        "name": "Mana Detonation",
+        "type": "Arcane",
+        "category": "Special",
+        "basePower": 130,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "allAdjacentFoes",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "arcanearchmage"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "runicgolem",
@@ -90,7 +249,60 @@ const DEFAULT_ROSTER = [
       "spd": 110,
       "spe": 50
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "runicovercharge",
+        "name": "Runic Overcharge",
+        "type": "Arcane",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "runicgolem"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "seraphknight",
@@ -111,7 +323,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 90
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "divinesmite",
+        "name": "Divine Smite",
+        "type": "Holy",
+        "category": "Physical",
+        "basePower": 90,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "seraphknight"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "oracleoflight",
@@ -131,7 +396,60 @@ const DEFAULT_ROSTER = [
       "spd": 110,
       "spe": 85
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "aegisaura",
+        "name": "Aegis Aura",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "allySide",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "oracleoflight"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "lichking",
@@ -152,7 +470,60 @@ const DEFAULT_ROSTER = [
       "spd": 120,
       "spe": 80
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "soulharvest",
+        "name": "Soul Harvest",
+        "type": "Undead",
+        "category": "Special",
+        "basePower": 70,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "lichking"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "bonecolossus",
@@ -173,7 +544,60 @@ const DEFAULT_ROSTER = [
       "spd": 60,
       "spe": 40
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "gravepulverize",
+        "name": "Grave Pulverize",
+        "type": "Undead",
+        "category": "Physical",
+        "basePower": 120,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "bonecolossus"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "crimsonwyrm",
@@ -194,7 +618,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 95
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "dragonswrath",
+        "name": "Dragons Wrath",
+        "type": "Dragon",
+        "category": "Physical",
+        "basePower": 100,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "crimsonwyrm"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "astraldrake",
@@ -215,7 +692,60 @@ const DEFAULT_ROSTER = [
       "spd": 90,
       "spe": 105
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "meteordive",
+        "name": "Meteor Dive",
+        "type": "Dragon",
+        "category": "Special",
+        "basePower": 140,
+        "accuracy": 90,
+        "priority": 0,
+        "target": "allAdjacentFoes",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "astraldrake"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "gaiatitan",
@@ -236,7 +766,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 55
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "quagmirequake",
+        "name": "Quagmire Quake",
+        "type": "Nature",
+        "category": "Physical",
+        "basePower": 90,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "allAdjacentFoes",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "gaiatitan"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "florasylph",
@@ -257,7 +840,60 @@ const DEFAULT_ROSTER = [
       "spd": 110,
       "spe": 115
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "sporecloud",
+        "name": "Spore Cloud",
+        "type": "Nature",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "florasylph"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "cyberblade09",
@@ -278,7 +914,60 @@ const DEFAULT_ROSTER = [
       "spd": 70,
       "spe": 120
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "vibroslash",
+        "name": "Vibro Slash",
+        "type": "Mecha",
+        "category": "Physical",
+        "basePower": 75,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "cyberblade09"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "aegisbastion",
@@ -299,7 +988,60 @@ const DEFAULT_ROSTER = [
       "spd": 90,
       "spe": 40
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "orbitalcannon",
+        "name": "Orbital Cannon",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 150,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "aegisbastion"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "reactorcore",
@@ -319,7 +1061,60 @@ const DEFAULT_ROSTER = [
       "spd": 95,
       "spe": 95
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "meltdown",
+        "name": "Meltdown",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 250,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "allAdjacent",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "reactorcore"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "voltstalker",
@@ -340,7 +1135,60 @@ const DEFAULT_ROSTER = [
       "spd": 65,
       "spe": 130
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "plasmachain",
+        "name": "Plasma Chain",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 80,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "voltstalker"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "nebulaweaver",
@@ -361,7 +1209,60 @@ const DEFAULT_ROSTER = [
       "spd": 110,
       "spe": 95
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "singularity",
+        "name": "Singularity",
+        "type": "Cosmic",
+        "category": "Special",
+        "basePower": 100,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "allAdjacentFoes",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "nebulaweaver"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "starfirecolossus",
@@ -382,7 +1283,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 70
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "supernovasmash",
+        "name": "Supernova Smash",
+        "type": "Cosmic",
+        "category": "Physical",
+        "basePower": 120,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "starfirecolossus"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "glacierknight",
@@ -403,7 +1357,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 65
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "zeropointstrike",
+        "name": "Zero Point Strike",
+        "type": "Frost",
+        "category": "Physical",
+        "basePower": 85,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "glacierknight"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "cryomage",
@@ -424,7 +1431,60 @@ const DEFAULT_ROSTER = [
       "spd": 90,
       "spe": 110
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "flashfreeze",
+        "name": "Flash Freeze",
+        "type": "Frost",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "cryomage"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "ignisdemon",
@@ -445,7 +1505,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 105
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "hellfirerain",
+        "name": "Hellfire Rain",
+        "type": "Inferno",
+        "category": "Special",
+        "basePower": 95,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "allAdjacentFoes",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "ignisdemon"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "vulcanbrute",
@@ -466,7 +1579,60 @@ const DEFAULT_ROSTER = [
       "spd": 75,
       "spe": 60
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "thermitepunch",
+        "name": "Thermite Punch",
+        "type": "Inferno",
+        "category": "Physical",
+        "basePower": 100,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "vulcanbrute"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "galezephyr",
@@ -486,7 +1652,60 @@ const DEFAULT_ROSTER = [
       "spd": 70,
       "spe": 140
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "hurricanekick",
+        "name": "Hurricane Kick",
+        "type": "Tempest",
+        "category": "Physical",
+        "basePower": 70,
+        "accuracy": 100,
+        "priority": 1,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "galezephyr"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "stormbringer",
@@ -507,7 +1726,60 @@ const DEFAULT_ROSTER = [
       "spd": 85,
       "spe": 100
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "thunderstrikecloud",
+        "name": "Thunderstrike Cloud",
+        "type": "Tempest",
+        "category": "Special",
+        "basePower": 110,
+        "accuracy": 70,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "stormbringer"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "toxicarachne",
@@ -528,7 +1800,60 @@ const DEFAULT_ROSTER = [
       "spd": 110,
       "spe": 115
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "venomousfang",
+        "name": "Venomous Fang",
+        "type": "Venom",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "toxicarachne"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "oozemutant",
@@ -549,7 +1874,60 @@ const DEFAULT_ROSTER = [
       "spd": 60,
       "spe": 45
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "acidicvomit",
+        "name": "Acidic Vomit",
+        "type": "Venom",
+        "category": "Special",
+        "basePower": 80,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "oozemutant"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "ironmonk",
@@ -570,7 +1948,60 @@ const DEFAULT_ROSTER = [
       "spd": 90,
       "spe": 40
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "zencounter",
+        "name": "Zen Counter",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 0,
+        "accuracy": 100,
+        "priority": -5,
+        "target": "scripted",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "ironmonk"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "swiftassassin",
@@ -591,7 +2022,60 @@ const DEFAULT_ROSTER = [
       "spd": 60,
       "spe": 115
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "flurrystrikes",
+        "name": "Flurry Strikes",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 25,
+        "accuracy": 90,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "swiftassassin"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "miragefox",
@@ -612,7 +2096,60 @@ const DEFAULT_ROSTER = [
       "spd": 80,
       "spe": 115
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "mindshatter",
+        "name": "Mind Shatter",
+        "type": "Illusion",
+        "category": "Special",
+        "basePower": 80,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "miragefox"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   },
   {
     "id": "nightmarefiend",
@@ -633,7 +2170,60 @@ const DEFAULT_ROSTER = [
       "spd": 70,
       "spe": 90
     },
-    "moves": []
+    "moves": [
+      {
+        "id": "dreameater",
+        "name": "Dream Eater",
+        "type": "Illusion",
+        "category": "Special",
+        "basePower": 100,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Signature Move",
+        "isSignature": true,
+        "signatureBrawler": "nightmarefiend"
+      },
+      {
+        "id": "strike",
+        "name": "Strike",
+        "type": "Martial",
+        "category": "Physical",
+        "basePower": 50,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "Plasma",
+        "category": "Special",
+        "basePower": 60,
+        "accuracy": 100,
+        "priority": 0,
+        "target": "normal",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      },
+      {
+        "id": "guard",
+        "name": "Guard",
+        "type": "Holy",
+        "category": "Status",
+        "basePower": 0,
+        "accuracy": true,
+        "priority": 0,
+        "target": "self",
+        "desc": "Universal Move",
+        "isSignature": false,
+        "signatureBrawler": ""
+      }
+    ]
   }
 ]
 

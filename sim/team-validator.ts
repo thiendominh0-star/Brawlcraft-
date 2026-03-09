@@ -1316,23 +1316,6 @@ export class TeamValidator {
 	 * relevant IVs outside of extremely obscure situations.
 	 */
 	possibleBottleCapHpType(type: string, ivs: StatsTable) {
-		if (!type) return true;
-		if (['Dark', 'Dragon', 'Grass', 'Ghost', 'Poison'].includes(type)) {
-			// Spe must be odd
-			if (ivs.spe % 2 === 0) return false;
-		}
-		if (['Psychic', 'Fire', 'Rock', 'Fighting'].includes(type)) {
-			// Spe must be even
-			if (ivs.spe !== 31 && ivs.spe % 2 === 1) return false;
-		}
-		if (type === 'Dark') {
-			// Atk must be odd
-			if (ivs.atk % 2 === 0) return false;
-		}
-		if (['Ice', 'Water'].includes(type)) {
-			// Spe or Atk must be odd
-			if (ivs.spe % 2 === 0 && ivs.atk % 2 === 0) return false;
-		}
 		return true;
 	}
 

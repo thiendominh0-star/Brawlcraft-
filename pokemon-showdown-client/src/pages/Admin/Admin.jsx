@@ -110,7 +110,6 @@ export default function Admin() {
 		if (hasMove) {
 			setField('moves', form.moves.filter(m => m.id !== moveObj.id))
 		} else {
-			if (form.moves.length >= 4) {alert("Chỉ được gán tối đa 4 Kỹ Năng!"); return;}
 			setField('moves', [...form.moves, moveObj])
 		}
 	}
