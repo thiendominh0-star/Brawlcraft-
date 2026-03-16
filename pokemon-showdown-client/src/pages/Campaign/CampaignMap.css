@@ -1,0 +1,229 @@
+.campaign-wrapper {
+	min-height: 100vh;
+	background: #0d0f12;
+	background-image: radial-gradient(circle at 50% 0%, #1a1525 0%, #0d0f12 70%);
+	color: #e5e7eb;
+	display: flex;
+	flex-direction: column;
+	font-family: 'Inter', sans-serif;
+}
+
+.campaign-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px 40px;
+	background: rgba(13, 15, 18, 0.8);
+	backdrop-filter: blur(10px);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	position: sticky;
+	top: 0;
+	z-index: 100;
+}
+
+.campaign-title {
+	margin: 0;
+	font-size: 2rem;
+	background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+.campaign-map-container {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 60px 20px;
+	padding-bottom: 100px;
+	position: relative;
+	max-width: 800px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+/* Kẻ sọc nối dọc bản đồ */
+.campaign-map-container::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 50%;
+	width: 4px;
+	background: rgba(255, 255, 255, 0.05);
+	transform: translateX(-50%);
+	z-index: 0;
+}
+
+.map-start-point {
+	position: relative;
+	z-index: 2;
+	background: #2a2d35;
+	padding: 15px 40px;
+	border-radius: 30px;
+	font-weight: 800;
+	letter-spacing: 2px;
+	color: #9ca3af;
+	border: 2px solid #4b5563;
+	margin-top: 40px;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+/* Stylings for individual level nodes */
+.campaign-node {
+	position: relative;
+	z-index: 2;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 60px;
+}
+
+.node-content {
+	background: #1f2229;
+	border: 1px solid #374151;
+	border-radius: 12px;
+	padding: 20px;
+	width: 400px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+}
+
+/* Các trạng thái của màn chơi */
+.campaign-node.locked .node-content {
+	opacity: 0.6;
+	background: #111318;
+	border-color: #1f232b;
+}
+
+.campaign-node.cleared .node-content {
+	border-color: #4ade80;
+	background: rgba(31, 34, 41, 0.8);
+}
+.campaign-node.cleared .node-content::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; bottom: 0;
+	background: linear-gradient(135deg, rgba(74, 222, 128, 0.05) 0%, transparent 100%);
+	pointer-events: none;
+}
+
+.campaign-node.current .node-content {
+	transform: scale(1.05);
+	border-color: #60a5fa;
+	box-shadow: 0 0 30px rgba(96, 165, 250, 0.2), 0 10px 25px rgba(0,0,0,0.5);
+	background: #1f2533;
+}
+.campaign-node.current .node-content::before {
+	content: '';
+	position: absolute;
+	top: 0; left: 0; right: 0; height: 2px;
+	background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+	animation: scanline 2s linear infinite;
+}
+
+/* Đối với Tầng Boss Cuối */
+.campaign-node.boss-node .node-content {
+	border-color: #f87171;
+	background: #2a1111;
+}
+.campaign-node.boss-node.current .node-content {
+	box-shadow: 0 0 40px rgba(248, 113, 113, 0.3), 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.node-floor-label {
+	position: absolute;
+	top: -12px;
+	left: 50%;
+	transform: translateX(-50%);
+	background: #374151;
+	padding: 4px 12px;
+	border-radius: 10px;
+	font-size: 0.8rem;
+	font-weight: 800;
+	letter-spacing: 1px;
+	color: #d1d5db;
+	border: 2px solid #1f2229;
+}
+.campaign-node.current .node-floor-label { background: #3b82f6; color: #fff;}
+.campaign-node.cleared .node-floor-label { background: #059669; color: #fff;}
+.campaign-node.boss-node .node-floor-label { background: #dc2626; color: #fff;}
+
+.node-details {
+	margin-top: 15px;
+	margin-bottom: 20px;
+}
+
+.node-name {
+	margin: 0;
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: #f3f4f6;
+	margin-bottom: 5px;
+}
+
+.node-enemies-info {
+	margin: 0;
+	font-size: 0.9rem;
+	color: #9ca3af;
+	font-family: monospace;
+}
+
+.node-action {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 48px;
+}
+
+.cleared-badge {
+	color: #4ade80;
+	font-weight: 700;
+	font-size: 1.1rem;
+}
+
+.locked-badge {
+	color: #6b7280;
+	font-weight: 600;
+	display: flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.battle-btn {
+	width: 100%;
+	font-size: 1.1rem;
+	letter-spacing: 2px;
+}
+.boss-node .battle-btn {
+	background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+	border-color: #b91c1c;
+}
+
+@keyframes scanline {
+	0% { transform: translateX(-100%); }
+	100% { transform: translateX(100%); }
+}
+
+.pulse-anim {
+	animation: pulseBtn 2s infinite;
+}
+@keyframes pulseBtn {
+	0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+	70% { box-shadow: 0 0 0 15px rgba(59, 130, 246, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+}
+.boss-node .pulse-anim {
+	animation: pulseBtnBoss 2s infinite;
+}
+@keyframes pulseBtnBoss {
+	0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+	70% { box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+	100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}

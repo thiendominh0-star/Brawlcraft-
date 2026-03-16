@@ -188,9 +188,18 @@ export default function Home() {
 						onClick={handleFindMatch}
 						disabled={status === 'connecting'}
 					>
-						{status === 'idle' && (connected ? '⚔ BATTLE!' : '⚔ FIND MATCH')}
+						{status === 'idle' && (connected ? '⚔ BATTLE (PVP)!' : '⚔ FIND MATCH (PVP)')}
 						{status === 'connecting' && '◌ CONNECTING...'}
 						{status === 'searching' && '✕ CANCEL SEARCH'}
+					</button>
+
+					<button
+						id="btn-campaign"
+						className="btn btn-primary btn-lg home__campaign-btn"
+						onClick={() => navigate('/campaign')}
+						style={{background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)', textShadow: '0 2px 4px rgba(0,0,0,0.5)', marginTop: '10px'}}
+					>
+						🗺 CHIẾN DỊCH PVE
 					</button>
 
 

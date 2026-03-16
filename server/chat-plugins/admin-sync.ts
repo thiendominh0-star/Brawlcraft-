@@ -29,9 +29,13 @@ export const PluginServer = http.createServer((req, res) => {
 				const payload = JSON.parse(body);
 				const roster = payload.roster || [];
 				const customMoves = payload.customMoves || [];
+				const towerBosses = payload.towerBosses || [];
+				const towerTemplates = payload.towerTemplates || [];
+				const towerGlobalConfig = payload.towerGlobalConfig || { totalFloors: 10, baseLevel: 10, levelStep: 10 };
 
-				writeCharactersFile(roster);
+				writeCharactersFile(roster, towerBosses);
 				writeMovesFile(customMoves);
+				writeTowerConfigFile(towerTemplates, towerGlobalConfig);
 
 				// 1. Build lại Typescript sang JS
 				child_process.execSync('node build', { cwd: path.join(__dirname, '../../../') });
@@ -69,10 +73,12 @@ PluginServer.listen(8001, () => {
 });
 
 // Hàm ghi file Characters
-function writeCharactersFile(roster: any[]) {
+function writeCharactersFile(roster: any[], bosses: any[] = []) {
 	let content = `export const Characters: import('../sim/dex-species').SpeciesDataTable = {\n`;
 
-	roster.forEach((char, index) => {
+	const allChars = [...roster, ...bosses];
+
+	allChars.forEach((char, index) => {
 		const id = char.id || `char${index}`;
 		const name = char.name || 'Unknown';
 		const types = JSON.stringify(char.types || ['Normal']);
@@ -93,6 +99,10 @@ function writeCharactersFile(roster: any[]) {
 		content += `\t\tbaseStats: { hp: ${bs.hp}, atk: ${bs.atk}, def: ${bs.def}, spa: ${bs.spa}, spd: ${bs.spd}, spe: ${bs.spe} },\n`;
 		content += `\t\tabilities: ${abilitiesStr},\n`;
 		content += `\t\tweightkg: 100,\n`;
+		if (char.isImmune) {
+			content += `\t\ttags: ["Boss"],\n`;
+			content += `\t\tisImmune: true,\n`;
+		}
 		content += `\t},\n`;
 	});
 
@@ -155,4 +165,13 @@ function writeMovesFile(customMoves: any[]) {
 
 	content += `};\n`;
 	fs.writeFileSync(path.join(DATA_DIR, 'moves.ts'), content, 'utf-8');
+}
+
+// Hàm ghi file Tower Config (JSON)
+function writeTowerConfigFile(templates: any[], config: any) {
+	const output = {
+		globalConfig: config,
+		templates: templates
+	};
+	fs.writeFileSync(path.join(DATA_DIR, 'tower_config.json'), JSON.stringify(output, null, 2), 'utf-8');
 }
